@@ -11,7 +11,9 @@ statusbar    "$HOME/.local/src/dwmstatus/dwmstatus.c"
 EOF
 
 # read in choice
-CHOICE=$(printf "$FILES" | awk '{print $1}' | dmenu -i -l 30)
+CHOICE=$(printf "$FILES" | awk '{print $1}' | dmenu -r -i -l 30)
 
 # open the file in vim
-echo "$FILES" | grep "${CHOICE}" | awk '{print $2}' | xargs -I {} $TERMINAL -e vim "{}"
+FILEPATH="$(echo "$FILES" | grep "${CHOICE}" | awk '{print $2}')"
+
+echo $FILEPATH | xargs -I {} "$TERMINAL" -e nvim {} &>/dev/null
