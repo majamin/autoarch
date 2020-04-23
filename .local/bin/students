@@ -1,0 +1,26 @@
+#!/bin/sh
+
+fetch() {
+	ls -t $(find $HOME/OneDrive/_data/ed/myed/allstudents/QR* -type f) | \
+	head -n 1 | \
+	xargs cat | \
+	awk -F, '{print $1 ", " $2}' | \
+	sed "s/\"//g" | \
+	dmenu -l 30 | \
+	xargs -I {} grep {} -hrnw $(find /home/sklss/OneDrive/_data/ed/myed/allstaff/*/*/4 -name "*tsv") | \
+	sed "s/^[0-9]\+://g"
+}
+
+list=("Current Teachers\nCurrent Classes\nID\nSchool Email\nPrimary Contact Email\nPrimary Contact Phone\nAll")
+
+choice=$(echo -e $list | dmenu -l 10)
+
+case $choice in
+	"Current Teachers" 	) fetch | awk -F $'\t' '{print $1}' | uniq ;;
+	"Current Classes" 	) fetch | awk -F $'\t' '{print $9}' | uniq ;;
+	"ID" 			) fetch | awk -F $'\t' '{print $3}' | uniq ;;
+	"School Email"		) fetch | awk -F $'\t' '{print $4}' | uniq ;;
+	"Primary Contact Email" ) fetch | awk -F $'\t' '{print $5 " (" $6 ") " $7}' | uniq ;;
+	"Primary Contact Phone" ) fetch | awk -F $'\t' '{print $5 " (" $6 ") " $8}' | uniq ;;
+	"All"			) fetch
+esac

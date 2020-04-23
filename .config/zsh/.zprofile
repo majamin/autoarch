@@ -2,9 +2,6 @@
 
 # zsh profile file. Runs on login. Environmental variables are set here.
 
-# set the user's wal theme if installed
-[ -x wal ] && wal -R
-
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 

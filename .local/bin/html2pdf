@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# names of files (without extension)
+files=$(find . -name "*.html" | sed -e 's/\.html$//')
+
+# convert files
+for file in $files
+do
+	echo "converting ${file}.html to ${file}.pdf"
+	wkhtmltopdf "${file}.html" "${file}.pdf"
+done
