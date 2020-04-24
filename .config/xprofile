@@ -1,6 +1,6 @@
 #!/bin/sh
 
-setscreen			# Get a better screen resolution if using virtualbox
+[ ! -z "grep -P \"^flags.*hypervisor\" /proc/cpuinfo" ] && setcreen
 remaps &			# run the remaps script, switching caps/esc and more; check it for more info
 setbg &				# set the background
 xcompmgr &			# xcompmgr for transparency
