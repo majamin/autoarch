@@ -13,12 +13,11 @@
 " For additional plugins, add them to the list in the Plug section below.
 
 " INSTRUCTIONS:
-" 1. Install pywal on your system and set a theme in your terminal. 
-" 2. In Vim, type :PlugInstall to fetch all of the plugins
+" 1. Install pywal (pip install pywal) if you want to use the wal plug.
+" 2. In Vim, type :PlugInstall to fetch all of the plugins.
 
 " NOTES:
 " Leader key is ','
-" Vim will choose the same colors thanks to wal.vim
 " Backup directory will be created at ~/.cache/nvim/backup
 " Type ,ll to enter distraction-free typing.
 
@@ -37,8 +36,7 @@
 
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
-	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" --create-dirs > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
 	autocmd VimEnter * PlugInstall
 endif
 
