@@ -13,23 +13,16 @@ HISTFILE="$ZDOTDIR/.zsh_history"
 #  \___/|_| |_|     |_| |_| |_|\__, |    /___|___/_| |_|
 #                              |___/                    
 
-# Installs oh-my-zsh if it's not already installed
-[ -z "$ZSH" ] && \
-	export ZSH="$HOME/.config/oh-my-zsh" && \
-	mkdir -p "$ZSH" && \
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# Here's the default theme (downloads and installs automatically)
-[ -d "$ZSH_CUSTOM/themes" ] && [ ! -d "$ZSH_CUSTOM/themes/typewritten" ] && echo "Installing 'typewritten' zsh theme ..." && git clone https://github.com/reobin/typewritten.git "$ZSH_CUSTOM/themes/typewritten"
-[ -d "$ZSH_CUSTOM/themes/typewritten" ] && ln -sf "$ZSH_CUSTOM/themes/typewritten/typewritten.zsh-theme" "$ZSH_CUSTOM/themes/typewritten.zsh-theme" && ZSH_THEME="typewritten"
-#ZSH_THEME="typewritten"
-
 ZSH_THEME="robbyrussell"
-plugins=(git vi-mode fzf)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-
+#   ___  ___ ___  ___ _ __ | |_(_) __ _| |___ 
+#  / _ \/ __/ __|/ _ \ '_ \| __| |/ _` | / __|
+# |  __/\__ \__ \  __/ | | | |_| | (_| | \__ \
+#  \___||___/___/\___|_| |_|\__|_|\__,_|_|___/
+                                            
 
 setopt autocd
 autoload -U compinit
@@ -37,6 +30,12 @@ zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
+
+# __   _(_)      _ __ ___   ___   __| | ___ 
+# \ \ / / |_____| '_ ` _ \ / _ \ / _` |/ _ \
+#  \ V /| |_____| | | | | | (_) | (_| |  __/
+#   \_/ |_|     |_| |_| |_|\___/ \__,_|\___|
+
 bindkey -v
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
@@ -58,6 +57,27 @@ zle-line-init() {
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+#   __     __ 
+#  / _|___/ _|
+# | ||_  / |_ 
+# |  _/ /|  _|
+# |_|/___|_|  
+
+export FZF_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config/}/fzf"
+export FZF_DEFAULT_COMMAND="''find . -type f -not -path '*/\.git/*'''"
+export FZF_DEFAULT_OPTS="-m --height 40% --layout reverse --info inline --border --preview \"file {} | awk -F: '{print \$2}'\" --preview-window down:1:noborder"
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+
+[ ! -d "$FZF_CONFIG" ] && \
+	mkdir -p "$FZF_CONFIG"
+[ ! -f "$FZF_CONFIG/completion.zsh" ] && \
+	cp "/usr/share/fzf/completion.zsh" "$FZF_CONFIG/completion.zsh"
+[ ! -f "$FZF_CONFIG/key-bindings.zsh" ] && \
+	cp "/usr/share/fzf/key-bindings.zsh" "$FZF_CONFIG/key-bindings.zsh"
+
+source "$FZF_CONFIG/completion.zsh"
+source "$FZF_CONFIG/key-bindings.zsh"
 
 
 #   __ _| (_) __ _ ___  ___  ___ 
