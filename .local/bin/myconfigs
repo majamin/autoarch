@@ -3,9 +3,9 @@
 read -r -d '' FILES <<-EOF
 zshrc "$ZDOTDIR/.zshrc"
 zprofile "$ZDOTDIR/.zprofile"
-xprofile "${XDG_CONFIG_HOME:-$HOME/.config}/xprofile"
+xprofile "${XDG_CONFIG_HOME:-$HOME/.config/}/xprofile"
 xinitrc "$HOME/.xinitrc"
-init.vim "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim"
+init.vim "${XDG_CONFIG_HOME:-$HOME/.config/}/nvim/init.vim"
 dwm "$HOME/.local/src/dwm/config.def.h"
 statusbar "$HOME/.local/src/dwmstatus/dwmstatus.c"
 EOF
@@ -14,6 +14,6 @@ EOF
 CHOICE=$(printf "$FILES" | awk '{print $1}' | dmenu -r -i -l 30)
 
 # open the file in vim
-FILEPATH="$(echo "$FILES" | grep "${CHOICE}" | awk '{print $2}')"
+FILEPATH="$(echo "$FILES" | grep "^${CHOICE} " | awk '{print $2}')"
 
 echo $FILEPATH | xargs -I {} "$TERMINAL" -e nvim {} &>/dev/null
