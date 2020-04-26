@@ -75,8 +75,8 @@ endif
 set backupdir=$HOME/.cache/nvim/backup
 
 "colorscheme alduin "enabled by plugin rafi/awesome-vim-colors
-colorscheme dracula
 "colorscheme gotham "enabled by plugin rafi/awesome-vim-colors
+colorscheme elflord "it's like dracula but better syntax
 "colorscheme jellybeans "enabled by plugin rafi/awesome-vim-colors
 "colorscheme meta5 "enabled by plugin rafi/awesome-vim-colors
 "colorscheme molokai "enabled by plugin rafi/awesome-vim-colors
