@@ -6,7 +6,7 @@ zprofile "$ZDOTDIR/.zprofile"
 xprofile "${XDG_CONFIG_HOME:-$HOME/.config/}/xprofile"
 xinitrc "$HOME/.xinitrc"
 init.vim "${XDG_CONFIG_HOME:-$HOME/.config/}/nvim/init.vim"
-dwm "$HOME/.local/src/dwm/config.def.h"
+dwm "$HOME/.local/src/dwm/config.h"
 statusbar "$HOME/.local/src/dwmstatus/dwmstatus.c"
 EOF
 

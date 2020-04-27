@@ -7,7 +7,7 @@ fetch() {
 	awk -F, '{print $1 ", " $2}' | \
 	sed "s/\"//g" | \
 	dmenu -l 30 | \
-	xargs -I {} grep {} -hrnw $(find /home/sklss/OneDrive/_data/ed/myed/allstaff/*/*/4 -name "*tsv") | \
+	xargs -I {} grep {} -hrnw $(find "${HOME}"/OneDrive/_data/ed/myed/allstaff/*/*/4 -name "*tsv") | \
 	sed "s/^[0-9]\+://g"
 }
 

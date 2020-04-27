@@ -135,6 +135,8 @@ map <leader>p :!opout <c-r>%<CR><CR>
 "	endif
 
 
+autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
+
 "   __     __ 
 "  / _|___/ _|
 " | ||_  / |_ 

@@ -1,8 +1,3 @@
 #!/bin/sh
 
-STREAMINFO="$(ffprobe -v error -show_streams http://192.168.1.67:8080/video)"
-
-WIDTH="$(echo $STREAMINFO | grep -Po '(?<=coded_width=)\d*' -)"
-HEIGHT="$(echo $STREAMINFO | grep -Po '(?<=coded_height=)\d*' -)"
-
-ffmpeg -i "http://192.168.1.67:8080/video" -pix_fmt rgb24 -f rawvideo - | mpv - --quiet --demuxer=rawvideo --demuxer-rawvideo-mp-format=rgb24 --demuxer-rawvideo-w=$WIDTH --demuxer-rawvideo-h=$HEIGHT
+surf -bk "http://192.168.1.67:8080/video" 
