@@ -3,7 +3,7 @@ uri=$(xclip -o -sel clip)
 
 choice=$( printf "DownloadVideo\\nDownloadAudio\\nPlay\\nCancel" | dmenu -l -i -nb darkred -sb red -sf white -nf gray )
 
+[ $choice == "Play" ] && ( mpv --no-terminal $uri & notify-send "Opening $uri..." ) 
 [ $choice == "DownloadVideo" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/video.config $uri & notify-send "Downloading video(s)" )
 [ $choice == "DownloadAudio" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/audio.config $uri & notify-send "Downloading music(s)" )
-[ $choice == "Play" ] && ( mpv --no-terminal $uri & notify-send "Opening $uri..." ) 
 
