@@ -1,6 +1,16 @@
 #!/bin/sh
 
-date '+%Y %b %d (%a) %I:%M%p'
+d=$(date +%e)
+
+case $d in
+    1?) d=${d}th ;;
+    *1) d=${d}st ;;
+    *2) d=${d}nd ;;
+    *3) d=${d}rd ;;
+    *)  d=${d}th ;;
+esac
+
+date "+%a $d %I:%M%p"
 
 case $BLOCK_BUTTON in
 	1) notify-send "This Month" "$(cal --color=always | sed "s/..7m/<b><span color=\"red\">/;s/..27m/<\/span><\/b>/")" && notify-send "Appointments" "$(calcurse -D ~/.config/calcurse -d3)" ;;
