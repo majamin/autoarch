@@ -6,7 +6,7 @@ WIDTH="$(echo $STREAMINFO | grep -Po '(?<=coded_width=)\d*' -)"
 HEIGHT="$(echo $STREAMINFO | grep -Po '(?<=coded_height=)\d*' -)"
 
 # open the camera stream, pipe to mpv
-ffmpeg -i "http://192.168.1.67:8080/video" -pix_fmt rgb24 -f rawvideo - | mpv - --quiet --demuxer=rawvideo --demuxer-rawvideo-mp-format=rgb24 --demuxer-rawvideo-w=$WIDTH --demuxer-rawvideo-h=$HEIGHT
+ffmpeg -i "http://192.168.1.67:8080/video" -tune zerolatency -b 900k -pix_fmt rgb24 -f rawvideo - | mpv - --quiet --demuxer=rawvideo --demuxer-rawvideo-mp-format=rgb24 --demuxer-rawvideo-w=$WIDTH --demuxer-rawvideo-h=$HEIGHT
 
 # open a browser to handle configs if necessary
-xdg-open "http://192.168.1.67:8080/video" 
+# xdg-open "http://192.168.1.67:8080/" 
