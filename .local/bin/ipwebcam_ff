@@ -1,12 +1,22 @@
 #!/bin/sh
 
-STREAMINFO="$(ffprobe -v error -show_streams http://192.168.1.67:8080/video)"
+VIDSOURCE="http://192.168.1.67:8080/video"
+AUDSOURCE="http://192.168.1.67:8080/audio.opus"
+SCREENDIM=$(xdpyinfo| grep dimensions | awk '{print $2}')
+#STREAMINFO="$(ffprobe -v error -show_streams $VIDSOURCE)"
+#IPWIDTH="$(echo $STREAMINFO | grep -Po '(?<=coded_width=)\d*' -)"
+#IPHEIGHT="$(echo $STREAMINFO | grep -Po '(?<=coded_height=)\d*' -)"
 
-WIDTH="$(echo $STREAMINFO | grep -Po '(?<=coded_width=)\d*' -)"
-HEIGHT="$(echo $STREAMINFO | grep -Po '(?<=coded_height=)\d*' -)"
+ffmpeg -i "$VIDSOURCE" -pix_fmt yuv420p -f v4l2 /dev/video0 &
+sleep 4
 
-# open the camera stream, pipe to mpv
-ffmpeg -i "http://192.168.1.67:8080/video" -tune zerolatency -b 900k -pix_fmt rgb24 -f rawvideo - | mpv - --quiet --demuxer=rawvideo --demuxer-rawvideo-mp-format=rgb24 --demuxer-rawvideo-w=$WIDTH --demuxer-rawvideo-h=$HEIGHT
+ffplay /dev/video0 &
 
-# open a browser to handle configs if necessary
+# countdown to recording
+for i in {10..1}; do
+	notify-send -t 1000 "Recording starting in $i seconds"
+	sleep 1
+done
+ffmpeg -y -f x11grab -s $SCREENDIM -i :0.0 -i http://192.168.1.67:8080/audio.opus "$(date '+%F-%H-%M-%S')-out.mkv"
+
 # xdg-open "http://192.168.1.67:8080/" 
