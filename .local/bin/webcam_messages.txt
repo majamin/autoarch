@@ -1,0 +1,146 @@
+ffmpeg version n4.2.2 Copyright (c) 2000-2019 the FFmpeg developers
+  built with gcc 9.3.0 (Arch Linux 9.3.0-1)
+  configuration: --prefix=/usr --disable-debug --disable-static --disable-stripping --enable-fontconfig --enable-gmp --enable-gnutls --enable-gpl --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libdav1d --enable-libdrm --enable-libfreetype --enable-libfribidi --enable-libgsm --enable-libiec61883 --enable-libjack --enable-libmfx --enable-libmodplug --enable-libmp3lame --enable-libopencore_amrnb --enable-libopencore_amrwb --enable-libopenjpeg --enable-libopus --enable-libpulse --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libtheora --enable-libv4l2 --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxcb --enable-libxml2 --enable-libxvid --enable-nvdec --enable-nvenc --enable-omx --enable-shared --enable-version3
+  libavutil      56. 31.100 / 56. 31.100
+  libavcodec     58. 54.100 / 58. 54.100
+  libavformat    58. 29.100 / 58. 29.100
+  libavdevice    58.  8.100 / 58.  8.100
+  libavfilter     7. 57.100 /  7. 57.100
+  libswscale      5.  5.100 /  5.  5.100
+  libswresample   3.  5.100 /  3.  5.100
+  libpostproc    55.  5.100 / 55.  5.100
+Input #0, mpjpeg, from 'http://192.168.1.67:8080/video':
+  Duration: N/A, bitrate: N/A
+    Stream #0:0: Video: mjpeg (Baseline), yuvj420p(pc, bt470bg/unknown/unknown), 640x480 [SAR 1:1 DAR 4:3], 25 tbr, 25 tbn, 25 tbc
+Please use -b:a or -b:v, -b is ambiguous
+Codec AVOption tune (Tune the encoding to a specific scenario) specified for output file #0 (pipe:) has not been used for any stream. The most likely reason is either wrong type (e.g. a video option with no video streams) or that it is a private option of some encoder which was not actually used for any stream.
+Stream mapping:
+  Stream #0:0 -> #0:0 (mjpeg (native) -> rawvideo (native))
+Press [q] to stop, [?] for help
+[swscaler @ 0x559a85e56e80] deprecated pixel format used, make sure you did set range correctly
+Output #0, rawvideo, to 'pipe:':
+  Metadata:
+    encoder         : Lavf58.29.100
+    Stream #0:0: Video: rawvideo (RGB[24] / 0x18424752), rgb24, 640x480 [SAR 1:1 DAR 4:3], q=2-31, 184320 kb/s, 25 fps, 25 tbn, 25 tbc
+    Metadata:
+      encoder         : Lavc58.54.100 rawvideo
+[modules] 
+[modules] stack traceback:
+[modules] 	[C]: in function 'dofile'
+[modules] 	/home/marian/.config/mpv/scripts/modules.lua:2: in function 'load'
+[modules] 	/home/marian/.config/mpv/scripts/modules.lua:3: in main chunk
+[modules] 	[C]: in ?
+[modules] 	[C]: in ?
+[modules] Lua error: cannot open /home/marian/.config/mpv/scripts/mpvSockets/mpvSockets.lua: No such file or directory
+[file] Reading from stdin...
+ (+) Video --vid=1 (rawvideo 640x480 25.000fps)
+libEGL warning: DRI2: failed to authenticate
+[vo/gpu/opengl] Suspected software renderer or indirect context.
+[vo/gpu/opengl] Suspected software renderer or indirect context.
+[vo/gpu/vulkan/libplacebo] Failed creating instance: VK_ERROR_EXTENSION_NOT_PRESENT
+[vo/gpu/vulkan/libplacebo] Failed initializing vulkan instance
+[vo/gpu/vulkan/libplacebo] Failed creating instance: VK_ERROR_EXTENSION_NOT_PRESENT
+[vo/gpu/vulkan/libplacebo] Failed initializing vulkan instance
+Failed to open VDPAU backend libvdpau_nvidia.so: cannot open shared object file: No such file or directory
+[vo/vdpau] Error when calling vdp_device_create_x11: 1
+[vo/xv] No Xvideo support found.
+[vaapi] libva: vaGetDriverNameByIndex() failed with unknown libva error, driver_name = (null)
+[vaapi] Failed to initialize VAAPI: unknown libva error
+[vo/x11] Warning: this legacy VO has bad performance. Consider fixing your graphics drivers, or not forcing the x11 VO.
+VO: [x11] 640x480 rgb24
+frame=    7 fps=0.0 q=-0.0 size=    6300kB time=00:00:00.28 bitrate=184320.0kbits/s speed=0.539x    frame=   26 fps= 25 q=-0.0 size=   23400kB time=00:00:01.04 bitrate=184320.0kbits/s speed=1.02x    frame=   45 fps= 29 q=-0.0 size=   40500kB time=00:00:01.80 bitrate=184320.0kbits/s speed=1.16x    frame=   58 fps= 28 q=-0.0 size=   52200kB time=00:00:02.32 bitrate=184320.0kbits/s speed=1.12x    frame=   71 fps= 28 q=-0.0 size=   63900kB time=00:00:02.84 bitrate=184320.0kbits/s speed= 1.1x    frame=   79 fps= 23 q=-0.0 size=   71100kB time=00:00:03.16 bitrate=184320.0kbits/s speed=0.916x    frame=   93 fps= 24 q=-0.0 size=   83700kB time=00:00:03.72 bitrate=184320.0kbits/s speed=0.94x    frame=  108 fps= 24 q=-0.0 size=   97200kB time=00:00:04.32 bitrate=184320.0kbits/s speed=0.96x    frame=  126 fps= 25 q=-0.0 size=  113400kB time=00:00:05.04 bitrate=184320.0kbits/s speed=   1x    frame=  139 fps= 25 q=-0.0 size=  125100kB time=00:00:05.56 bitrate=184320.0kbits/s speed=   1x    frame=  152 fps= 25 q=-0.0 size=  136800kB time=00:00:06.08 bitrate=184320.0kbits/s speed=   1x    frame=  171 fps= 26 q=-0.0 size=  153900kB time=00:00:06.84 bitrate=184320.0kbits/s speed=1.04x    frame=  181 fps= 26 q=-0.0 size=  162900kB time=00:00:07.24 bitrate=184320.0kbits/s speed=1.02x    frame=  192 fps= 25 q=-0.0 size=  172800kB time=00:00:07.68 bitrate=184320.0kbits/s speed=1.01x    frame=  221 fps= 27 q=-0.0 size=  198900kB time=00:00:08.84 bitrate=184320.0kbits/s speed=1.09x    frame=  238 fps= 28 q=-0.0 size=  214200kB time=00:00:09.52 bitrate=184320.0kbits/s speed= 1.1x    frame=  253 fps= 28 q=-0.0 size=  227700kB time=00:00:10.12 bitrate=184320.0kbits/s speed=1.11x    frame=  269 fps= 28 q=-0.0 size=  242100kB time=00:00:10.76 bitrate=184320.0kbits/s speed=1.12x    frame=  284 fps= 28 q=-0.0 size=  255600kB time=00:00:11.36 bitrate=184320.0kbits/s speed=1.12x    frame=  299 fps= 28 q=-0.0 size=  269100kB time=00:00:11.96 bitrate=184320.0kbits/s speed=1.12x    frame=  313 fps= 28 q=-0.0 size=  281700kB time=00:00:12.52 bitrate=184320.0kbits/s speed=1.12x    frame=  331 fps= 28 q=-0.0 size=  297900kB time=00:00:13.24 bitrate=184320.0kbits/s speed=1.13x    frame=  347 fps= 28 q=-0.0 size=  312300kB time=00:00:13.88 bitrate=184320.0kbits/s speed=1.13x    frame=  362 fps= 28 q=-0.0 size=  325800kB time=00:00:14.48 bitrate=184320.0kbits/s speed=1.13x    frame=  377 fps= 28 q=-0.0 size=  339300kB time=00:00:15.08 bitrate=184320.0kbits/s speed=1.14x    frame=  392 fps= 28 q=-0.0 size=  352800kB time=00:00:15.68 bitrate=184320.0kbits/s speed=1.14x    frame=  407 fps= 28 q=-0.0 size=  366300kB time=00:00:16.28 bitrate=184320.0kbits/s speed=1.14x    frame=  425 fps= 29 q=-0.0 size=  382500kB time=00:00:17.00 bitrate=184320.0kbits/s speed=1.14x    frame=  441 fps= 29 q=-0.0 size=  396900kB time=00:00:17.64 bitrate=184320.0kbits/s speed=1.15x    frame=  457 fps= 29 q=-0.0 size=  411300kB time=00:00:18.28 bitrate=184320.0kbits/s speed=1.15x    frame=  473 fps= 29 q=-0.0 size=  425700kB time=00:00:18.92 bitrate=184320.0kbits/s speed=1.15x    frame=  488 fps= 29 q=-0.0 size=  439200kB time=00:00:19.52 bitrate=184320.0kbits/s speed=1.15x    
+
+Exiting... (Quit)
+av_interleaved_write_frame(): Broken pipe
+Error writing trailer of pipe:: Broken pipe
+frame=  496 fps= 29 q=-0.0 Lsize=  445564kB time=00:00:19.84 bitrate=183974.8kbits/s speed=1.15x    
+video:446400kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+Conversion failed!
+libva error: vaGetDriverNameByIndex() failed with unknown libva error, driver_name = (null)
+[31930:31930:0427/150717.416296:ERROR:vaapi_wrapper.cc(481)] vaInitialize failed: unknown libva error
+[31930:31930:0427/150717.416579:ERROR:gl_implementation.cc(277)] Failed to load /usr/lib/brave-bin/swiftshader/libGLESv2.so: /usr/lib/brave-bin/swiftshader/libGLESv2.so: cannot open shared object file: No such file or directory
+[31930:31930:0427/150717.429935:ERROR:viz_main_impl.cc(161)] Exiting GPU process due to errors during initialization
+libva error: vaGetDriverNameByIndex() failed with unknown libva error, driver_name = (null)
+[31959:31959:0427/150717.842417:ERROR:vaapi_wrapper.cc(481)] vaInitialize failed: unknown libva error
+[31959:31959:0427/150717.842747:ERROR:gl_implementation.cc(277)] Failed to load /usr/lib/brave-bin/swiftshader/libGLESv2.so: /usr/lib/brave-bin/swiftshader/libGLESv2.so: cannot open shared object file: No such file or directory
+[31959:31959:0427/150717.859221:ERROR:viz_main_impl.cc(161)] Exiting GPU process due to errors during initialization
+libva error: vaGetDriverNameByIndex() failed with unknown libva error, driver_name = (null)
+[32004:32004:0427/150718.397665:ERROR:vaapi_wrapper.cc(481)] vaInitialize failed: unknown libva error
+[32004:32004:0427/150718.405415:ERROR:sandbox_linux.cc(374)] InitializeSandbox() called with multiple threads in process gpu-process.
+[32004:32004:0427/150718.418218:ERROR:gpu_channel_manager.cc(459)] ContextResult::kFatalFailure: Failed to create shared context for virtualization.
+[31907:32085:0427/150718.434055:ERROR:object_proxy.cc(632)] Failed to call method: org.freedesktop.DBus.Properties.Get: object_path= /org/freedesktop/UPower: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.UPower was not provided by any .service files
+[31907:32085:0427/150718.434219:ERROR:object_proxy.cc(632)] Failed to call method: org.freedesktop.UPower.GetDisplayDevice: object_path= /org/freedesktop/UPower: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.UPower was not provided by any .service files
+[31907:32085:0427/150718.434338:ERROR:object_proxy.cc(632)] Failed to call method: org.freedesktop.UPower.EnumerateDevices: object_path= /org/freedesktop/UPower: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.UPower was not provided by any .service files
+[31907:31948:0427/150718.667353:ERROR:rewards_service_impl.cc(194)] Failed to read file: /home/marian/.config/BraveSoftware/Brave-Browser/Default/ledger_state
+[31940:31940:0427/150718.697295:ERROR:ledger_impl.cc(113)] Failed to initialize wallet
+[31907:31907:0427/150719.709974:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/150720.255610:ERROR:brave_referrals_service.cc(222)] Failed to fetch headers from referral server, error: -102, response code: -1, payload: , url: https://laptop-updates.brave.com/promo/custom-headers
+[31907:31907:0427/150722.391516:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: The tab was closed.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/150722.391584:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: The tab was closed.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/150722.391611:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: The tab was closed.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/150722.417371:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/150722.417422:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 28.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/150722.417447:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 28.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/150722.417470:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 28.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/150722.786989:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 28.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[32466:1:0427/150735.388158:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[32466:1:0427/150735.388377:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[32569:1:0427/150743.310158:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[32569:1:0427/150743.310368:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[32629:1:0427/150746.898607:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[32629:1:0427/150746.898794:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[31907:31907:0427/150817.455621:ERROR:gcm_channel_status_request.cc(145)] GCM channel request failed.
+[31907:31907:0427/150838.091471:ERROR:gcm_channel_status_request.cc(145)] GCM channel request failed.
+[31907:31907:0427/150934.435073:ERROR:gcm_channel_status_request.cc(145)] GCM channel request failed.
+[31907:31907:0427/150953.306462:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/150953.306657:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/150953.367133:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: Cannot access contents of url "chrome://newtab/". Extension manifest must request permission to access this host.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[34087:1:0427/151007.803494:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[34087:1:0427/151007.803709:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[31907:31907:0427/151115.672562:ERROR:gcm_channel_status_request.cc(145)] GCM channel request failed.
+[31907:31907:0427/151429.651934:ERROR:gcm_channel_status_request.cc(145)] GCM channel request failed.
+[31907:31907:0427/152035.303248:ERROR:gcm_channel_status_request.cc(145)] GCM channel request failed.
+[31907:31907:0427/152525.670906:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/152525.670959:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/152528.130852:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/152528.130903:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/152528.152130:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/152528.152204:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+Fontconfig error: Cannot load default config file: No such file: (null)
+[31907:31907:0427/152601.960951:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/152601.961002:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/152710.037112:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/152710.037175:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 49.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152710.037203:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 49.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152710.037227:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 49.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152710.569360:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 49.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152711.633729:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/152711.633780:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 48.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152711.633805:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 48.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152711.633949:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 48.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152711.874303:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 48.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152712.367165:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: The tab was closed.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152712.495859:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/152712.495915:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 47.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152712.495941:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 47.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152712.501048:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 47.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152712.546554:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 47.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152712.546613:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 47.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152712.702708:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 47.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152712.788201:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 47.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152712.857965:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 47.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152713.530842:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/152713.530899:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 46.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152713.530925:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 46.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152713.530948:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 46.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152713.546869:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/152713.546930:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 46.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152713.546960:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 46.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152713.546982:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 46.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152713.569004:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 46.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152713.738036:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 46.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152713.781893:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: No tab with id: 46.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/152805.930960:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/152805.931596:ERROR:CONSOLE(1)] "[Shields]: Can't request shields panel data. Error: No tab url specified", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/out/brave_extension_background.bundle.js (1)
+[31907:31907:0427/152806.141033:ERROR:CONSOLE(0)] "Unchecked runtime.lastError: Cannot access contents of url "chrome://newtab/". Extension manifest must request permission to access this host.", source: chrome-extension://mnojpmjdmbbfmejpflffifhffcmidifd/_generated_background_page.html (0)
+[31907:31907:0427/153035.394803:ERROR:gcm_channel_status_request.cc(145)] GCM channel request failed.
