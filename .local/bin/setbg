@@ -9,11 +9,11 @@
 # Location of link to wallpaper link.
 bgloc="${XDG_DATA_HOME:-$HOME/.local/share/}/bg"
 
-fallback="${XDG_CACHE_HOME:-$HOME/.local/share/}/defaultbg.jpg"
+fallback="${XDG_CACHE_HOME:-$HOME/.local/share/}defaultbg.jpg"
+
+[ ! -f "$bgloc" ] && ln -sf "$fallback" "$bgloc"
 
 [ -f "$1" ] && ln -sf "$(readlink -f "$1")" "$bgloc" && notify-send -i "$bgloc" "Changing wallpaper..."
-
-[ ! -f $bgloc ] && ln -sf "$fallback" "$bgloc" && notify-send -i "$bgloc" "Wallpaper changed to default..."
 
 if [ -d "$1" ]; then
 	DPATH=$(readlink -f "$1")
