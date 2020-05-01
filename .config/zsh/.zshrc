@@ -92,6 +92,7 @@ alias mv="mv -iv" # allows verbose and intearctive moving
 alias rm="rm -v" # allows verbose removal
 alias mkdir="mkdir -pv" # allows verbose and recursive directory creation
 alias p="sudo pacman" # quick shortcut to sudo pacman
+alias sudo="sudo --askpass"
 
 
 #  _     _       _     _ _       _     _   _             
