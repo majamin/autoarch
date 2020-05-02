@@ -1,7 +1,7 @@
 #!/bin/sh
 
-setscreen
-xwallpaper --zoom "${XDG_DATA_HOME:-$HOME/.local/share/}/bg"
+setbg &
+setscreen &
 remaps &			# run the remaps script, switching caps/esc and more; check it for more info
 xcompmgr &			# xcompmgr for transparency
 #dwmstatus 2>&1 >/dev/null &	# dwmstatus statusbar
