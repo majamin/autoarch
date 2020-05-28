@@ -36,7 +36,8 @@
 
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" --create-dirs > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
+	silent !mkdir -p "$HOME/.config/nvim/autoload"
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
 	autocmd VimEnter * PlugInstall
 endif
 
@@ -135,6 +136,8 @@ map <leader>p :!opout <c-r>%<CR><CR>
 "		r! echo % >> "~/todofiles.txt"
 "	endif
 
+" Save file as sudo on files that require root permission
+	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
 
@@ -166,13 +169,13 @@ let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markd
 
 " where's vimwiki?
 let wiki_personal 		= {}
-let wiki_personal.path 		= '~/OneDrive/Documents/vimwiki_personal/'
-let wiki_personal.path_html 	= '~/OneDrive/Documents/vimwiki_personal/html/'
+let wiki_personal.path 		= '~/OneDrive/Maja/Documents/vimwiki_personal/'
+let wiki_personal.path_html 	= '~/OneDrive/Maja/Documents/vimwiki_personal/html/'
 let wiki_personal.syntax 	= 'markdown'
 let wiki_personal.ext 		= '.md'
 let wiki_mss 			= {}
-let wiki_mss.path 		= '~/OneDrive/Documents/vimwiki_mss/'
-let wiki_mss.path_html 		= '~/OneDrive/Documents/vimwiki_mss/html/'
+let wiki_mss.path 		= '~/OneDrive/Maja/Documents/vimwiki_mss/'
+let wiki_mss.path_html 		= '~/OneDrive/Maja/Documents/vimwiki_mss/html/'
 let wiki_mss.syntax 		= 'markdown'
 let wiki_mss.ext 		= '.md'
 let g:vimwiki_list 		= [wiki_personal, wiki_mss]

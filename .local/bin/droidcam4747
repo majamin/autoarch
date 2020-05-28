@@ -1,0 +1,8 @@
+#/bin/sh
+
+# is the phone plugged in?
+adb kill-server && adb start-server &> /dev/null
+[[ $(adb devices | wc -l ) = 3 ]] && notify-send "adb reports connection to a device" || notify-send "adb reports NO connections"
+[[ -z $(ps -e | grep droidcam) ]] && droidcam &
+killall -q -9 ffplay
+ffplay /dev/video0 &> /dev/null

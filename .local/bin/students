@@ -4,13 +4,13 @@ read -p "Please select a term (an integer 1-4):" TERM
 
 if [[ "$TERM" =~ ^[1-4]+$ ]]; then
 	fetch() {
-		ls -t $(find $HOME/OneDrive/_data/ed/myed/allstudents/QR* -type f) | \
+		ls -t $(find $MYDATA/ed/myed/allstudents/QR* -type f) | \
 		head -n 1 | \
 		xargs cat | \
 		awk -F, '{print $1 ", " $2}' | \
 		sed "s/\"//g" | \
 		fzf | \
-		xargs -I {} grep {} -hrnw $(find "${HOME}"/OneDrive/_data/ed/myed/allstaff/*/*/4 -name "*tsv") | \
+		xargs -I {} grep {} -hrnw $(find "${MYDATA}"/ed/myed/allstaff/*/*/"${TERM}" -name "*tsv") | \
 		sed "s/^[0-9]\+://g"
 	}
 	
