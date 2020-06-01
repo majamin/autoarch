@@ -169,13 +169,13 @@ let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markd
 
 " where's vimwiki?
 let wiki_personal 		= {}
-let wiki_personal.path 		= '~/OneDrive/Maja/Documents/vimwiki_personal/'
-let wiki_personal.path_html 	= '~/OneDrive/Maja/Documents/vimwiki_personal/html/'
+let wiki_personal.path 		= system('printf "%s" "$ONEDRIVE" "/Maja/Documents/vimwiki_personal"')
+let wiki_personal.path_html 	= system('printf "%s" "$ONEDRIVE" "/Maja/Documents/vimwiki_personal/html"')
 let wiki_personal.syntax 	= 'markdown'
 let wiki_personal.ext 		= '.md'
 let wiki_mss 			= {}
-let wiki_mss.path 		= '~/OneDrive/Maja/Documents/vimwiki_mss/'
-let wiki_mss.path_html 		= '~/OneDrive/Maja/Documents/vimwiki_mss/html/'
+let wiki_mss.path 		= system('printf "%s" "$ONEDRIVE" "/Maja/Documents/vimwiki_mss"')
+let wiki_mss.path_html 		= system('printf "%s" "$ONEDRIVE" "/Maja/Documents/vimwiki_mss/html"')
 let wiki_mss.syntax 		= 'markdown'
 let wiki_mss.ext 		= '.md'
 let g:vimwiki_list 		= [wiki_personal, wiki_mss]

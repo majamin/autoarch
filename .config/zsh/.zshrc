@@ -92,7 +92,10 @@ alias mv="mv -iv" # allows verbose and intearctive moving
 alias rm="rm -v" # allows verbose removal
 alias mkdir="mkdir -pv" # allows verbose and recursive directory creation
 alias p="sudo pacman" # quick shortcut to sudo pacman
-
+alias yt="youtube-dl --add-metadata -i --restrict-filenames" \
+alias yta="yt -x -f bestaudio/best --write-thumbnail" \
+alias ffmpeg="ffmpeg -hide_banner"
+command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 
 #  _     _       _     _ _       _     _   _             
 # | |__ (_) __ _| |__ | (_) __ _| |__ | |_(_)_ __   __ _ 
