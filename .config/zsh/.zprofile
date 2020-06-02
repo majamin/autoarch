@@ -13,8 +13,8 @@ export BROWSER="brave"
 
 
 [ $(hostname) = "minarch" ] && export ONEDRIVE="/mnt/BarraCuda/OneDrive"
-[ $(hostname) = "arch17" ] && export ONEDRIVE="~/OneDrive"
-[ $(hostname) = "archlinux" ] && export ONEDRIVE="~/OneDrive"
+[ $(hostname) = "arch17" ] && export ONEDRIVE="$HOME/OneDrive"
+[ $(hostname) = "archlinux" ] && export ONEDRIVE="$HOME/OneDrive"
 
 #case "$HOST" in
 #	"minarch" )
