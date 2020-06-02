@@ -1,7 +1,6 @@
 #!/bin/sh
 
-setbg &
-setscreen &
+setscreen && setbg &
 remaps &			# run the remaps script, switching caps/esc and more; check it for more info
 #xcompmgr &			# xcompmgr for transparency
 dwmblocks 2>&1 >/dev/null &	# dwmstatus statusbar

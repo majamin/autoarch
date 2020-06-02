@@ -4,4 +4,4 @@
 
 [ $(hostname) = "minarch" ] && xrandr --output VGA-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal
 
-[ $(hostname) = "" ] && xrandr --output VGA-1 --primary --mode 1360x768 --pos 0x0 --rotate normal
+[ $(hostname) = "archlinux" ] && xrandr --output Virtual1 --primary --mode 1360x768 --pos 0x0 --rotate normal
