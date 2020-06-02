@@ -2,6 +2,6 @@
 
 [ $(hostname) = "arch17" ] && xrandr --output VGA-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off --output HDMI-2 --off --output HDMI-3 --mode 1024x768 --pos 1920x0 --rotate normal --output DP-2 --off --output DP-3 --off
 
-[ $(hostname) = "minarch" ] && xrandr --output VGA-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal
-
 [ $(hostname) = "archlinux" ] && xrandr --output Virtual1 --primary --mode 1360x768 --pos 0x0 --rotate normal
+
+[ $(hostname) = "minarch" ] && xrandr --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI1 --off --output VIRTUAL1 --off
