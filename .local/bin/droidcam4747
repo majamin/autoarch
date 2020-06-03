@@ -1,11 +1,18 @@
 #/bin/sh
 
-# create loopback device
-sudo modprobe v4l2loopback_dc
+# create loopback device if it doesn't exist
+[ -z "$(v4l2-ctl -l) | grep "Cannot open device"" ] && sudo modprobe v4l2loopback_dc
 
 # is the phone plugged in?
-adb kill-server && adb start-server &> /dev/null
+adb kill-server && adb start-server &> /dev/null &
 [[ $(adb devices | wc -l ) = 3 ]] && notify-send "adb reports connection to a device" || notify-send "adb reports NO connections"
-[[ -z $(ps -e | grep droidcam) ]] && droidcam &
+killall -q -9 droidcam
+droidcam &
 killall -q -9 ffplay
-ffplay -autoexit -alwaysontop /dev/video0 &> /dev/null
+ffplay -autoexit -alwaysontop /dev/video0 &> /dev/null &
+
+#ffmpeg -f x11grab -thread_queue_size 64 -video_size 1920x1080 -framerate 30 -i :1 \
+#       -f v4l2 -thread_queue_size 64 -video_size 320x180 -framerate 30 -i /dev/video0 \
+#       -filter_complex 'overlay=main_w-overlay_w:main_h-overlay_h:format=yuv444' \
+#       -vcodec libx264 -preset ultrafast -qp 0 -pix_fmt yuv444p \
+#       video.mkv
