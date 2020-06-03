@@ -1,6 +1,6 @@
 #!/bin/sh
 
-file="$HOME/.local/src/dwm/config.def.h"
+file=$(fzf)
 
 MODKEY=$(grep "(?<=#define MODKEY ).+" -Po $file)
 
