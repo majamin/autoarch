@@ -87,7 +87,7 @@ colorscheme angr
 set spelllang=en_ca
 set backup "backup copy saved as '~<original-file>'
 set ruler "display column, row, etc.
-set number "display line numbers
+set nonumber "display line numbers
 set scrolloff=9
 set visualbell " use a visual bell instead of beeping
 set showmode " display the current mode in the status line
