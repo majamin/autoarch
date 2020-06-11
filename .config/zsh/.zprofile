@@ -11,25 +11,23 @@ export EDITOR="nvim"
 export READER="zathura"
 export BROWSER="brave"
 
-
+# Host-specific environment variables
 [ $(hostname) = "minarch" ] && export ONEDRIVE="/mnt/BarraCuda/OneDrive"
 [ $(hostname) = "arch17" ] && export ONEDRIVE="$HOME/OneDrive"
 [ $(hostname) = "archlinux" ] && export ONEDRIVE="$HOME/OneDrive"
 
-#case "$HOST" in
-#	"minarch" )
-#		export ONEDRIVE="/mnt/BarraCuda/OneDrive" ;;
-#	"arch17" )
-#		export ONEDRIVE="~/OneDrive" ;;
-#esac
-
-# ~/ Clean-up:
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export MYDATA="$ONEDRIVE/Maja/_data"
 [ $(hostname) = "minarch" ] && export VIDEOS="/mnt/BarraCuda/Videos"
 [ $(hostname) = "arch17" ] && export VIDEOS="$HOME/Videos"
 [ $(hostname) = "archlinux" ] && export VIDEOS="$HOME/Videos"
+
+
+[ $(hostname) = "minarch" ] && export MUSIC="/mnt/BarraCuda/Music"
+[ $(hostname) = "arch17" ] && export MUSIC="$HOME/Music"
+[ $(hostname) = "archlinux" ] && export MUSIC="$HOME/Music"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export MYDATA="$ONEDRIVE/Maja/_data"
 export PASSWORD_STORE_DIR="$ONEDRIVE/Maja/password-store"
 export SUDO_ASKPASS="$HOME/.local/bin/sudopass"
 export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
