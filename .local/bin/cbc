@@ -1,0 +1,2 @@
+#!/bin/sh
+curl https://cbcliveradio-lh.akamaihd.net/i/CBCR1_KAM@384142/master.m3u8 | tail -n1 | xargs ffplay
