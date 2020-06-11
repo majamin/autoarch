@@ -37,7 +37,7 @@ mountandroid() { \
 	notify-send "🤖 Android Mounting" "Android device mounted to $mp."
 	}
 
-mountmediadisc() { # in development
+mountmediadisc() { \ # in development
 }
 
 asktype() { \
