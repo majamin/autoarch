@@ -1,6 +1,6 @@
 #!/bin/sh
 
-file=$(fzf)
+file="$HOME/.local/src/dwm/config.def.h"
 
 MODKEY=$(grep "(?<=#define MODKEY ).+" -Po $file)
 
@@ -19,7 +19,7 @@ cat "$file" |
 	sed 's/ \+/ /g' |
 	sed 's/XK_//g' | 
 	sed 's/ShiftMask/Shift/g' |
-	sed 's/MODKEY/Alt/g' |
+	sed "s/MODKEY/${MODKEY}/g" |
 	sed 's/,/ +/' |
 	awk -F, '{print $1 $4}' |
 	sed 's/\/\//\t\t/g'
