@@ -5,6 +5,8 @@
 #                         
 
 HISTFILE="$ZDOTDIR/.zsh_history"
+HISTSIZE=10000
+SAVEHIST=10000
 
 #        _                                        _     
 #   ___ | |__        _ __ ___  _   _      _______| |__  
@@ -13,10 +15,10 @@ HISTFILE="$ZDOTDIR/.zsh_history"
 #  \___/|_| |_|     |_| |_| |_|\__, |    /___|___/_| |_|
 #                              |___/                    
 
-ZSH_THEME="robbyrussell"
-plugins=(git)
+#ZSH_THEME="robbyrussell"
+#plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 #   ___  ___ ___  ___ _ __ | |_(_) __ _| |___ 
 #  / _ \/ __/ __|/ _ \ '_ \| __| |/ _` | / __|
@@ -26,10 +28,17 @@ source $ZSH/oh-my-zsh.sh
 
 setopt autocd
 autoload -U compinit
+autoload -U colors && colors	# Load colors
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
 zstyle ':completion:*' menu select
 zmodload zsh/complist
+stty stop undef		# Disable ctrl-s to freeze terminal.
 compinit
 _comp_options+=(globdots)
+
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
 
 # __   _(_)      _ __ ___   ___   __| | ___ 
 # \ \ / / |_____| '_ ` _ \ / _ \ / _` |/ _ \
@@ -37,6 +46,8 @@ _comp_options+=(globdots)
 #   \_/ |_|     |_| |_| |_|\___/ \__,_|\___|
 
 bindkey -v
+export KEYTIMEOUT=1
+
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
