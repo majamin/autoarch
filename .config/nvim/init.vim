@@ -75,13 +75,9 @@ if ! filereadable(expand('~/.cache/nvim/backup'))
 endif
 set backupdir=$HOME/.cache/nvim/backup
 
-"colorscheme alduin "enabled by plugin rafi/awesome-vim-colors
-"colorscheme gotham "enabled by plugin rafi/awesome-vim-colors
-"colorscheme elflord "it's not bad but the TODO is horendous
-colorscheme angr 
-"colorscheme jellybeans "enabled by plugin rafi/awesome-vim-colors
+colorscheme afterglow " an awesome choice woth no transperancy
+"colorscheme angr " a good choice with transperancy
 "colorscheme meta5 "enabled by plugin rafi/awesome-vim-colors
-"colorscheme molokai "enabled by plugin rafi/awesome-vim-colors
 "colorscheme wal "only works with pywal installed
 
 set spelllang=en_ca
