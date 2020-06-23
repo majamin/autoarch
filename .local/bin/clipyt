@@ -3,11 +3,11 @@ uri=$(xclip -o -sel clip)
 
 case "$@" in
 	"play") choice="Play" ;;
-	"")     choice=$( printf "Play\\nDownload as Video\\nDownload as Audio\\nCancel" | dmenu -l -i) ;;
+	"")     choice=$( printf "Play\\nDownloadVideo\\nDownloadAudio\\nCancel" | dmenu -l -i) ;;
 	*)	echo "Usage: clipyt play"; exit 1 ;;
 esac
 
 [ $choice == "Play" ] && ( mpv --no-terminal $uri & notify-send "Opening $uri..." ) 
-[ $choice == "Download as Video" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/video.config $uri & notify-send "Downloading video(s)" )
-[ $choice == "Download as Audio" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/audio.config $uri & notify-send "Downloading music(s)" )
+[ $choice == "DownloadVideo" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/video.config $uri & notify-send "Downloading video(s)" )
+[ $choice == "DownloadAudio" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/audio.config $uri & notify-send "Downloading music(s)" )
 
