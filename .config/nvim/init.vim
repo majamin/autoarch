@@ -124,6 +124,10 @@ map <leader>c :w! \| !compiler <c-r>%<CR>
 " Open corresponding .pdf/.html or preview
 map <leader>p :!opout <c-r>%<CR><CR>
 
+" paste image paths found in working directory and up to sub-sub directories
+" DEPS: sxiv, xclip
+map <leader>i :r !find . -maxdepth 2 -print \| file -if - \| grep "image/" \| awk -F: '{print $1}' \| xargs sxiv -qto<CR><CR>
+
 " Experimental TODO things
 " I want Vim to detect if I have a TODO in a file and to add the path
 " of the file to a 'todofiles.txt' simple database that I can search later.
@@ -144,7 +148,8 @@ autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/
 " |_|/___|_|  
 "             
 " search for files starting in the home directory
-nnoremap <leader>f 	:Files ~/<CR>
+nnoremap <leader>f 	:Files <CR>
+nnoremap <leader>ff	:Files ~/<CR>
 nnoremap <leader>fc 	:Files ~/.config<CR>
 nnoremap <leader>fo 	:Files ~/OneDrive<CR>
 nnoremap <leader>b 	:Buffers<CR>
