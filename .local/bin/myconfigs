@@ -1,18 +1,15 @@
 #!/bin/sh
 
 read -r -d '' FILES <<-EOF
-zshrc "$ZDOTDIR/.zshrc"
-zprofile "$ZDOTDIR/.zprofile"
-xprofile "${XDG_CONFIG_HOME:-$HOME/.config/}/xprofile"
-xinitrc "$HOME/.xinitrc"
-init.vim "${XDG_CONFIG_HOME:-$HOME/.config/}/nvim/init.vim"
-dwm "$HOME/.local/src/dwm/config.def.h"
+"$ZDOTDIR/.zshrc"
+"$ZDOTDIR/.zprofile"
+"${XDG_CONFIG_HOME:-$HOME/.config/}/xprofile"
+"$HOME/.xinitrc"
+"${XDG_CONFIG_HOME:-$HOME/.config/}/nvim/init.vim"
+"${XDG_CONFIG_HOME:-$HOME/.config/}/newsboat/config"
+"${XDG_CONFIG_HOME:-$HOME/.config/}/newsboat/urls"
+"$HOME/.local/src/dwm/config.def.h"
 EOF
 
-# read in choice
-CHOICE=$(printf "$FILES" | awk '{print $1}' | dmenu -F -i -l 30)
-
 # open the file in vim
-FILEPATH="$(echo "$FILES" | grep "^${CHOICE} " | awk '{print $2}')"
-
-echo $FILEPATH | xargs -I {} "$TERMINAL" -e nvim {} &>/dev/null
+echo "$FILES" | dmenu -F -l 30 | xargs -I {} "$TERMINAL" -e nvim {} &>/dev/null
