@@ -2,4 +2,4 @@
 
 d=$(date +%e)
 
-date "+%a %b %d " | xargs -I {} echo -e "\x03 {}\x01"
+date "+%a %b %d " | xargs -I {} echo -e " \x03 \x01{}"
