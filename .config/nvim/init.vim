@@ -75,8 +75,8 @@ if ! filereadable(expand('~/.cache/nvim/backup'))
 endif
 set backupdir=$HOME/.cache/nvim/backup
 
-colorscheme afterglow " an awesome choice woth no transperancy
-"colorscheme angr " a good choice with transperancy
+"colorscheme afterglow " an awesome choice with no transperancy
+colorscheme angr " a good choice with transperancy
 "colorscheme meta5 "enabled by plugin rafi/awesome-vim-colors
 "colorscheme wal "only works with pywal installed
 

@@ -7,7 +7,7 @@ case "$@" in
 	*)	echo "Usage: clipyt play"; exit 1 ;;
 esac
 
-[ $choice == "Play" ] && ( mpv --no-terminal $uri & notify-send "Opening $uri..." ) 
+[ $choice == "Play" ] && ( mpv --volume=30 --no-terminal $uri & notify-send "Opening $uri..." ) 
 [ $choice == "DownloadVideo" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/video.config $uri & notify-send "Downloading video(s)" )
 [ $choice == "DownloadAudio" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/audio.config $uri & notify-send "Downloading music(s)" )
 

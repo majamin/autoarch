@@ -12,4 +12,4 @@ esac
 grep "down" /sys/class/net/w*/operstate && wifiicon="" ||
 	wifiicon="$(grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70) "%" }')"
 
-printf "%s %s\n" "$wifiicon" "$(sed "s/down//;s/up/\\x03\\x01/" /sys/class/net/e*/operstate)"
+printf "%s %s\n" "$wifiicon" "$(sed "s/down//;s/up//" /sys/class/net/e*/operstate)"

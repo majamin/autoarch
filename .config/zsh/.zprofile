@@ -21,7 +21,6 @@ export BROWSER="brave"
 [ $(hostname) = "arch17" ] && export VIDEOS="$HOME/Videos"
 [ $(hostname) = "archlinux" ] && export VIDEOS="$HOME/Videos"
 
-
 [ $(hostname) = "minarch" ] && export MUSIC="/mnt/BarraCuda/Music"
 [ $(hostname) = "arch17" ] && export MUSIC="$HOME/Music"
 [ $(hostname) = "archlinux" ] && export MUSIC="$HOME/Music"
