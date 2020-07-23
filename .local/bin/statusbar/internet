@@ -9,12 +9,10 @@ case $BLOCK_BUTTON in
 " ;;
 esac
 
-INDEXUP=$(cat /sys/class/net/*/operstate | grep -n up | grep -Po "\d+")
-DEVICES=($(ls /sys/class/net))
-WHICHUP=${DEVICES[ (( $INDEXUP - 1 )) ]}
+WHICHSSID=$(nmcli -t -f name connection show --active)
 
 #[ -z $INDEXUP ] && \
 #	printf "%s %s\n" "\\x03down\\x01" || \
 #	printf "%s %s\n" "\\x03$WHICHUP\\x01" || \
 
-printf "\x03%s\x01" "$WHICHUP"
+printf "\x03%s\x01" "$WHICHSSID"
