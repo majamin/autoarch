@@ -9,7 +9,12 @@ case $BLOCK_BUTTON in
 " ;;
 esac
 
-grep "down" /sys/class/net/w*/operstate && wifiicon="" ||
-	wifiicon="$(grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70) "%" }')"
+INDEXUP=$(cat /sys/class/net/*/operstate | grep -n up | grep -Po "\d+")
+DEVICES=($(ls /sys/class/net))
+WHICHUP=${DEVICES[ (( $INDEXUP - 1 )) ]}
 
-printf "%s %s\n" "$wifiicon" "$(sed "s/down//;s/up/\\x03\\x01/" /sys/class/net/e*/operstate)"
+#[ -z $INDEXUP ] && \
+#	printf "%s %s\n" "\\x03down\\x01" || \
+#	printf "%s %s\n" "\\x03$WHICHUP\\x01" || \
+
+printf "\x03%s\x01" "$WHICHUP"
