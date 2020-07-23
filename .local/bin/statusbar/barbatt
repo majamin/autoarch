@@ -13,7 +13,7 @@ do
 
 	status=$(cat "$battery"/status) || break
 
-	[ "$status" = "Discharging" ] && icon="" && printf " \x09%s\x01%s " "$icon" "$baticon" || \ 
+	[ "$status" = "Discharging" ] && icon="" && printf " \x09%s\x01%s " "$icon" "$baticon"
 	[ "$status" != "Discharging" ] && icon="" && printf " %s%s " "$icon" "$baticon"
 
 	unset warn
