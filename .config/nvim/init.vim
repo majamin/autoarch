@@ -51,7 +51,6 @@ Plug 'junegunn/goyo.vim'
 	Plug 'junegunn/limelight.vim' "focus directly what's in front of you
 Plug 'jalvesaq/Nvim-R' " a plugin for R
 Plug 'dylanaraps/wal.vim' " wal matches vim colors to the current wal theme
-Plug 'baeuml/summerfruit256.vim' "great light-color theme (not used, yet)
 Plug 'rafi/awesome-vim-colorschemes' "it's obvious what this is
 call plug#end()
 
@@ -76,8 +75,8 @@ endif
 set backupdir=$HOME/.cache/nvim/backup
 
 "colorscheme afterglow " an awesome choice with no transperancy
-colorscheme angr " a good choice with transperancy
-"colorscheme meta5 "enabled by plugin rafi/awesome-vim-colors
+"colorscheme angr " a good choice with transperancy
+colorscheme meta5 "enabled by plugin rafi/awesome-vim-colors
 "colorscheme wal "only works with pywal installed
 
 set spelllang=en_ca
