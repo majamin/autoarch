@@ -26,4 +26,4 @@ case $BLOCK_BUTTON in
 esac
 
 nopac=$(pacman -Qu | grep -cv "\[ignored\]")
-echo -e "\x08PAC\x01 $nopac "
+echo -e "\x08\x01 $nopac "
