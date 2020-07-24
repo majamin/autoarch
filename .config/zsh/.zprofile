@@ -13,15 +13,15 @@ export READER="zathura"
 export BROWSER="brave"
 
 # Host-specific environment variables
-[ $(hostname) = "minarch" ] && export ONEDRIVE="/mnt/BarraCuda/OneDrive"
+[ $(hostname) = "thinkarch" ] && export ONEDRIVE="$HOME/Maja"
 [ $(hostname) = "arch17" ] && export ONEDRIVE="$HOME/OneDrive"
 [ $(hostname) = "archlinux" ] && export ONEDRIVE="$HOME/OneDrive"
 
-[ $(hostname) = "minarch" ] && export VIDEOS="/mnt/BarraCuda/Videos"
+[ $(hostname) = "thinkarch" ] && export VIDEOS="$HOME/Videos"
 [ $(hostname) = "arch17" ] && export VIDEOS="$HOME/Videos"
 [ $(hostname) = "archlinux" ] && export VIDEOS="$HOME/Videos"
 
-[ $(hostname) = "minarch" ] && export MUSIC="/mnt/BarraCuda/Music"
+[ $(hostname) = "thinkarch" ] && export MUSIC="$HOME/Music"
 [ $(hostname) = "arch17" ] && export MUSIC="$HOME/Music"
 [ $(hostname) = "archlinux" ] && export MUSIC="$HOME/Music"
 

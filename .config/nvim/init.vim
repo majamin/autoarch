@@ -43,14 +43,12 @@ endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 Plug 'scrooloose/nerdtree'
-Plug 'lukesmithxyz/vimling'
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'junegunn/goyo.vim'
 	Plug 'junegunn/limelight.vim' "focus directly what's in front of you
 Plug 'jalvesaq/Nvim-R' " a plugin for R
-Plug 'dylanaraps/wal.vim' " wal matches vim colors to the current wal theme
 Plug 'rafi/awesome-vim-colorschemes' "it's obvious what this is
 call plug#end()
 
@@ -142,7 +140,7 @@ autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/
 
 "   __     __ 
 "  / _|___/ _|
-" | ||_  / |_ 
+" | ||_  / |_   Fuzzy File Finder
 " |  _/ /|  _|  How did we ever do things before fzf?
 " |_|/___|_|  
 "             
@@ -169,34 +167,19 @@ let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markd
 
 " where's vimwiki?
 let wiki_personal 		= {}
-let wiki_personal.path 		= system('printf "%s" "~/vimwiki"')
-let wiki_personal.path_html 	= system('printf "%s" "~/vimwiki/html"')
+let wiki_personal.path 		= system('printf "%s" "$ONEDRIVE" "/Projects/vimwiki_personal"')
+let wiki_personal.path_html	= system('printf "%s" "$ONEDRIVE" "/Projects/vimwiki_personal/html"')
 let wiki_personal.syntax 	= 'markdown'
 let wiki_personal.ext 		= '.md'
 let wiki_mss 			= {}
-let wiki_mss.path 		= system('printf "%s" "$ONEDRIVE" "/Maja/Projects/mss/vimwiki"')
-let wiki_mss.path_html 		= system('printf "%s" "$ONEDRIVE" "/Maja/Projects/mss/vimwiki/html"')
+let wiki_mss.path 		= system('printf "%s" "$ONEDRIVE" "/Projects/mss/vimwiki"')
+let wiki_mss.path_html 		= system('printf "%s" "$ONEDRIVE" "/Projects/mss/vimwiki/html"')
 let wiki_mss.syntax 		= 'markdown'
 let wiki_mss.ext 		= '.md'
 let g:vimwiki_list 		= [wiki_personal, wiki_mss]
 
 " Vimwiki is nicer when there's no wrap
 autocmd BufRead,BufNewFile */vimwiki* set nowrap
-
-
-" __     ___           _ _             
-" \ \   / (_)_ __ ___ | (_)_ __   __ _ 
-"  \ \ / /| | '_ ` _ \| | | '_ \ / _` |
-"   \ V / | | | | | | | | | | | | (_| |    for the dead keys
-"    \_/  |_|_| |_| |_|_|_|_| |_|\__, |    LukeSmithxyz
-"                                |___/ 
-
-nm <leader><leader>d :call ToggleDeadKeys()<CR>
-imap <leader><leader>d <esc>:call ToggleDeadKeys()<CR>a
-nm <leader><leader>i :call ToggleIPA()<CR>
-imap <leader><leader>i <esc>:call ToggleIPA()<CR>a
-nm <F8> :call ToggleProse()<CR>
-
 
 "   ____                   
 "  / ___| ___  _   _  ___  
