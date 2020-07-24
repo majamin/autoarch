@@ -1,0 +1,18 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) $TERMINAL -e nmtui ;;
+	3) notify-send " Internet module" "\- Click to connect
+: no internet connection
+: wifi connection with quality
+: ethernet working
+" ;;
+esac
+
+WHICHSSID=$(nmcli -t -f name connection show --active)
+
+#[ -z $INDEXUP ] && \
+#	printf "%s %s\n" "\\x03down\\x01" || \
+#	printf "%s %s\n" "\\x03$WHICHUP\\x01" || \
+
+printf "\x03%s\x01" "$WHICHSSID"
