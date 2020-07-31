@@ -8,16 +8,6 @@ HISTFILE="$ZDOTDIR/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=10000
 
-#        _                                        _     
-#   ___ | |__        _ __ ___  _   _      _______| |__  
-#  / _ \| '_ \ _____| '_ ` _ \| | | |____|_  / __| '_ \ 
-# | (_) | | | |_____| | | | | | |_| |_____/ /\__ \ | | |
-#  \___/|_| |_|     |_| |_| |_|\__, |    /___|___/_| |_|
-#                              |___/                    
-
-#ZSH_THEME="robbyrussell"
-#plugins=(git)
-
 #source $ZSH/oh-my-zsh.sh
 
 #   ___  ___ ___  ___ _ __ | |_(_) __ _| |___ 
@@ -46,7 +36,6 @@ bindkey '^e' edit-command-line
 #   \_/ |_|     |_| |_| |_|\___/ \__,_|\___|
 
 bindkey -v
-export KEYTIMEOUT=1
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
@@ -89,7 +78,8 @@ export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat 
 
 source "$FZF_CONFIG/completion.zsh"
 source "$FZF_CONFIG/key-bindings.zsh"
-
+source "$ZDOTDIR/git-fzf-zsh-functions.sh"
+source "$ZDOTDIR/git-key-bindings.zsh"
 
 #   __ _| (_) __ _ ___  ___  ___ 
 #  / _` | | |/ _` / __|/ _ \/ __|
