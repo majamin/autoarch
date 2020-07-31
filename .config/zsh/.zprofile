@@ -4,7 +4,8 @@
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
-export PATH="$PATH:/home/maja/.gem/ruby/2.7.0/bin"
+export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
+export PATH="$PATH:$HOME/.local/src/youtube-dl-music"
 
 # Default programs
 export TERMINAL="st"
