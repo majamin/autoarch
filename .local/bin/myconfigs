@@ -9,6 +9,7 @@ read -r -d '' FILES <<-EOF
 "${XDG_CONFIG_HOME:-$HOME/.config/}/newsboat/config"
 "${XDG_CONFIG_HOME:-$HOME/.config/}/newsboat/urls"
 "$HOME/.local/src/dwm/config.def.h"
+"$HOME/.local/src/dwmblocks/blocks.h"
 EOF
 
 # open the file in vim
