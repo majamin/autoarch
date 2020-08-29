@@ -8,8 +8,6 @@ HISTFILE="$ZDOTDIR/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=10000
 
-#source $ZSH/oh-my-zsh.sh
-
 #   ___  ___ ___  ___ _ __ | |_(_) __ _| |___ 
 #  / _ \/ __/ __|/ _ \ '_ \| __| |/ _` | / __|
 # |  __/\__ \__ \  __/ | | | |_| | (_| | \__ \
@@ -18,8 +16,10 @@ SAVEHIST=10000
 
 setopt autocd
 autoload -U compinit
-autoload -U colors && colors	# Load colors
-PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+autoload -U promptinit
+promptinit
+prompt fade blue black
+
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 stty stop undef		# Disable ctrl-s to freeze terminal.
@@ -105,4 +105,4 @@ command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 # |_| |_|_|\__, |_| |_|_|_|\__, |_| |_|\__|_|_| |_|\__, |
 #          |___/           |___/                   |___/ 
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null

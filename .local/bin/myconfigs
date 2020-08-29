@@ -13,4 +13,4 @@ read -r -d '' FILES <<-EOF
 EOF
 
 # open the file in vim
-echo "$FILES" | dmenu -F -l 30 | xargs -I {} "$TERMINAL" -e nvim {} &>/dev/null
+echo "$FILES" | dmenu -l 30 | xargs -I {} "$TERMINAL" -e nvim {} &>/dev/null
