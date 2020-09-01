@@ -1,15 +1,17 @@
 #!/bin/sh
 
 read -r -d '' FILES <<-EOF
-"$ZDOTDIR/.zshrc"
-"$ZDOTDIR/.zprofile"
-"${XDG_CONFIG_HOME:-$HOME/.config/}/xprofile"
 "$HOME/.xinitrc"
+"${XDG_CONFIG_HOME:-$HOME/.config/}/xprofile"
+"$ZDOTDIR/.zprofile"
+"$ZDOTDIR/.zshrc"
+"$ZDOTDIR/functions"
+"$HOME/.local/src/dwm/config.def.h"
+"$HOME/.local/src/dwmblocks/blocks.h"
+"${XDG_CONFIG_HOME:-$HOME/.config/}/fontconfig/fonts.conf"
 "${XDG_CONFIG_HOME:-$HOME/.config/}/nvim/init.vim"
 "${XDG_CONFIG_HOME:-$HOME/.config/}/newsboat/config"
 "${XDG_CONFIG_HOME:-$HOME/.config/}/newsboat/urls"
-"$HOME/.local/src/dwm/config.def.h"
-"$HOME/.local/src/dwmblocks/blocks.h"
 EOF
 
 # open the file in vim

@@ -67,7 +67,7 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 export FZF_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config/}/fzf"
 export FZF_DEFAULT_COMMAND="''find . -type f -not -path '*/\.git/*'''"
 export FZF_DEFAULT_OPTS="-m --height 40% --layout reverse --info inline --border --preview \"file {} | awk -F: '{print \$2}'\" --preview-window down:1:noborder"
-export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+#export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 
 [ ! -d "$FZF_CONFIG" ] && \
 	mkdir -p "$FZF_CONFIG"
@@ -78,8 +78,8 @@ export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat 
 
 source "$FZF_CONFIG/completion.zsh"
 source "$FZF_CONFIG/key-bindings.zsh"
-source "$ZDOTDIR/git-fzf-zsh-functions.sh"
-source "$ZDOTDIR/git-key-bindings.zsh"
+source "$ZDOTDIR/functions"
+#source "$ZDOTDIR/git-key-bindings.zsh"
 
 #   __ _| (_) __ _ ___  ___  ___ 
 #  / _` | | |/ _` / __|/ _ \/ __|
