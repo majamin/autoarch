@@ -18,7 +18,7 @@ setopt autocd
 autoload -U compinit
 autoload -U promptinit
 promptinit
-prompt fade blue black
+prompt off
 
 zstyle ':completion:*' menu select
 zmodload zsh/complist
@@ -29,34 +29,6 @@ _comp_options+=(globdots)
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
-
-# __   _(_)      _ __ ___   ___   __| | ___ 
-# \ \ / / |_____| '_ ` _ \ / _ \ / _` |/ _ \
-#  \ V /| |_____| | | | | | (_) | (_| |  __/
-#   \_/ |_|     |_| |_| |_|\___/ \__,_|\___|
-
-bindkey -v
-
-# Change cursor shape for different vi modes.
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
-    echo -ne '\e[1 q'
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
-    echo -ne '\e[5 q'
-  fi
-}
-zle -N zle-keymap-select
-zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-    echo -ne "\e[5 q"
-}
-zle -N zle-line-init
-echo -ne '\e[5 q' # Use beam shape cursor on startup.
-preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 #   __     __ 
 #  / _|___/ _|
@@ -88,6 +60,7 @@ source "$ZDOTDIR/functions"
 #                                
 
 alias sdn="shutdown -h now"
+alias ls="ls -hN --color=auto --group-directories-first"
 alias cp="cp -iv" # allows verbose and interactive copying
 alias mv="mv -iv" # allows verbose and intearctive moving
 alias rm="rm -v" # allows verbose removal
@@ -98,11 +71,7 @@ alias yta="yt -x -f bestaudio/best --write-thumbnail" \
 alias ffmpeg="ffmpeg -hide_banner"
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 
-#  _     _       _     _ _       _     _   _             
-# | |__ (_) __ _| |__ | (_) __ _| |__ | |_(_)_ __   __ _ 
-# | '_ \| |/ _` | '_ \| | |/ _` | '_ \| __| | '_ \ / _` |
-# | | | | | (_| | | | | | | (_| | | | | |_| | | | | (_| |
-# |_| |_|_|\__, |_| |_|_|_|\__, |_| |_|\__|_|_| |_|\__, |
-#          |___/           |___/                   |___/ 
+# Pywal: terminal colours
+(cat ~/.cache/wal/sequences &)
 
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null

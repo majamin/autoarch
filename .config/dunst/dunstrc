@@ -1,16 +1,16 @@
 [global]
     monitor = 0
     follow = keyboard
-    geometry = "350x5-0+24"
+    geometry = "350x5-0+50"
     indicate_hidden = yes
     shrink = yes
-    transparency = 20
+    transparency = 40
     notification_height = 0
     separator_height = 2
     padding = 0
-    horizontal_padding = 8
-    frame_width = 3
-    frame_color = "#282828"
+    horizontal_padding = 20
+    frame_width = 0
+    # frame_color = "#282828"
 
     # Define a color for the separator.
     # possible values are:
@@ -18,7 +18,7 @@
     #  * foreground: use the same color as the foreground;
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
-    separator_color = frame
+    separator_color = auto
 
     # Sort messages by urgency.
     sort = yes
@@ -54,7 +54,7 @@
     sticky_history = yes
     history_length = 20
     dmenu = /usr/bin/dmenu -p dunst:
-    browser = /usr/bin/firefox -new-tab
+    browser = /usr/bin/brave -new-tab
 
     # Always run rule-defined scripts, even if the notification is suppressed
     always_run_script = true
@@ -75,15 +75,15 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#282828"
-    foreground = "#928374"
+    background = "#8be9fd"
+    foreground = "#000000"
     timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
     #icon = /path/to/icon
 
 [urgency_normal]
-    background = "#458588"
-    foreground = "#ebdbb2"
+    background = "#444444"
+    foreground = "#ffffff"
     timeout = 5
 
 [urgency_critical]

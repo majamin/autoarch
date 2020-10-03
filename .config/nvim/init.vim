@@ -4,35 +4,6 @@
 " | | | |  __/ (_) \ V /| | | | | | |
 " |_| |_|\___|\___/ \_/ |_|_| |_| |_|
 " 				VIMRC
-"
-" By Marian Minar
-" Attributions - Luke Smith (of lukesmith.xyz)
-"                Dr. Stackoverflow and Dr. Stackexchange
-
-" The aim of the vimrc file is to provide a nice configuration.
-" For additional plugins, add them to the list in the Plug section below.
-
-" INSTRUCTIONS:
-" 1. Install pywal (pip install pywal) if you want to use the wal plug.
-" 2. In Vim, type :PlugInstall to fetch all of the plugins.
-
-" NOTES:
-" Leader key is ','
-" Backup directory will be created at ~/.cache/nvim/backup
-" Type ,ll to enter distraction-free typing.
-
-" TIPS:
-" type `:options` to see all of the ways you can customize Neovim.
-" type `:so %` to reload this vimrc and see your changes
-
-
-
-"  ____  _             
-" |  _ \| |_   _  __ _ 
-" | |_) | | | | |/ _` |
-" |  __/| | |_| | (_| |    June Gunn's simple plugin manager
-" |_|   |_|\__,_|\__, |
-"                |___/ 
 
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
@@ -50,52 +21,46 @@ Plug 'junegunn/goyo.vim'
 	Plug 'junegunn/limelight.vim' "focus directly what's in front of you
 Plug 'jalvesaq/Nvim-R' " a plugin for R
 Plug 'rafi/awesome-vim-colorschemes' "it's obvious what this is
+Plug 'rust-lang/rust.vim'
 call plug#end()
-
-
-
 
 "                           _   _       _     
 "   ___  ___ ___  ___ _ __ | |_(_) __ _| |___ 
 "  / _ \/ __/ __|/ _ \ '_ \| __| |/ _` | / __|
-" |  __/\__ \__ \  __/ | | | |_| | (_| | \__ \  stuff
+" |  __/\__ \__ \  __/ | | | |_| | (_| | \__ \
 "  \___||___/___/\___|_| |_|\__|_|\__,_|_|___/
 "                                             
 
-filetype plugin indent on "filetype detect, smart options, indent rules
-let mapleader="," "mapleader key
-syntax on "syntax highlighting
+filetype plugin on
+filetype indent on
+let mapleader=","
+syntax on
+colorscheme afterglow 
 set clipboard+=unnamedplus "allows copying/pasting from system clipboard
-
-if ! filereadable(expand('~/.cache/nvim/backup'))
-	silent !mkdir -p ~/.cache/nvim/backup//
-endif
-set backupdir=$HOME/.cache/nvim/backup
-
-"colorscheme afterglow " an awesome choice with no transperancy
-"colorscheme angr " a good choice with transperancy
-colorscheme meta5 "enabled by plugin rafi/awesome-vim-colors
-"colorscheme wal "only works with pywal installed
-
 set spelllang=en_ca
-set backup "backup copy saved as '~<original-file>'
-set ruler "display column, row, etc.
-set nonumber "display line numbers
-set scrolloff=9
-set visualbell " use a visual bell instead of beeping
-set showmode " display the current mode in the status line
-set splitright " opem split windows on the right
-set hlsearch " type :noh to get rid of highlighted search results
-set splitbelow splitright "open window splits on bottom and right
 set backspace=indent,eol,start "<BS> is allowed to delete these
-set autoindent "indent same amount as previous line
+set backup "backup copy saved as '~<original-file>'
+set ruler
+set nowrap "don't wrap unless I really need it
+set nonumber
+set scrolloff=9
+set showmode "display the current mode in the status line
+set splitbelow splitright "open split windows on the right
+"set hlsearch "type :noh to get rid of highlighted search results
+"set autoindent "indent same amount as previous line
 set history=50 "keep 50 commands and search history
-set showcmd "display an incomplete command
+"set showcmd "display an incomplete command
 set incsearch "display matches while you type
 set magic "change how backslashes behave in searches
 set encoding=utf-8
 set mouse=a
 set go=a
+
+" backups
+if ! filereadable(expand('~/.cache/nvim/backup'))
+	silent !mkdir -p ~/.cache/nvim/backup//
+endif
+set backupdir=$HOME/.cache/nvim/backup
 
 " jump to the beginning and end of a line
 nnoremap <S-h> ^
@@ -115,28 +80,16 @@ map <C-l> <C-w>l
 inoremap <F12> <C-r>=system("date +'\%F' \| tr '\n' ' '")<CR>
 inoremap <F24> <C-r>=system("date +'\%F \%T \%Z' \| tr '\n' ' '")<CR>
 
-" Compile document, be it groff/LaTeX/markdown/etc.
 map <leader>c :w! \| !compiler <c-r>%<CR>
-
-" Open corresponding .pdf/.html or preview
+map <leader>ap :w! \| !bundle exec asciidoctor-revealjs <c-r>%<CR>
 map <leader>p :!opout <c-r>%<CR><CR>
 
 " paste image paths found in working directory and up to sub-sub directories
 " DEPS: sxiv, xclip
 map <leader>i :r !find . -maxdepth 2 -print \| file -if - \| grep "image/" \| awk -F: '{print $1}' \| xargs sxiv -qto<CR><CR>
 
-" Experimental TODO things
-" I want Vim to detect if I have a TODO in a file and to add the path
-" of the file to a 'todofiles.txt' simple database that I can search later.
-"autocmd BufWrite
-"	if echo("TODO", "cnw") > 0
-"		r! echo % >> "~/todofiles.txt"
-"	endif
-
 " Save file as sudo on files that require root permission
 	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-
-autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid dwmblocks & }
 
 "   __     __ 
 "  / _|___/ _|
@@ -147,11 +100,7 @@ autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/
 " search for files starting in the home directory
 nnoremap <leader>f 	:Files <CR>
 nnoremap <leader>ff	:Files ~/<CR>
-nnoremap <leader>fc 	:Files ~/.config<CR>
-nnoremap <leader>fo 	:Files ~/OneDrive<CR>
 nnoremap <leader>b 	:Buffers<CR>
-
-
 
 
 " __   _(_)_ __ _____      _(_) | _(_)
@@ -230,6 +179,12 @@ let maplocalleader = ';'
 
 " Get rid of the absolutely insane binding the _ turns into <-
 let R_assign = 0
+
+" R indentation
+" NOTE: r.vim in ~/.config/nvim/after/ftplugin
+let r_indent_align_args = 0
+autocmd FileType r setlocal ts=2
+autocmd FileType r setlocal sw=2
 
 " Use Ctrl+Space to do omnicompletion:
 if has('nvim') || has('gui_running')
