@@ -9,10 +9,14 @@ case $BLOCK_BUTTON in
 " ;;
 esac
 
-WHICHSSID=$(nmcli -t -f name connection show --active)
+CONNTYPE=$(nmcli -t -f TYPE connection show --active)
+CONNSTR=$(nmcli -t -f SSID,SIGNAL dev wifi list | grep -oP "(?<=${ACTIVECONN}:)\d+" | head -n1)
+ACTIVECONN=$(nmcli -t -f name connection show --active)
+ICON="" # wireless icon for now
+# WIREDICON=""
 
 #[ -z $INDEXUP ] && \
 #	printf "%s %s\n" "\\x03down\\x01" || \
 #	printf "%s %s\n" "\\x03$WHICHUP\\x01" || \
 
-printf "\x03%s\x01" "$WHICHSSID"
+printf "\x03%s\x01" "$ACTIVECONN $ICON"
