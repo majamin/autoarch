@@ -1,6 +1,6 @@
-"                        _           
-"  _ __   ___  _____   _(_)_ __ ___  
-" | '_ \ / _ \/ _ \ \ / / | '_ ` _ \ 
+"                        _
+"  _ __   ___  _____   _(_)_ __ ___
+" | '_ \ / _ \/ _ \ \ / / | '_ ` _ \
 " | | | |  __/ (_) \ V /| | | | | | |
 " |_| |_|\___|\___/ \_/ |_|_| |_| |_|
 " 				VIMRC
@@ -21,21 +21,22 @@ Plug 'junegunn/goyo.vim'
 	Plug 'junegunn/limelight.vim' "focus directly what's in front of you
 Plug 'jalvesaq/Nvim-R' " a plugin for R
 Plug 'rafi/awesome-vim-colorschemes' "it's obvious what this is
+Plug 'ap/vim-css-color' "previews colors for convenience
 Plug 'rust-lang/rust.vim'
 call plug#end()
 
-"                           _   _       _     
-"   ___  ___ ___  ___ _ __ | |_(_) __ _| |___ 
+"                           _   _       _
+"   ___  ___ ___  ___ _ __ | |_(_) __ _| |___
 "  / _ \/ __/ __|/ _ \ '_ \| __| |/ _` | / __|
 " |  __/\__ \__ \  __/ | | | |_| | (_| | \__ \
 "  \___||___/___/\___|_| |_|\__|_|\__,_|_|___/
-"                                             
+"
 
 filetype plugin on
 filetype indent on
 let mapleader=","
 syntax on
-colorscheme afterglow 
+colorscheme afterglow
 set clipboard+=unnamedplus "allows copying/pasting from system clipboard
 set spelllang=en_ca
 set backspace=indent,eol,start "<BS> is allowed to delete these
@@ -46,7 +47,7 @@ set nonumber
 set scrolloff=9
 set showmode "display the current mode in the status line
 set splitbelow splitright "open split windows on the right
-"set hlsearch "type :noh to get rid of highlighted search results
+set nohlsearch "type :noh to get rid of highlighted search results
 "set autoindent "indent same amount as previous line
 set history=50 "keep 50 commands and search history
 "set showcmd "display an incomplete command
@@ -86,17 +87,21 @@ map <leader>p :!opout <c-r>%<CR><CR>
 
 " paste image paths found in working directory and up to sub-sub directories
 " DEPS: sxiv, xclip
-map <leader>i :r !find . -maxdepth 2 -print \| file -if - \| grep "image/" \| awk -F: '{print $1}' \| xargs sxiv -qto<CR><CR>
+map <leader>i :r !find . -maxdepth 3 -print \| file -if - \| grep "image/" \| awk -F: '{print $1}' \| xargs sxiv -qto 2> /dev/null <CR><CR>
 
 " Save file as sudo on files that require root permission
-	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
-"   __     __ 
+" Automatically deletes all trailing whitespace and newlines at end of file on save.
+autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritepre * %s/\n\+\%$//e
+
+"   __     __
 "  / _|___/ _|
 " | ||_  / |_   Fuzzy File Finder
 " |  _/ /|  _|  How did we ever do things before fzf?
-" |_|/___|_|  
-"             
+" |_|/___|_|
+"
 " search for files starting in the home directory
 nnoremap <leader>f 	:Files <CR>
 nnoremap <leader>ff	:Files ~/<CR>
@@ -130,12 +135,12 @@ let g:vimwiki_list 		= [wiki_personal, wiki_mss]
 " Vimwiki is nicer when there's no wrap
 autocmd BufRead,BufNewFile */vimwiki* set nowrap
 
-"   ____                   
-"  / ___| ___  _   _  ___  
-" | |  _ / _ \| | | |/ _ \ 
+"   ____
+"  / ___| ___  _   _  ___
+" | |  _ / _ \| | | |/ _ \
 " | |_| | (_) | |_| | (_) |   Distraction-free editing
-"  \____|\___/ \__, |\___/ 
-"              |___/       
+"  \____|\___/ \__, |\___/
+"              |___/
 
 noremap <leader>ll :Goyo<CR>
 
@@ -169,12 +174,12 @@ autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 
-"  ____  
-" |  _ \ 
+"  ____
+" |  _ \
 " | |_) |
-" |  _ < 
+" |  _ <
 " |_| \_\    Nvim-R is my R IDE
-        
+
 let maplocalleader = ';'
 
 " Get rid of the absolutely insane binding the _ turns into <-
