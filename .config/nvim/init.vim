@@ -123,14 +123,7 @@ let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markd
 let wiki_personal 		= {}
 let wiki_personal.path 		= system('printf "%s" "$ONEDRIVE" "/Projects/vimwiki_personal"')
 let wiki_personal.path_html	= system('printf "%s" "$ONEDRIVE" "/Projects/vimwiki_personal/html"')
-let wiki_personal.syntax 	= 'markdown'
-let wiki_personal.ext 		= '.md'
-let wiki_mss 			= {}
-let wiki_mss.path 		= system('printf "%s" "$ONEDRIVE" "/Projects/mss/vimwiki"')
-let wiki_mss.path_html 		= system('printf "%s" "$ONEDRIVE" "/Projects/mss/vimwiki/html"')
-let wiki_mss.syntax 		= 'markdown'
-let wiki_mss.ext 		= '.md'
-let g:vimwiki_list 		= [wiki_personal, wiki_mss]
+let g:vimwiki_list 		= [wiki_personal]
 
 " Vimwiki is nicer when there's no wrap
 autocmd BufRead,BufNewFile */vimwiki* set nowrap

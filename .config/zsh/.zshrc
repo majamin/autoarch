@@ -1,18 +1,18 @@
-#  _______| |__  _ __ ___ 
+#  _______| |__  _ __ ___
 # |_  / __| '_ \| '__/ __|
-#  / /\__ \ | | | | | (__ 
+#  / /\__ \ | | | | | (__
 # /___|___/_| |_|_|  \___|
-#                         
+#
 
 HISTFILE="$ZDOTDIR/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=10000
 
-#   ___  ___ ___  ___ _ __ | |_(_) __ _| |___ 
+#   ___  ___ ___  ___ _ __ | |_(_) __ _| |___
 #  / _ \/ __/ __|/ _ \ '_ \| __| |/ _` | / __|
 # |  __/\__ \__ \  __/ | | | |_| | (_| | \__ \
 #  \___||___/___/\___|_| |_|\__|_|\__,_|_|___/
-                                            
+
 
 setopt autocd
 autoload -U compinit
@@ -30,11 +30,11 @@ _comp_options+=(globdots)
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-#   __     __ 
+#   __     __
 #  / _|___/ _|
-# | ||_  / |_ 
+# | ||_  / |_
 # |  _/ /|  _|
-# |_|/___|_|  
+# |_|/___|_|
 
 export FZF_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config/}/fzf"
 export FZF_DEFAULT_COMMAND="''find . -type f -not -path '*/\.git/*'''"
@@ -53,11 +53,11 @@ source "$FZF_CONFIG/key-bindings.zsh"
 source "$ZDOTDIR/functions"
 #source "$ZDOTDIR/git-key-bindings.zsh"
 
-#   __ _| (_) __ _ ___  ___  ___ 
+#   __ _| (_) __ _ ___  ___  ___
 #  / _` | | |/ _` / __|/ _ \/ __|
 # | (_| | | | (_| \__ \  __/\__ \
 #  \__,_|_|_|\__,_|___/\___||___/
-#                                
+#
 
 alias sdn="shutdown -h now"
 alias ls="ls -hN --color=auto --group-directories-first"
@@ -66,8 +66,8 @@ alias mv="mv -iv" # allows verbose and intearctive moving
 alias rm="rm -v" # allows verbose removal
 alias mkdir="mkdir -pv" # allows verbose and recursive directory creation
 alias p="sudo pacman" # quick shortcut to sudo pacman
-alias yt="youtube-dl --add-metadata -i --restrict-filenames" \
-alias yta="yt -x -f bestaudio/best --write-thumbnail" \
+alias yt="youtube-dl --config-location ~/.config/youtube-dl/video.config" \
+alias yta="youtube-dl --config-location ~/.config/youtube-dl/audio.config" \
 alias ffmpeg="ffmpeg -hide_banner"
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 
