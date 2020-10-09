@@ -7,5 +7,5 @@ files=$(find . -name "*.html" | sed -e 's/\.html$//')
 for file in $files
 do
 	echo "converting ${file}.html to ${file}.pdf"
-	wkhtmltopdf "${file}.html" "${file}.pdf"
+	wkhtmltopdf -s Letter "${file}.html" "${file}.pdf"
 done
