@@ -4,7 +4,7 @@
 
 cmds="\
 lock screen	slock
-leave dwm	kill -TERM $(pidof -s dwm)
+leave dwm	kill -TERM $(pidof -s xinit)
 refresh dwm	kill -HUP $(pidof -s dwm)
 reboot		sudo -A reboot
 shutdown	sudo -A shutdown -h now"
