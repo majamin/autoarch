@@ -6,7 +6,6 @@ base16-irblack
 base16-pop
 dkeg-vans
 monokai
-random_dark
 sexy-astromouse
 sexy-derp
 sexy-invisibone
