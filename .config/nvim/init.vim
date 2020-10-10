@@ -22,6 +22,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'jalvesaq/Nvim-R' " a plugin for R
 Plug 'rafi/awesome-vim-colorschemes' "it's obvious what this is
 Plug 'ap/vim-css-color' "previews colors for convenience
+Plug 'dylanaraps/wal.vim' "pywal colorscheme
 Plug 'rust-lang/rust.vim'
 call plug#end()
 
@@ -36,7 +37,8 @@ filetype plugin on
 filetype indent on
 let mapleader=","
 syntax on
-colorscheme afterglow
+colorscheme wal
+"colorscheme afterglow
 set clipboard+=unnamedplus "allows copying/pasting from system clipboard
 set spelllang=en_ca
 set backspace=indent,eol,start "<BS> is allowed to delete these
@@ -56,6 +58,9 @@ set magic "change how backslashes behave in searches
 set encoding=utf-8
 set mouse=a
 set go=a
+
+highlight Normal ctermbg=Black
+highlight NonText ctermbg=Black
 
 " backups
 if ! filereadable(expand('~/.cache/nvim/backup'))
