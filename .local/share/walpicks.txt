@@ -7,7 +7,6 @@ dkeg-vans
 monokai
 sexy-astromouse
 sexy-derp
-sexy-invisibone
 sexy-kasugano
 sexy-material
 sexy-mikado
