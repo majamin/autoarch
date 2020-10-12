@@ -3,6 +3,7 @@ http://lukesmith.xyz/rss.xml
 http://www.independent.co.uk/news/world/rss "news world"
 http://feeds.washingtonpost.com/rss/world "news world"
 https://www.archlinux.org/feeds/news/ "news linux"
+https://www.archlinux.org/feeds/packages/ "~Arch Linux Package Updates" "linux ArchDistro"
 
 https://www.youtube.com/feeds/videos.xml?channel_id=UCLwNTXWEjVd2qIHLcXxQWxA "~Timcast IRL" "YouTube Politics News"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCSJ4gkVC6NrvII8umztf0Ow "~ChilledCow" "YouTube Music"
