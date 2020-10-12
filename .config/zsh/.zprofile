@@ -4,8 +4,7 @@
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
-export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
-export PATH="$PATH:$HOME/.local/src/youtube-dl-music"
+#export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
 
 # Default programs
 export TERMINAL="st"
@@ -13,11 +12,11 @@ export EDITOR="nvim"
 export READER="zathura"
 export BROWSER="brave"
 
-# Host-specific environment variables
-[ $(hostname) = "thinkarch" ] && export ONEDRIVE="$HOME/Maja"
-[ $(hostname) = "thinkarch" ] && export VIDEOS="$HOME/Videos"
-[ $(hostname) = "thinkarch" ] && export MUSIC="$HOME/Music"
+# Cloud-based
+export ONEDRIVE="$HOME/Maja"
 
+export VIDEOS="$HOME/Videos"
+export MUSIC="$HOME/Music"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export MYDATA="$ONEDRIVE/_data"
@@ -37,10 +36,10 @@ export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
 export LESS_TERMCAP_se="$(printf '%b' '[0m')"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
-export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
+#export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
 export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
-export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname
+#export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname
 export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
 
 # This is the list for lf icons:
