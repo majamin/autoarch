@@ -1,4 +1,3 @@
-base16-atelier-cave
 base16-bespin
 base16-black-metal-bathory
 base16-dracula
@@ -6,10 +5,8 @@ base16-irblack
 base16-pop
 dkeg-vans
 monokai
-random_dark
 sexy-astromouse
 sexy-derp
-sexy-invisibone
 sexy-kasugano
 sexy-material
 sexy-mikado
