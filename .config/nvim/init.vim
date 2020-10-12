@@ -14,6 +14,7 @@ endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-surround'
 Plug 'jreybert/vimagit'
 Plug 'junegunn/fzf.vim'
 Plug 'vimwiki/vimwiki'
@@ -98,8 +99,14 @@ map <leader>i :r !find . -maxdepth 3 -print \| file -if - \| grep "image/" \| aw
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Automatically deletes all trailing whitespace and newlines at end of file on save.
-autocmd BufWritePre * %s/\s\+$//e
-autocmd BufWritepre * %s/\n\+\%$//e
+function! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 "   __     __
 "  / _|___/ _|
