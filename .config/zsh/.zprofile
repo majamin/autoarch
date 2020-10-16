@@ -4,7 +4,7 @@
 
 # Adds `~/.local/bin` to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
-#export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
+export PATH="$PATH:$HOME/.gem/ruby/2.7.0/bin"
 
 # Default programs
 export TERMINAL="st"
@@ -21,6 +21,8 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export MYDATA="$ONEDRIVE/_data"
 export PASSWORD_STORE_DIR="$ONEDRIVE/password-store"
+export LPASS_CLIPBOARD_COMMAND="xclip -selection clipboard -in -l 1"
+export LPASS_CLIPBOARD_COMMAND="xsel -t 5000 --input --clipboard"
 export SUDO_ASKPASS="$HOME/.local/bin/sudopass"
 export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"

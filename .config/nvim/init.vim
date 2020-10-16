@@ -59,9 +59,10 @@ set magic "change how backslashes behave in searches
 set encoding=utf-8
 set mouse=a
 set go=a
+set autochdir
 
-highlight Normal ctermbg=Black
-highlight NonText ctermbg=Black
+"highlight Normal ctermbg=Black
+"highlight NonText ctermbg=Black
 
 " backups
 if ! filereadable(expand('~/.cache/nvim/backup'))
