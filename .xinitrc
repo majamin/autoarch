@@ -2,4 +2,4 @@
 test $(which gpg-agent) && eval $(gpg-agent --daemon)
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
-exec /home/$USER/.local/bin/startdwm
+ssh-agent /home/$USER/.local/bin/startdwm
