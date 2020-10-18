@@ -8,39 +8,55 @@ setopt autocd
 autoload -U compinit
 PROMPT='%F{green}%n%f@%F{magenta}%m%f %F{blue}%B%~%b%f %# '
 
+stty stop undef		# Disable ctrl-s to freeze terminal.
+
 # ====== Completion
 	zstyle ':completion:*:*:cdr:*:*' menu selection
-	#zstyle ':completion:*' menu select
 	zmodload zsh/complist
-	stty stop undef		# Disable ctrl-s to freeze terminal.
 	compinit
 	_comp_options+=(globdots)
 
-# ====== Recent Directories
+# ====== Recent Directories (cdr command)
 	autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 	add-zsh-hook chpwd chpwd_recent_dirs
 
-# ====== Use vim keys to navigate directories
-cdUndoKey() {
-  popd
-  #zle       reset-prompt
-  #print
-  #ls -hN --color=auto --group-directories-first
-  zle       reset-prompt
-}
+# ====== Use Alt-h and Alt-l to navigate directories
+	cdUndoKey() {
+	  popd
+	  zle       reset-prompt
+	}
 
-cdParentKey() {
-  pushd ..
-  #zle      reset-prompt
-  #print
-  #ls -hN --color=auto --group-directories-first
-  zle       reset-prompt
-}
+	cdParentKey() {
+	  pushd ..
+	  zle       reset-prompt
+	}
 
 	zle -N  cdParentKey
 	zle -N  cdUndoKey
 	bindkey '^[h' cdParentKey
 	bindkey '^[l' cdUndoKey
+
+# ====== Use pacman to suggest a package when command not found
+	command_not_found_handler() {
+		local pkgs cmd="$1" files=()
+		files=(${(f)"$(pacman -F --machinereadable -- "/usr/bin/${cmd}")"})
+		if (( ${#files[@]} )); then
+			printf '%s may be found in the following packages:\n' "$cmd"
+			local res=() repo package version file
+			for file in "$files[@]"; do
+				res=("${(0)file}")
+				repo="$res[1]"
+				package="$res[2]"
+				version="$res[3]"
+				file="$res[4]"
+				printf '  %s/%s %s: /%s\n' "$repo" "$package" "$version" "$file"
+			done
+		else
+			printf 'zsh: command not found: %s\n' "$cmd"
+			printf 'pacman: no files found: %s\n' "$cmd"
+		fi
+		return 127
+	}
 
 # ====== Edit line (Ctrl + E)
 	autoload edit-command-line; zle -N edit-command-line
