@@ -1,14 +1,5 @@
 #!/bin/sh
 
-case $BLOCK_BUTTON in
-	1) $TERMINAL -e nmtui ;;
-	3) notify-send " Internet module" "\- Click to connect
-: no internet connection
-: wifi connection with quality
-: ethernet working
-" ;;
-esac
-
 grep "down" /sys/class/net/w*/operstate && wifiicon="" ||
 	wifiicon="$(grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70) "%" }')"
 

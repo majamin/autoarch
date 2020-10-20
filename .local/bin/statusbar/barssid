@@ -1,14 +1,5 @@
 #!/bin/sh
 
-case $BLOCK_BUTTON in
-	1) $TERMINAL -e nmtui ;;
-	3) notify-send " Internet module" "\- Click to connect
-: no internet connection
-: wifi connection with quality
-: ethernet working
-" ;;
-esac
-
 CONNTYPE=$(nmcli -t -f TYPE connection show --active)
 CONNSTR=$(nmcli -t -f SSID,SIGNAL dev wifi list | grep -oP "(?<=${ACTIVECONN}:)\d+" | head -n1)
 ACTIVECONN=$(nmcli -t -f name connection show --active)
@@ -19,4 +10,4 @@ ICON="" # wireless icon for now
 #	printf "%s %s\n" "\\x03down\\x01" || \
 #	printf "%s %s\n" "\\x03$WHICHUP\\x01" || \
 
-printf "\x03%s\x01" "$ACTIVECONN $ICON"
+printf "%s" "$ACTIVECONN $ICON"

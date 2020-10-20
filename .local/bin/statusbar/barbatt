@@ -5,15 +5,15 @@ for battery in /sys/class/power_supply/BAT?
 do
 	# Get its remaining capacity and charge status.
 	capacity=$(cat "$battery"/capacity) || break
-	[ "$capacity" -le 100 ] && baticon="$(echo -e "\x07\x01")"
-	[ "$capacity" -le 75 ] && baticon="$(echo -e "\x07\x01")"
-	[ "$capacity" -le 50 ] && baticon="$(echo -e "\x07\x01")"
-	[ "$capacity" -le 25 ] && baticon="$(echo -e "\x08\x01")"
+	[ "$capacity" -le 100 ] && baticon="$(echo -e "")"
+	[ "$capacity" -le 75 ] && baticon="$(echo -e "")"
+	[ "$capacity" -le 50 ] && baticon="$(echo -e "")"
+	[ "$capacity" -le 25 ] && baticon="$(echo -e "")"
 	[ "$capacity" -le 10 ] && baticon="$(echo -e "\x09\x01")"
 
 	status=$(cat "$battery"/status) || break
 
-	[ "$status" = "Discharging" ] && icon="" && printf " \x09%s\x01%s " "$icon" "$baticon"
+	[ "$status" = "Discharging" ] && icon="" && printf " %s%s " "$icon" "$baticon"
 	[ "$status" != "Discharging" ] && icon="" && printf " %s%s " "$icon" "$baticon"
 
 	unset warn
