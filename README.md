@@ -11,4 +11,4 @@ If you don't want to do this, then I'm assuming that you know what you're doing 
 
 # Screenshots
 
-![screenshot][https://raw.githubusercontent.com/majamin/LARBS/master/screenshot.png]
+![screenshot](https://raw.githubusercontent.com/majamin/LARBS/master/screenshot.png)
