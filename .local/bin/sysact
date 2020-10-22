@@ -4,8 +4,8 @@
 
 cmds="\
 lock screen	slock
-leave dwm	kill -TERM $(pidof -s Xorg)
-refresh dwm	kill -HUP $(pidof -s dwm)
+leave dwm	kill -TERM $(pgrep -u $USER "\bXorg$")
+refresh dwm	kill -HUP $(pgrep -u $USER "\bdwm$")
 reboot		sudo -A reboot
 shutdown	sudo -A shutdown -h now"
 
