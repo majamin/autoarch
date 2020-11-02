@@ -22,18 +22,18 @@ bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
 
-color listnormal cyan default
+color listnormal blue default
 color listfocus black yellow standout bold
-color listnormal_unread blue default
-color listfocus_unread yellow default bold
-color info red black bold
-color article white default bold
+color listfocus_unread yellow black bold
+color listnormal_unread cyan default
+color info magenta default bold
+color article white default
 
 browser linkhandler
 macro , open-in-browser
 macro t set browser "qndl" ; open-in-browser ; set browser linkhandler
-macro a set browser "tsp youtube-dl --add-metadata -xic -f bestaudio/best" ; open-in-browser ; set browser linkhandler
-macro v set browser "setsid -f mpv --no-osc --ontop --geometry=35%--0--0 --volume=40 --no-terminal" ; open-in-browser ; set browser linkhandler
+macro a set browser "youtube-dl --config-location ~/.config/youtube-dl/audio.config" ; open-in-browser ; set browser linkhandler
+macro v set browser "setsid -f mpv --no-osc --ontop --geometry=35%--0--0 --volume=60 --no-terminal" ; open-in-browser ; set browser linkhandler
 macro w set browser "lynx" ; open-in-browser ; set browser linkhandler
 macro p set browser "dmenuhandler" ; open-in-browser ; set browser linkhandler
 macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler
