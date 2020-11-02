@@ -13,7 +13,7 @@ esac
 cat "$file" \
 	| grep -A 100 -P "static Key" \
 	| grep -P "\t{ MODKEY" \
-	| sed 's/ {2,}//g' \
+	| sed 's/ \{2,\}//g' \
 	| sed 's/|/ + /g' \
 	| sed 's/XK_//g' \
 	| sed 's/ShiftMask/Shift/g' \
@@ -24,15 +24,18 @@ cat "$file" \
 	| sed 's/\/\///g' \
 	| sed 's/,/ |/' \
 	| sed 's/^/| /' \
-	| sed 's/$/ |/' |
-while read -r line 
-do
-	echo $line
-done | pandoc -t pdf | zathura -
+	| sed 's/\t//g' \
+	| sed '$a|===' \
+	| sed '1i | keybinding | effect ' \
+	| sed '1i |===' \
+	| sed '1i [grid=cols]' \
+	| sed '1i \ ' \
+	| sed '1i = DWM keybindings' \
+	| asciidoctor - -o /tmp/keys.html
 
-	#| sed 's/,/ +/' \
-	#| sed 's/$/ |/g' \
-	#| awk -F, '{print $1 $4}' \
-	#| sed 's/\/\//\|/g' \
-	#| sed 's/{/|/g' \
-	#| sed 's/ +
+surf "/tmp/keys.html"
+
+#while read -r line
+#do
+#	echo $line
+#done | pandoc -t pdf | zathura -
