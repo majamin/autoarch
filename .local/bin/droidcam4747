@@ -13,18 +13,24 @@
 DEVICE=$(v4l2-ctl --list-devices | grep -A1 Droidcam | tail -n1 | sed -e 's/^[ \t]*//')
 
 # is the phone plugged in?
-adb kill-server \
-	&& adb start-server \
-	&& ([[ $(adb devices | wc -l ) = 3 ]] \
-		&& notify-send "adb reports connection to a device") \
-		|| notify-send "adb reports NO connections"
+adb kill-server && adb start-server
 
-droidcam-cli -v adb 4747 &
+if [[ $(adb devices | wc -l ) = 3 ]]; then
+	notify-send "adb reports connection to a device"
+	droidcam-cli -v adb 4747 &
+	ffplay -vf "vflip,hflip" $DEVICE \
+
+	ffmpeg "$DEVICE" \
+		-f v4l2 -vcodec libx264\
+		-preset ultrafast \
+		video_"$(date +\"%y_%m_%d_%H_%M_%S\")".mkv &
+else
+	notify-send "adb reports NO connections"
+	adb kill-server
+	killall droidcam-cli
+fi
+
 #mpv --no-osc --ontop --vf=rotate=PI av://v4l2:/dev/video0
-
-ffplay -vf "vflip,hflip" $DEVICE \
-	&& killall droidcam-cli \
-	&& adb kill-server
 
 # NOTE: keeping this here as a reference for how to add a filter
 #ffplay -vf "deband=1thr=0.5:d=-PI" $DEVICE

@@ -75,8 +75,8 @@ nnoremap <S-h> ^
 nnoremap <S-l> $
 
 " move a line up/down
-nnoremap <S-j> :move +1<CR>
-nnoremap <S-k> :move -2<CR>
+"nnoremap <S-j> :move +1<CR>
+"nnoremap <S-k> :move -2<CR>
 
 " Simple window navigation using <C-*>
 map <C-h> <C-w>h
@@ -210,5 +210,7 @@ nmap <Space> <Plug>RDSendLine
 
 " R output will follow current colorscheme
 let rout_follow_colorscheme = 1 "ORIGINAL
+let r_syntax_folding = 1
+set nofoldenable
 " TODO READING help file :help Rout_more_colors
 " let Rout_more_colors = 1
