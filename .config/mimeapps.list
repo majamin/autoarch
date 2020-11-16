@@ -18,3 +18,4 @@ x-scheme-handler/mailto=brave-browser.desktop
 image/png=gimp.desktop;sxiv.desktop;
 text/html=brave-browser.desktop;
 image/jpeg=gimp.desktop;
+image/svg+xml=org.inkscape.Inkscape.desktop;

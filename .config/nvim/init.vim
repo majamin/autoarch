@@ -38,8 +38,8 @@ filetype plugin on
 filetype indent on
 let mapleader=","
 syntax on
-colorscheme wal
-"colorscheme afterglow
+"colorscheme wal
+colorscheme afterglow
 set clipboard+=unnamedplus "allows copying/pasting from system clipboard
 set spelllang=en_ca
 set backspace=indent,eol,start "<BS> is allowed to delete these
@@ -55,11 +55,12 @@ set nohlsearch "type :noh to get rid of highlighted search results
 set history=50 "keep 50 commands and search history
 "set showcmd "display an incomplete command
 set incsearch "display matches while you type
-set magic "change how backslashes behave in searches
+"set nomagic "change how backslashes behave in searches
 set encoding=utf-8
 set mouse=a
 set go=a
 set autochdir
+set nowrapscan
 
 "highlight Normal ctermbg=Black
 "highlight NonText ctermbg=Black
