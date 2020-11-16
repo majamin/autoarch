@@ -10,5 +10,4 @@ unclutter &			# Remove mouse when idle
 mpd-module-update &		# Check for when to update the mpd module
 xinput disable 'SynPS/2 Synaptics TouchPad'
 setbg
-#setbg ~/Images/backgrounds
 [ -x $(command -v wal) ] && wal --theme sexy-dotshare
