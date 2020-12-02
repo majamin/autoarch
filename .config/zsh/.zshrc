@@ -6,7 +6,7 @@ SAVEHIST=10000
 
 setopt autocd
 autoload -U compinit
-PROMPT='%F{green}%n%f@%F{magenta}%m%f %F{blue}%B%~%b%f %# '
+PROMPT='-> '
 
 stty stop undef		# Disable ctrl-s to freeze terminal.
 
@@ -65,10 +65,6 @@ stty stop undef		# Disable ctrl-s to freeze terminal.
 # ====== Aliases
 	alias sdn="shutdown -h now"
 	alias ls="ls -hN --color=auto --group-directories-first"
-	alias cp="cp -iv" # allows verbose and interactive copying
-	alias mv="mv -iv" # allows verbose and intearctive moving
-	alias rm="rm -v" # allows verbose removal
-	alias mkdir="mkdir -pv" # allows verbose and recursive directory creation
 	alias p="sudo pacman" # quick shortcut to sudo pacman
 	alias yt="youtube-dl --config-location ~/.config/youtube-dl/video.config" \
 	alias yta="youtube-dl --config-location ~/.config/youtube-dl/audio.config" \
@@ -120,14 +116,11 @@ stty stop undef		# Disable ctrl-s to freeze terminal.
 	bindkey '^g^r' fzf-gr-widget
 
 
-#   ____      _
-# / ___|___ | | ___  _ __ ___
-#| |   / _ \| |/ _ \| '__/ __|
-#| |__| (_) | | (_) | |  \__ \
-# \____\___/|_|\___/|_|  |___/
-
-# pywal
-(cat ~/.cache/wal/sequences &)
+#  ____ _                    _
+# / ___| |__   ___ _ __ _ __(_) ___  ___
+#| |   | '_ \ / _ \ '__| '__| |/ _ \/ __|
+#| |___| | | |  __/ |  | |  | |  __/\__ \
+# \____|_| |_|\___|_|  |_|  |_|\___||___/
 
 # syntax highlighting
 source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh

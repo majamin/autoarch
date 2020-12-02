@@ -25,6 +25,7 @@ Plug 'rafi/awesome-vim-colorschemes' "it's obvious what this is
 Plug 'ap/vim-css-color' "previews colors for convenience
 Plug 'dylanaraps/wal.vim' "pywal colorscheme
 Plug 'rust-lang/rust.vim'
+Plug 'dermusikman/sonicpi.vim' " sonic-pi experiment
 call plug#end()
 
 "                           _   _       _
