@@ -1,8 +1,0 @@
-#!/bin/sh
-
-while read QUARTER ADDRESS PACKAGE; do
-	DATE=$(ls -l --time-style=full-iso $PACKAGE | awk '{print $6}')
-	#neomutt -a /home/sklss/OneDrive/_data/ed/myed/allstaff/2019/minar_marian/4/care_package.pdf -- $ADDRESS
-	#neomutt -e 'set content_type="text/html"' -a "/home/sklss/OneDrive/_data/ed/myed/allstaff/2019/minar_marian/4/care_package.pdf" -- $ADDRESS -s "TESTING ONLY PDF - Care Package - $DATE - Term $QUARTER"
-	neomutt -e 'set content_type="text/html"' $ADDRESS -s "Care Package - $DATE - Term $QUARTER" < $PACKAGE
-done < "$HOME/OneDrive/_data/ed/myed/allstaff/care_package_email_list"

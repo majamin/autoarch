@@ -1,12 +1,12 @@
 #!/bin/sh
-uri=$(xclip -o -sel clip)
 
 case "$@" in
-	"")     choice=$( printf "Play\\nDownloadVideo\\nDownloadAudio\\nCancel" | dmenu -l -i) ;;
-	"play")	choice="Play" ;;
+	"")     uri=$(xclip -o -sel clip) ;;
+	"*")	uri="$@" ;;
 esac
 
-[ $choice == "Play" ] && ( mpv --title="clipyt" --no-osc --ontop --geometry=35%--0--0 --volume=40 --no-terminal $uri & notify-send "Opening $uri..." )
-[ $choice == "DownloadVideo" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/video.config $uri & notify-send "Downloading video(s)" )
-[ $choice == "DownloadAudio" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/audio.config $uri & notify-send "Downloading music(s)" )
+mpv --title="clipyt" --no-osc --ontop --geometry=35%--0--0 --volume=40 --no-terminal $uri & notify-send "Opening $uri..."
+
+#[ $choice == "DownloadVideo" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/video.config $uri & notify-send "Downloading video(s)" )
+#[ $choice == "DownloadAudio" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/audio.config $uri & notify-send "Downloading music(s)" )
 
