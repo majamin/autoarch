@@ -12,7 +12,6 @@ external-url-viewer "urlscan -dc -r 'linkhandler {}'"
 # -- display -------------------------------------------------------------------
 
 show-read-feeds yes
-feed-sort-order unreadarticlecount-asc
 include simple2
 text-width 80
 
