@@ -22,6 +22,7 @@ Plug 'junegunn/goyo.vim'
 	Plug 'junegunn/limelight.vim' "focus directly what's in front of you
 Plug 'jalvesaq/Nvim-R' " a plugin for R
 Plug 'rafi/awesome-vim-colorschemes' "it's obvious what this is
+Plug 'lifepillar/vim-gruvbox8'
 Plug 'ap/vim-css-color' "previews colors for convenience
 Plug 'dylanaraps/wal.vim' "pywal colorscheme
 Plug 'rust-lang/rust.vim'
@@ -39,8 +40,8 @@ filetype plugin on
 filetype indent on
 let mapleader=","
 syntax on
-"colorscheme wal
-colorscheme afterglow
+set bg=light
+colorscheme gruvbox8
 set clipboard+=unnamedplus "allows copying/pasting from system clipboard
 set spelllang=en_ca
 set backspace=indent,eol,start "<BS> is allowed to delete these
@@ -76,9 +77,8 @@ set backupdir=$HOME/.cache/nvim/backup
 nnoremap <S-h> ^
 nnoremap <S-l> $
 
-" move a line up/down
-"nnoremap <S-j> :move +1<CR>
-"nnoremap <S-k> :move -2<CR>
+inoremap jk <Esc>
+inoremap kj <Esc>
 
 " Simple window navigation using <C-*>
 map <C-h> <C-w>h

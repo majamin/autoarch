@@ -118,7 +118,7 @@ ex=🎯:\
 "
 
 # Start X if not already running
-[[ -n "$(tty)" && -z "$(pgrep -u $USER '\bXorg$')" ]] && exec startx &> /dev/null
+[[ -n "$(tty)" && -z "$(pgrep -u $USER '\bXorg$')" ]] && exec startx
 
 # Switch escape and caps if tty and no passwd required:
 sudo -n loadkeys ${XDG_DATA_HOME:-$HOME/.local/share}/ttymaps.kmap 2>/dev/null
