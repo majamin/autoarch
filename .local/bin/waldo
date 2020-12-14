@@ -1,2 +1,15 @@
 #!/bin/sh
-[ -x $(command -v wal) ] && wal --theme | sed '/:$/d' | awk '{print $2}' | dmenu -i -l 20 | xargs wal --theme
+darklist() {
+	wal --theme | sed -n '/Light Themes/q;p' | sed '/:$/d' | sed 's/ - //g' | dmenu -i -l 20
+}
+
+lightlist() {
+	wal --theme | grep -A100 Light | sed '/:$/d' | grep -v "random" | sed 's/ - //g' | dmenu -i -l 20
+}
+
+SEL=$(echo -e "Dark\nLight\nRandom" | dmenu -i -l 3)
+
+case $SEL in
+	Dark)  wal --theme $(darklist) ;;
+	Light) wal -l --theme $(lightlist) ;;
+esac
