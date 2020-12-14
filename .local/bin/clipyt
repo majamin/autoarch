@@ -1,12 +1,34 @@
 #!/bin/sh
 
-case "$@" in
-	"")     uri=$(xclip -o -sel clip) ;;
-	"*")	uri="$@" ;;
-esac
+# a DIY video/media player feeder for mpv
 
-mpv --title="clipyt" --no-osc --ontop --geometry=35%--0--0 --volume=40 --no-terminal $uri & notify-send "Opening $uri..."
+for PROC in $(pgrep -f mpv-clipyt); do kill -TERM $PROC; done
 
-#[ $choice == "DownloadVideo" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/video.config $uri & notify-send "Downloading video(s)" )
-#[ $choice == "DownloadAudio" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/audio.config $uri & notify-send "Downloading music(s)" )
+SOURCES=("$@")
 
+SOURCES+=("$(xclip -o -sel clip | grep http)")
+
+SOURCES+=(
+"https://nightride.fm/stream/nightride.m4a"
+"https://chillout.zone/chillout_plus"
+"http://audio-ogg.ibiblio.org:8000/wcpe.ogg"
+"https://ycradio.stream.publicradio.org/ycradio.aac"
+"https://holiday.stream.publicradio.org/holiday_yc.aac"
+"https://hygge.stream.publicradio.org/hygge.aac"
+"https://peacefulpiano.stream.publicradio.org/peacefulpiano.aac"
+"https://classicalkids.stream.publicradio.org/classicalkids.aac"
+"https://focus.stream.publicradio.org/focus.aac"
+"https://favorites.stream.publicradio.org/favorites.aac"
+)
+SOURCES+=("$(find ~/Videos -print | file -if - | grep "video/" | awk -F: '{print $1}')")
+
+printf '%s\n' "${SOURCES[@]}" | \
+	dmenu -i -l 20 | \
+	xargs -I {} mpv \
+		--title="mpv-clipyt" \
+		--no-osc \
+		--ontop \
+		--geometry=35%--0--0 \
+		--volume=40 \
+		--no-terminal \
+		{} 2> notify-send
