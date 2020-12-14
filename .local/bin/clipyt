@@ -2,12 +2,19 @@
 
 # a DIY video/media player feeder for mpv
 
-for PROC in $(pgrep -f mpv-clipyt); do kill -TERM $PROC; done
+# if a mpv-clipyt process if already running, kill it and exit
+[[ -n $(pgrep -f mpv-clipyt) ]] && \
+	for PROC in $(pgrep -f mpv-clipyt); do
+		kill -TERM $PROC
+	done && exit
 
+# playable arguments passed to clipyt on the command line
 SOURCES=("$@")
 
+# anything currently on the clipboard with 'http'
 SOURCES+=("$(xclip -o -sel clip | grep http)")
 
+# some radio stations
 SOURCES+=(
 "https://nightride.fm/stream/nightride.m4a"
 "https://chillout.zone/chillout_plus"
@@ -20,15 +27,18 @@ SOURCES+=(
 "https://focus.stream.publicradio.org/focus.aac"
 "https://favorites.stream.publicradio.org/favorites.aac"
 )
+
+# My video folder
 SOURCES+=("$(find ~/Videos -print | file -if - | grep "video/" | awk -F: '{print $1}')")
 
-printf '%s\n' "${SOURCES[@]}" | \
-	dmenu -i -l 20 | \
-	xargs -I {} mpv \
+SEL=$(printf '%s\n' "${SOURCES[@]}" | dmenu -i -l 20)
+
+[[ -n "$SEL" ]] && \
+	mpv \
 		--title="mpv-clipyt" \
 		--no-osc \
 		--ontop \
 		--geometry=35%--0--0 \
 		--volume=40 \
 		--no-terminal \
-		{} 2> notify-send
+		"$SEL"
