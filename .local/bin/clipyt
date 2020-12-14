@@ -1,12 +1,44 @@
 #!/bin/sh
 
-case "$@" in
-	"")     uri=$(xclip -o -sel clip) ;;
-	"*")	uri="$@" ;;
-esac
+# a DIY video/media player feeder for mpv
 
-mpv --title="clipyt" --no-osc --ontop --geometry=35%--0--0 --volume=40 --no-terminal $uri & notify-send "Opening $uri..."
+# if a mpv-clipyt process if already running, kill it and exit
+[[ -n $(pgrep -f mpv-clipyt) ]] && \
+	for PROC in $(pgrep -f mpv-clipyt); do
+		kill -TERM $PROC
+	done && exit
 
-#[ $choice == "DownloadVideo" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/video.config $uri & notify-send "Downloading video(s)" )
-#[ $choice == "DownloadAudio" ] && ( youtube-dl --no-warnings --config-location ~/.config/youtube-dl/audio.config $uri & notify-send "Downloading music(s)" )
+# playable arguments passed to clipyt on the command line
+SOURCES=("$@")
 
+# anything currently on the clipboard with 'http'
+SOURCES+=("$(xclip -o -sel clip | grep http)")
+
+# some radio stations
+SOURCES+=(
+"https://nightride.fm/stream/nightride.m4a"
+"https://chillout.zone/chillout_plus"
+"http://audio-ogg.ibiblio.org:8000/wcpe.ogg"
+"https://ycradio.stream.publicradio.org/ycradio.aac"
+"https://holiday.stream.publicradio.org/holiday_yc.aac"
+"https://hygge.stream.publicradio.org/hygge.aac"
+"https://peacefulpiano.stream.publicradio.org/peacefulpiano.aac"
+"https://classicalkids.stream.publicradio.org/classicalkids.aac"
+"https://focus.stream.publicradio.org/focus.aac"
+"https://favorites.stream.publicradio.org/favorites.aac"
+)
+
+# My video folder
+SOURCES+=("$(find ~/Videos -print | file -if - | grep "video/" | awk -F: '{print $1}')")
+
+SEL=$(printf '%s\n' "${SOURCES[@]}" | dmenu -i -l 20)
+
+[[ -n "$SEL" ]] && \
+	mpv \
+		--title="mpv-clipyt" \
+		--no-osc \
+		--ontop \
+		--geometry=35%--0--0 \
+		--volume=40 \
+		--no-terminal \
+		"$SEL"

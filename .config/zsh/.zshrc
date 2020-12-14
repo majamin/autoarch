@@ -71,6 +71,12 @@ stty stop undef		# Disable ctrl-s to freeze terminal.
 	alias ffmpeg="ffmpeg -hide_banner"
 	command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
 
+	notify-me() {
+		mpv ~/.local/share/reminders-immediate.mp3 &>/dev/null;
+		[[ -z "$1" ]] && notify-send -t 60000 -u critical "Job's done!" || \
+		notify-send -t 60000 -u critical "$1"
+		}
+
 #   __     __
 #  / _|___/ _|
 # | ||_  / |_
@@ -123,5 +129,5 @@ stty stop undef		# Disable ctrl-s to freeze terminal.
 # \____|_| |_|\___|_|  |_|  |_|\___||___/
 
 # syntax highlighting
-source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+#source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
