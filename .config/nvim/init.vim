@@ -40,8 +40,7 @@ filetype plugin on
 filetype indent on
 let mapleader=","
 syntax on
-set bg=light
-colorscheme gruvbox8
+colorscheme angr
 set clipboard+=unnamedplus "allows copying/pasting from system clipboard
 set spelllang=en_ca
 set backspace=indent,eol,start "<BS> is allowed to delete these
