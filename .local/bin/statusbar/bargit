@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# While tweaking all of my dotfiles, it's convenient to have an indicator
+# script that lets me know if things have been changed, but not pushed to
+# github. That's what this script does. If ANY files have been changed in
+# $HOME or ~/.local/src repos, but not pushed, we'll see a warning in the
+# statusbar.
+
+# check $HOME repo
+FILES=$(git -C "$HOME" ls-files --modified)
+
+# check src repos
+for DIR in $(find "$HOME/.local/src" -maxdepth 1 -type d); do
+	FILES="$FILES\n$(git -C "$DIR" ls-files --modified)"
+done
+
+# remove blank lines
+FILES=$(printf "$FILES" | sed '/^$/d')
+
+[[ -n $FILES ]] && echo -e "\x09(GIT)\x01"
