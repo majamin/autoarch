@@ -17,4 +17,6 @@ done
 # remove blank lines
 FILES=$(printf "$FILES" | sed '/^$/d')
 
+echo "$FILES" > ~/git-ls-modified.txt
+
 [[ -n $FILES ]] && echo -e "\x09(GIT)\x01"
