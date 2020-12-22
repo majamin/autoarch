@@ -10,20 +10,23 @@ LOG="$HOME/bargit.log"
 rm $LOG 2>/dev/null
 FLAG=false
 
-ls_files(){
+git_ls_files(){
 	echo "$(git -C "$1" ls-files --modified)"
 }
 
+# TODO: add $HOME repo
 DIRS="$HOME $(find "$HOME/.local/src" -maxdepth 1 -type d)"
 
 # check src repos
 for DIR in $DIRS; do
-	FILES=$(ls_files $DIR)
-	if [[ -z $FILES ]]; then
-		break
+	FILES="$(git_ls_files ${DIR})"
+	if [[ -z "$FILES" ]]; then
+		continue
 	else
 		FLAG=true
-		echo "$FILES" > $LOG
+		for FILE in $FILES; do
+			echo -e "$DIR/$FILE" >> "$LOG"
+		done
 	fi
 done
 
