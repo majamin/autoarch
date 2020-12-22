@@ -129,5 +129,5 @@ stty stop undef		# Disable ctrl-s to freeze terminal.
 # \____|_| |_|\___|_|  |_|  |_|\___||___/
 
 # syntax highlighting
-#source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
