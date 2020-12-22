@@ -1,14 +1,11 @@
-# Purpose
+## What is this?
 
-These are dotfiles that are the most compatible with Arch-based linux installs.
-There are enough objects in here to break your system if you blindly clone this into your home directory, so be careful.
-
-# Installing
-
-To get the nicest experience, get up and going using my fork of [LARBS](https://github.com/majamin/LARBS) (all credit to [LS](https://lukesmith.xyz/)).
-
-If you don't want to do this, then I'm assuming that you know what you're doing with dotfiles.
-
-# Screenshots
+These are dotfiles deployed by my fork of [LARBS](https://github.com/LukeSmithxyz/LARBS.git).
+If you install it the "larbs" way, you can expect to get:
 
 ![screenshot](https://raw.githubusercontent.com/majamin/LARBS/master/screenshot.png)
+
+## Compatibility
+
+This repo expects [dwm](https://dwm.suckless.org/) on an [Arch Linux](https://archlinux.org/) install.
+Use at your own risk.
