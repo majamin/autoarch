@@ -6,17 +6,25 @@
 # $HOME or ~/.local/src repos, but not pushed, we'll see a warning in the
 # statusbar.
 
-# check $HOME repo
-FILES=$(git -C "$HOME" ls-files --modified)
+LOG="$HOME/bargit.log"
+rm $LOG 2>/dev/null
+FLAG=false
+
+ls_files(){
+	echo "$(git -C "$1" ls-files --modified)"
+}
+
+DIRS="$HOME $(find "$HOME/.local/src" -maxdepth 1 -type d)"
 
 # check src repos
-for DIR in $(find "$HOME/.local/src" -maxdepth 1 -type d); do
-	FILES="$FILES\n$(git -C "$DIR" ls-files --modified)"
+for DIR in $DIRS; do
+	FILES=$(ls_files $DIR)
+	if [[ -z $FILES ]]; then
+		break
+	else
+		FLAG=true
+		echo "$FILES" > $LOG
+	fi
 done
 
-# remove blank lines
-FILES=$(printf "$FILES" | sed '/^$/d')
-
-echo "$FILES" > ~/git-ls-modified.txt
-
-[[ -n $FILES ]] && echo -e "\x09(GIT)\x01"
+[[ $FLAG ]] && echo -e "\x09(GIT)\x01"
