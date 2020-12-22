@@ -11,7 +11,7 @@ rm $LOG 2>/dev/null
 FLAG=false
 
 git_ls_files(){
-	echo "$(git -C "$1" ls-files --modified)"
+	echo "$(git -C "$1" ls-files --modified | sed '/^$/d')"
 }
 
 # TODO: add $HOME repo
