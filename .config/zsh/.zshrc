@@ -1,5 +1,8 @@
 # ZSHRC
 
+# SSH keychain https://wiki.archlinux.org/index.php/SSH_keys#Keychain
+eval $(keychain --eval --quiet)
+
 HISTFILE="$ZDOTDIR/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=10000
