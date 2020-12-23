@@ -6,7 +6,7 @@
 [[ -n $(pgrep -f mpv-clipyt) ]] && \
 	for PROC in $(pgrep -f mpv-clipyt); do
 		kill -TERM $PROC
-	done && exit
+	done && notify-send "clipyt stopped" && exit
 
 # playable arguments passed to clipyt on the command line
 SOURCES=("$@")
