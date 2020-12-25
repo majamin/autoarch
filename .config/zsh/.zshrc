@@ -55,6 +55,6 @@ alias ls="ls -hN --color=auto --group-directories-first"
 
 . "/usr/share/fzf/completion.zsh"
 . "/usr/share/fzf/key-bindings.zsh"
-#. "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 . "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 . "/usr/share/LS_COLORS/dircolors.sh"
+. "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
