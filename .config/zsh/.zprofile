@@ -14,7 +14,6 @@ export BROWSER="brave"
 
 # Cloud-based
 export ONEDRIVE="$HOME/Maja"
-
 export VIDEOS="$HOME/Videos"
 export MUSIC="$HOME/Music"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -29,7 +28,6 @@ export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export R_ENVIRON_USER="${XDG_CONFIG_HOME:-$HOME/.config}/R/Renviron"
 export FZF_DEFAULT_OPTS="-m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all --layout=reverse --inline-info"
 export TEXMFHOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-#export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
 
 export LESS=-R
 export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
