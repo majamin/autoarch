@@ -73,6 +73,7 @@ SOURCES+=("$(xclip -o -sel clip 2>/dev/null | grep http)")
 
 # some radio stations
 SOURCES+=(
+"https://kcrw.streamguys1.com/kcrw_192k_mp3_e24"
 "https://nightride.fm/stream/nightride.m4a"
 "https://chillout.zone/chillout_plus"
 "http://audio-ogg.ibiblio.org:8000/wcpe.ogg"
