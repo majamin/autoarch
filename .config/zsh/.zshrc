@@ -31,6 +31,7 @@ compinit
 PROMPT='-> '
 setopt globdots
 bindkey '^e' edit-command-line
+bindkey '^ ' autosuggest-accept
 
 export KEYTIMEOUT=1
 
