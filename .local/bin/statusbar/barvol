@@ -15,4 +15,4 @@ vol="$(echo "$volstat" | grep '^[[:space:]]Volume:' | sed "s,.* \([0-9]\+\)%.*,\
 #vol=$(amixer sget Master | grep -oP "(?<=\[)\d+")
 
 # both options
-printf "%s %s%%\\n" "" "$vol"
+printf "  %s %s%%\\n" "" "$vol"

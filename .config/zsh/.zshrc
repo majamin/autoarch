@@ -31,7 +31,7 @@ compinit
 PROMPT='-> '
 setopt globdots
 bindkey '^e' edit-command-line
-bindkey '^ ' autosuggest-accept
+bindkey '^ ' autosuggest-execute
 
 export KEYTIMEOUT=1
 
