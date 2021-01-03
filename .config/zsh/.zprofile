@@ -14,7 +14,6 @@ export BROWSER="brave"
 
 # Cloud-based
 export ONEDRIVE="$HOME/Maja"
-
 export VIDEOS="$HOME/Videos"
 export MUSIC="$HOME/Music"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -28,17 +27,17 @@ export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export R_ENVIRON_USER="${XDG_CONFIG_HOME:-$HOME/.config}/R/Renviron"
 export FZF_DEFAULT_OPTS="-m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all --layout=reverse --inline-info"
-#export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
+export TEXMFHOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 
-export LESS=-R
-export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
-export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
-export LESS_TERMCAP_me="$(printf '%b' '[0m')"
-export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
-export LESS_TERMCAP_se="$(printf '%b' '[0m')"
-export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
-export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
-export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
+#export LESS=-R
+#export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"
+#export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"
+#export LESS_TERMCAP_me="$(printf '%b' '[0m')"
+#export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"
+#export LESS_TERMCAP_se="$(printf '%b' '[0m')"
+#export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"
+#export LESS_TERMCAP_ue="$(printf '%b' '[0m')"
+#export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
 export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
 #export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname

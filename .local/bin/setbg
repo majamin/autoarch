@@ -9,7 +9,7 @@
 # Location of link to wallpaper link.
 bgloc="${XDG_DATA_HOME:-$HOME/.local/share/}/bg"
 
-fallback="${XDG_CACHE_HOME:-$HOME/.local/share/}defaultbg.jpg"
+fallback="${XDG_CACHE_HOME:-$HOME/.local/share/}defaultbg.png"
 
 [ ! -f "$bgloc" ] && ln -sf "$fallback" "$bgloc"
 

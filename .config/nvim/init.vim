@@ -40,8 +40,7 @@ filetype plugin on
 filetype indent on
 let mapleader=","
 syntax on
-set bg=light
-colorscheme gruvbox8
+colorscheme angr
 set clipboard+=unnamedplus "allows copying/pasting from system clipboard
 set spelllang=en_ca
 set backspace=indent,eol,start "<BS> is allowed to delete these
@@ -136,8 +135,8 @@ let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markd
 
 " where's vimwiki?
 let wiki_personal 		= {}
-let wiki_personal.path 		= system('printf "%s" "$ONEDRIVE" "/Projects/vimwiki_personal"')
-let wiki_personal.path_html	= system('printf "%s" "$ONEDRIVE" "/Projects/vimwiki_personal/html"')
+let wiki_personal.path 		= system('printf "%s" "$ONEDRIVE" "/Projects/notes"')
+let wiki_personal.path_html	= system('printf "%s" "$ONEDRIVE" "/Projects/notes/html"')
 let g:vimwiki_list 		= [wiki_personal]
 
 " Vimwiki is nicer when there's no wrap

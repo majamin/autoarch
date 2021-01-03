@@ -1,133 +1,61 @@
-# ZSHRC
-
-HISTFILE="$ZDOTDIR/.zsh_history"
+HISTFILE="$ZDOTDIR/.history"
 HISTSIZE=10000
 SAVEHIST=10000
 
-setopt autocd
-autoload -U compinit
+# The following lines were added by compinstall
+
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' completions 1
+zstyle ':completion:*' expand suffix
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' glob 1
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' ignore-parents parent pwd
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' list-suffixes true
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
+zstyle ':completion:*' max-errors 2
+zstyle ':completion:*' menu select=1
+zstyle ':completion:*' prompt '%e'
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' substitute 1
+zstyle :compinstall filename '/home/marian/.config/zsh/.zshrc'
+
+autoload -Uz compinit
+autoload edit-command-line; zle -N edit-command-line
+
+compinit
+
 PROMPT='-> '
+setopt globdots
+bindkey '^e' edit-command-line
+bindkey '^ ' autosuggest-execute
 
-stty stop undef		# Disable ctrl-s to freeze terminal.
+export KEYTIMEOUT=1
 
-# ====== Completion
-	zstyle ':completion:*:*:cdr:*:*' menu selection
-	zmodload zsh/complist
-	compinit
-	_comp_options+=(globdots)
+# Change cursor shape for different vi modes.
+function zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) echo -ne '\e[1 q';;      # block
+        viins|main) echo -ne '\e[5 q';; # beam
+    esac
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-# ====== Recent Directories (cdr command)
-	autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-	add-zsh-hook chpwd chpwd_recent_dirs
+alias pacman="sudo pacman"
+alias ls="ls -hN --color=auto --group-directories-first"
 
-# ====== Use Alt-h and Alt-l to navigate directories
-	cdUndoKey() {
-	  popd
-	  zle       reset-prompt
-	}
-
-	cdParentKey() {
-	  pushd ..
-	  zle       reset-prompt
-	}
-
-	zle -N  cdParentKey
-	zle -N  cdUndoKey
-	bindkey '^[h' cdParentKey
-	bindkey '^[l' cdUndoKey
-
-# ====== Use pacman to suggest a package when command not found
-	command_not_found_handler() {
-		local pkgs cmd="$1" files=()
-		files=(${(f)"$(pacman -F --machinereadable -- "/usr/bin/${cmd}")"})
-		if (( ${#files[@]} )); then
-			printf '%s may be found in the following packages:\n' "$cmd"
-			local res=() repo package version file
-			for file in "$files[@]"; do
-				res=("${(0)file}")
-				repo="$res[1]"
-				package="$res[2]"
-				version="$res[3]"
-				file="$res[4]"
-				printf '  %s/%s %s: /%s\n' "$repo" "$package" "$version" "$file"
-			done
-		else
-			printf 'zsh: command not found: %s\n' "$cmd"
-			printf 'pacman: no files found: %s\n' "$cmd"
-		fi
-		return 127
-	}
-
-# ====== Edit line (Ctrl + E)
-	autoload edit-command-line; zle -N edit-command-line
-	bindkey '^e' edit-command-line
-
-# ====== Aliases
-	alias sdn="shutdown -h now"
-	alias ls="ls -hN --color=auto --group-directories-first"
-	alias p="sudo pacman" # quick shortcut to sudo pacman
-	alias yt="youtube-dl --config-location ~/.config/youtube-dl/video.config" \
-	alias yta="youtube-dl --config-location ~/.config/youtube-dl/audio.config" \
-	alias ffmpeg="ffmpeg -hide_banner"
-	command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d"
-
-	notify-me() {
-		mpv ~/.local/share/reminders-immediate.mp3 &>/dev/null;
-		[[ -z "$1" ]] && notify-send -t 60000 -u critical "Job's done!" || \
-		notify-send -t 60000 -u critical "$1"
-		}
-
-#   __     __
-#  / _|___/ _|
-# | ||_  / |_
-# |  _/ /|  _|
-# |_|/___|_|
-
-# ====== Load
-	source "/usr/share/fzf/completion.zsh"
-	source "/usr/share/fzf/key-bindings.zsh"
-
-# ====== Ignored paths
-	_fzf_compgen_path() {
-	  find . -type f \! \( \
-		  -path '*/\.git/*' \
-		  -o -path '*/\.wine/*' \
-		  \) 2>/dev/null
-	}
-
-# ====== Ignored directories
-	_fzf_compgen_dir() {
-	  find . -type d \! \( \
-		  -path '*/\.git/*' \
-		  -o -path '*/\.wine/*' \
-		  \) 2>/dev/null
-	}
-
-# ====== Git key bindings
-	source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/zshxtra.zsh" # git widgets and more
-
-	zle -N fzf-gf-widget
-	bindkey '^g^f' fzf-gf-widget
-
-	zle -N fzf-gb-widget
-	bindkey '^g^b' fzf-gb-widget
-
-	zle -N fzf-gt-widget
-	bindkey '^g^t' fzf-gt-widget
-
-	zle -N fzf-gh-widget
-	bindkey '^g^h' fzf-gh-widget
-
-	zle -N fzf-gr-widget
-	bindkey '^g^r' fzf-gr-widget
-
-
-#  ____ _                    _
-# / ___| |__   ___ _ __ _ __(_) ___  ___
-#| |   | '_ \ / _ \ '__| '__| |/ _ \/ __|
-#| |___| | | |  __/ |  | |  | |  __/\__ \
-# \____|_| |_|\___|_|  |_|  |_|\___||___/
-
-# syntax highlighting
-#source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+. "/usr/share/fzf/completion.zsh"
+. "/usr/share/fzf/key-bindings.zsh"
+. "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+. "/usr/share/LS_COLORS/dircolors.sh"
+. "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
