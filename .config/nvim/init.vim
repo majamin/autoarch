@@ -15,18 +15,11 @@ endif
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
-Plug 'jreybert/vimagit'
-Plug 'junegunn/fzf.vim'
+Plug 'rafi/awesome-vim-colorschemes'
 Plug 'vimwiki/vimwiki'
-Plug 'junegunn/goyo.vim'
-	Plug 'junegunn/limelight.vim' "focus directly what's in front of you
 Plug 'jalvesaq/Nvim-R' " a plugin for R
-Plug 'rafi/awesome-vim-colorschemes' "it's obvious what this is
-Plug 'lifepillar/vim-gruvbox8'
 Plug 'ap/vim-css-color' "previews colors for convenience
-Plug 'dylanaraps/wal.vim' "pywal colorscheme
-Plug 'rust-lang/rust.vim'
-Plug 'dermusikman/sonicpi.vim' " sonic-pi experiment
+Plug 'jpalardy/vim-slime'
 call plug#end()
 
 "                           _   _       _
@@ -40,7 +33,7 @@ filetype plugin on
 filetype indent on
 let mapleader=","
 syntax on
-colorscheme angr
+colorscheme gruvbox
 set clipboard+=unnamedplus "allows copying/pasting from system clipboard
 set spelllang=en_ca
 set backspace=indent,eol,start "<BS> is allowed to delete these

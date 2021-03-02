@@ -28,7 +28,7 @@ autoload edit-command-line; zle -N edit-command-line
 
 compinit
 
-PROMPT='-> '
+PROMPT="${STY}-> "
 setopt globdots
 bindkey '^e' edit-command-line
 bindkey '^ ' autosuggest-execute
