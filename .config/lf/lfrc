@@ -59,6 +59,14 @@ cmd copyto ${{
 	notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
 
+
+cmd echopaths ${{
+	rm ~/marked.txt &>/dev/null
+	for FILE in "$fs"; do
+		echo "$FILE" >> ~/marked.txt
+	done
+}}
+
 cmd setbg "$1"
 cmd bulkrename $vidir
 
