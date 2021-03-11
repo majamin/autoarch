@@ -21,7 +21,7 @@ play(){
 	--no-osc \
 	--ontop \
 	--geometry=35%--0--0 \
-	--volume=40 \
+	--volume=60 \
 	--no-terminal \
 	--input-ipc-server="$SOC" \
 	"$1" &>/dev/null
@@ -73,6 +73,7 @@ SOURCES+=("$(xclip -o -sel clip 2>/dev/null | grep http)")
 
 # some radio stations
 SOURCES+=(
+"https://kcrw.streamguys1.com//kcrw_128k_mp3_on_air"
 "https://kcrw.streamguys1.com/kcrw_192k_mp3_e24"
 "http://liveradio.cbc.ca/i/CBCR1_KAM@384142/index_96_a-p.m3u8"
 "https://nightride.fm/stream/nightride.m4a"
