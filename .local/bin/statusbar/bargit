@@ -33,4 +33,4 @@ done
 
 [[ $GITFLAG == true ]] && FLAGS+=("  ")
 
-echo -e "\x05${FLAGS[@]}\x01"
+echo -e "   \x05${FLAGS[@]}\x01"

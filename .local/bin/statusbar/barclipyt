@@ -10,4 +10,4 @@ TITLE=$(echo '{ "command": ["get_property", "media-title"] }' | socat - /tmp/mpv
 ICON=" "
 [[ -n $TITLE ]] && ICON=""
 
-echo -e "$ICON  $TITLE  "
+echo -e "$ICON  \x08$TITLE \x01"
