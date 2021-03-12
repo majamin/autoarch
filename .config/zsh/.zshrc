@@ -21,7 +21,7 @@ zstyle ':completion:*' menu select=1
 zstyle ':completion:*' prompt '%e'
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' substitute 1
-zstyle :compinstall filename '/home/marian/.config/zsh/.zshrc'
+zstyle :compinstall filename '~/.config/zsh/.zshrc'
 
 autoload -Uz compinit
 autoload edit-command-line; zle -N edit-command-line
@@ -53,6 +53,8 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 alias pacman="sudo pacman"
 alias ls="ls -hN --color=auto --group-directories-first"
+alias yt="youtube-dl --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/video.config\""
+alias yta="youtube-dl --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/audio.config\""
 
 . "/usr/share/fzf/completion.zsh"
 . "/usr/share/fzf/key-bindings.zsh"
