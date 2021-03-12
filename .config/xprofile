@@ -2,11 +2,13 @@
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
 remaps &			# switch caps/esc etc.
-xcompmgr &			# composite manager
+picom &				# composite manager
 dwmblocks &			# dwmstatus statusbar
 dunst &				# dunst for notifications
 xset r rate 300 50 &		# Speed xrate up
 unclutter &			# Remove mouse when idle
 mpd-module-update &		# Check for when to update the mpd module
 xinput disable 'SynPS/2 Synaptics TouchPad' # use mouse or trackpoint only
-[ -x $(command setbg) ] && setbg # ~/.local/bin/setbg
+sleep 2
+[[ -x ~/.screenlayout/default.sh ]] && ~/.screenlayout/default.sh &
+[[ -x $(command setbg) ]] && setbg &
