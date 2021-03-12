@@ -1,9 +1,13 @@
 #!/bin/sh
 
+#FILENAME=$(echo '{ "command": ["get_property", "filename/no-ext"] }' | socat - /tmp/mpv-clipyt)
+#METADATA=$(echo '{ "command": ["get_property", "filtered-metadata"] }' | socat - /tmp/mpv-clipyt)
+
 # Displays information about the currently playing clipyt (mpv) file
 
-FILENAME=$(echo '{ "command": ["get_property", "filename/no-ext"] }' | socat - /tmp/mpv-clipyt)
-METADATA=$(echo '{ "command": ["get_property", "filtered-metadata"] }' | socat - /tmp/mpv-clipyt)
-echo '{ "command": ["get_property", "media-title"] }' | socat - /tmp/mpv-clipyt
+TITLE=$(echo '{ "command": ["get_property", "media-title"] }' | socat - /tmp/mpv-clipyt | grep -Po '(?<="data":").*(?=","request)')
 
-#echo -e "\x05${FLAGS[@]}\x01"
+ICON=" "
+[[ -n $TITLE ]] && ICON=""
+
+echo -e "$ICON  $TITLE  "
