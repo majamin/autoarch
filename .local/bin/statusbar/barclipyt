@@ -1,13 +1,28 @@
 #!/bin/sh
 
+# NOTES #
 #FILENAME=$(echo '{ "command": ["get_property", "filename/no-ext"] }' | socat - /tmp/mpv-clipyt)
 #METADATA=$(echo '{ "command": ["get_property", "filtered-metadata"] }' | socat - /tmp/mpv-clipyt)
+
+# capture a certain portion of a string:
+#echo "$TITLE" | sed 's/.\{100\}\(.\{25\}\).*/\1/g'
+
+
 
 # Displays information about the currently playing clipyt (mpv) file
 
 TITLE=$(echo '{ "command": ["get_property", "media-title"] }' | socat - /tmp/mpv-clipyt | grep -Po '(?<="data":").*(?=","request)')
+[[ $? == 1 ]] && exit
 
-ICON=" "
-[[ -n $TITLE ]] && ICON=""
+TITLE=$(echo $TITLE | sed 's/\\//g;s/"//g') # clean-up (no '"' or '\')
+PAUSE=$(echo '{ "command": ["get_property", "pause"] }' | socat - /tmp/mpv-clipyt| grep -Po '(?<=data":)[a-z]*')
 
-echo -e "$ICON  \x08$TITLE \x01"
+TIMEREM=$(echo '{ "command": ["get_property", "time-remaining"] }' | socat - /tmp/mpv-clipyt| grep -Po '(?<=data":)[^"]*(?=,")')
+
+H=$(echo "$TIMEREM/3600" | bc)
+m=$(echo "($TIMEREM/60)%60" | bc)
+s=$(echo "($TIMEREM/1)%60" | bc)
+
+[[ $PAUSE == "true" ]] && ICON="" || ICON=""
+
+printf "%s %02d:%02d:%02d \x08%s\x01" "$ICON" "$H" "$m" "$s" "$TITLE"
