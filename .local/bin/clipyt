@@ -18,6 +18,9 @@ play_toggle(){
 play(){
 	mpv \
 	--title="mpv-clipyt" \
+	--ytdl-raw-options="yes-playlist=" \
+	--cache=yes \
+	--cache-secs=20 \
 	--no-osc \
 	--ontop \
 	--geometry=35%--0--0 \
