@@ -76,6 +76,8 @@ SOURCES+=("$(xclip -o -sel clip 2>/dev/null | grep http)")
 
 # some radio stations
 SOURCES+=(
+"https://ais-edge09-live365-dal02.cdnstream.com/a06375?listenerId=Live365-Widget-AdBlock&aw_0_1st.playerid=Live365-Widget&aw_0_1st.skey=1617124325"
+"https://kathy.torontocast.com:1825/stream"
 "https://kcrw.streamguys1.com//kcrw_128k_mp3_on_air"
 "https://kcrw.streamguys1.com/kcrw_192k_mp3_e24"
 "http://liveradio.cbc.ca/i/CBCR1_KAM@384142/index_96_a-p.m3u8"
