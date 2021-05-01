@@ -1,1 +1,0 @@
-cat /etc/pacman.d/mirrorlist | grep -Po "(?<=:\/\/)[^/]*(?=/)" | uniq | head -n 50

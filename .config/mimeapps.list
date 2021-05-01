@@ -13,6 +13,7 @@ video/x-matroska=video.desktop
 x-scheme-handler/lbry=lbry.desktop
 x-scheme-handler/magnet=torrent.desktop;
 x-scheme-handler/mailto=brave-browser.desktop
+x-scheme-handler/webcal=brave-browser.desktop
 
 [Added Associations]
 image/png=gimp.desktop;sxiv.desktop;
