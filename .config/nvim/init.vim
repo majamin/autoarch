@@ -100,15 +100,17 @@ endfun
 
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
-autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
-autocmd FileType go setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
+"autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
+"autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
+"autocmd FileType go setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
 
-let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-let wiki_personal 		= {}
+set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
+
+let g:vimwiki_ext2syntax    = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+let wiki_personal           = {}
 let wiki_personal.path 		= system('printf "%s" "$ONEDRIVE" "/Projects/notes"')
 let wiki_personal.path_html	= system('printf "%s" "$ONEDRIVE" "/Projects/notes/html"')
-let g:vimwiki_list 		= [wiki_personal]
+let g:vimwiki_list 		    = [wiki_personal]
 
 
 let R_assign = 0
