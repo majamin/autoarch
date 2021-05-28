@@ -1,6 +1,6 @@
 #!/bin/sh
 
-FILE="finder.txt"
+FILE="/home/marian/Maja/Projects/newed/finder.txt"
 
 selcol(){
 	cat "$FILE" | cut -d";" -f$1 | sort -u | dmenu -i -l 20 -p "Select a $2"

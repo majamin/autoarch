@@ -17,6 +17,6 @@ x-scheme-handler/webcal=brave-browser.desktop
 
 [Added Associations]
 image/png=gimp.desktop;sxiv.desktop;
-text/html=brave-browser.desktop;
+text/html=firefox.desktop;brave-browser.desktop;
 image/jpeg=gimp.desktop;
 image/svg+xml=org.inkscape.Inkscape.desktop;

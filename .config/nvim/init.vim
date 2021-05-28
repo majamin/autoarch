@@ -64,8 +64,8 @@ map <F11> :bn<CR>
 map <F10> :bp<CR>
 
 " jump to the beginning and end of a line
-nnoremap <S-h> ^
-nnoremap <S-l> $
+nnoremap <S-h> g^
+nnoremap <S-l> g$
 
 " Simple window navigation
 map <C-h> <C-w>h

@@ -28,4 +28,6 @@ cat "$file" \
 	| sed '1i keybinding	effect' \
 	| sed '1i .ta 1i 2i' \
 	| sed '1i .nf' \
+	| sed '1i Global DWM keybindings - sourced from config.def.h' \
+	| sed '1i .TL' \
 	| groff -mom -Tpdf -i | zathura -
