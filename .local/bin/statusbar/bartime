@@ -1,5 +1,3 @@
 #!/bin/sh
 
-d=$(date +%e)
-
-date "+%H:%M" | xargs -I {} echo -e "{} "
+date "+%H:%M %b %d" | xargs -I {} echo -e "{} "
