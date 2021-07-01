@@ -79,6 +79,9 @@ map <Down> :resize -2<CR>
 map <Left> :vertical resize -2<CR>
 map <Right> :vertical resize +2<CR>
 
+" quick terminal escape
+tnoremap <Esc><Esc> <C-\><C-n>
+
 " In insert mode, F12 to insert date and <S-F12> for a datetime
 inoremap <F12> <C-r>=system("date +'\%F' \| tr '\n' ' '")<CR>
 inoremap <F24> <C-r>=system("date +'\%F \%T \%Z' \| tr '\n' ' '")<CR>
