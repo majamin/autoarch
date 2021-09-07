@@ -86,6 +86,8 @@ tnoremap <Esc><Esc> <C-\><C-n>
 inoremap <F12> <C-r>=system("date +'\%F' \| tr '\n' ' '")<CR>
 inoremap <F24> <C-r>=system("date +'\%F \%T \%Z' \| tr '\n' ' '")<CR>
 
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
 " paste image paths found in working directory and up to sub-sub directories
 " DEPS: sxiv, xclip
 map <leader>i :r !find . -maxdepth 3 -print \| file -if - \| grep "image/" \| awk -F: '{print $1}' \| xargs sxiv -qto 2> /dev/null <CR><CR>

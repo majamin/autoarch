@@ -1,26 +1,28 @@
 HISTFILE="$ZDOTDIR/.history"
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=20000
+SAVEHIST=20000
 
 # The following lines were added by compinstall
 
 zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' cache-path "$ZDOTDIR/cache"
 zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
 zstyle ':completion:*' completions 1
 zstyle ':completion:*' expand suffix
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' glob 1
 zstyle ':completion:*' group-name ''
-zstyle ':completion:*' ignore-parents parent pwd
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zstyle ':completion:*' list-suffixes true
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
-zstyle ':completion:*' max-errors 2
+zstyle ':completion:*' max-errors 1
 zstyle ':completion:*' menu select=1
 zstyle ':completion:*' prompt '%e'
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' substitute 1
+zstyle ':completion:*' use-cache on
 zstyle :compinstall filename '~/.config/zsh/.zshrc'
 
 autoload -Uz compinit
