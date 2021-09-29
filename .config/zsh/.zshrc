@@ -33,7 +33,7 @@ compinit
 PROMPT="${STY}-> "
 setopt globdots
 bindkey '^e' edit-command-line
-bindkey '^ ' autosuggest-execute
+bindkey '^ ' forward-char
 
 export KEYTIMEOUT=1
 

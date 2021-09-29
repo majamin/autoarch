@@ -64,8 +64,8 @@ map <F11> :bn<CR>
 map <F10> :bp<CR>
 
 " jump to the beginning and end of a line
-nnoremap <S-h> g^
-nnoremap <S-l> g$
+nnoremap <S-h> ^
+nnoremap <S-l> $
 
 " Simple window navigation
 map <C-h> <C-w>h
@@ -117,6 +117,10 @@ let wiki_personal.path 		= system('printf "%s" "$ONEDRIVE" "/Projects/notes"')
 let wiki_personal.path_html	= system('printf "%s" "$ONEDRIVE" "/Projects/notes/html"')
 let g:vimwiki_list 		    = [wiki_personal]
 
+let g:slime_no_mappings = 1
+autocmd FileType python xmap <Space> <Plug>SlimeRegionSend
+autocmd FileType python nmap <Space> <Plug>SlimeParagraphSend
+nmap <C-c>v <Plug>SlimeConfig
 
 let R_assign = 0
 let r_indent_align_args = 0
