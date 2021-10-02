@@ -88,6 +88,8 @@ inoremap <F24> <C-r>=system("date +'\%F \%T \%Z' \| tr '\n' ' '")<CR>
 
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
+let g:surround_{char2nr('-')} = "\1start: \1\r\2end: \2"
+
 " paste image paths found in working directory and up to sub-sub directories
 " DEPS: sxiv, xclip
 map <leader>i :r !find . -maxdepth 3 -print \| file -if - \| grep "image/" \| awk -F: '{print $1}' \| xargs sxiv -qto 2> /dev/null <CR><CR>
