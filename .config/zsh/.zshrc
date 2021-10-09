@@ -57,7 +57,7 @@ alias pacman="sudo pacman"
 alias ls="ls -hN --color=auto --group-directories-first"
 alias yt="youtube-dl --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/video.config\""
 alias yta="youtube-dl --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/audio.config\""
-alias oneliner='grep "(\*)" -rw ~/Maja/Projects/notes/index.wiki | fzf -e | sed "s/:/\n/" | tee /dev/tty | tail -1 | grep -Po "(?<=\`).*(?=\`)" | xclip -i -sel clip'
+alias oneliner='grep "(\*)" -rw ~/Maja/Projects/notes/index.wiki | fzf -e | sed "s/:/\n/" | tee /dev/tty | tail -1 | grep -Po "(?<=\`).*(?=\`)" | xclip -i -sel clip &> /dev/null'
 
 . "/usr/share/fzf/completion.zsh"
 . "/usr/share/fzf/key-bindings.zsh"
