@@ -113,6 +113,8 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 
+nnoremap <leader>html :-1read $HOME/.config/nvim/.skeleton.html<CR>:set filetype=html<CR>3jf>a
+
 let g:vimwiki_ext2syntax    = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 let wiki_personal           = {}
 let wiki_personal.path 		= system('printf "%s" "$ONEDRIVE" "/Projects/notes"')
