@@ -34,7 +34,7 @@ filetype plugin indent on
 let mapleader=","
 let maplocalleader=';'
 syntax on
-colorscheme gruvbox
+colorscheme PaperColor " gruvbox is good, too
 set clipboard+=unnamedplus " system clipboard
 set spelllang=en_ca
 set ruler
@@ -57,6 +57,11 @@ set statusline+=\ %F 	"full path
 set statusline+=\ ----
 set statusline+=\ %l/%L "line/out of
 set statusline+=\ [%n] 	"buffer #
+
+"autocmd FileType set markdown setlocal shiftwidth=2 softtabstop=2 expandtab
+"autocmd FileType set python setlocal shiftwidth=2 softtabstop=2 expandtab
+"autocmd FileType set go setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
+autocmd FileType c,cpp set cindent expandtab shiftwidth=4 softtabstop=4 tabstop=4
 
 map <C-n> :vnew<CR>
 
@@ -107,11 +112,6 @@ endfun
 
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-"autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
-"autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
-"autocmd FileType go setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
-
-set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 
 nnoremap <leader>html :-1read $HOME/.config/nvim/.skeleton.html<CR>:set filetype=html<CR>3jf>a
 

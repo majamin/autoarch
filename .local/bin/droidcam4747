@@ -18,7 +18,7 @@ adb kill-server && adb start-server
 if [[ $(adb devices | wc -l ) = 3 ]]; then
 	notify-send "adb reports connection to a device"
 	droidcam-cli -v adb 4747 &
-	ffplay -vf "vflip,hflip" $DEVICE \
+	ffplay -autoexit -vf "vflip,hflip" $DEVICE \
 
 	ffmpeg "$DEVICE" \
 		-f v4l2 -vcodec libx264\
