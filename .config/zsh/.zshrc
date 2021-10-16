@@ -27,10 +27,14 @@ zstyle :compinstall filename '~/.config/zsh/.zshrc'
 
 autoload -Uz compinit
 autoload edit-command-line; zle -N edit-command-line
+autoload -U colors && colors
 
 compinit
 
-PROMPT="${STY}-> "
+#PROMPT="${STY} %~ -> "
+#PS1="${STY}%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[yellow]%}%(5~|%-1~/.../%3~|%4~) %{$reset_color%}%-> "
+PS1="${STY}%F{55}%n@%m%F{141} (%1d)%F{reset} -> "
+
 setopt globdots
 bindkey '^e' edit-command-line
 bindkey '^ ' forward-char

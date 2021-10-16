@@ -58,6 +58,11 @@ set statusline+=\ ----
 set statusline+=\ %l/%L "line/out of
 set statusline+=\ [%n] 	"buffer #
 
+"autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
+"autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
+"autocmd FileType go setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
+autocmd FileType c,cpp setlocal cindent expandtab shiftwidth=4 softtabstop=4 tabstop=4
+
 map <C-n> :vnew<CR>
 
 map <F11> :bn<CR>
@@ -86,6 +91,7 @@ tnoremap <Esc><Esc> <C-\><C-n>
 inoremap <F12> <C-r>=system("date +'\%F' \| tr '\n' ' '")<CR>
 inoremap <F24> <C-r>=system("date +'\%F \%T \%Z' \| tr '\n' ' '")<CR>
 
+" look for visual selection
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 let g:surround_{char2nr('-')} = "\1start: \1\r\2end: \2"
@@ -97,6 +103,9 @@ map <leader>i :r !find . -maxdepth 3 -print \| file -if - \| grep "image/" \| aw
 " Save file as sudo on files that require root permission
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
+vnoremap ( <esc>`>a)<esc>`<i(<esc>
+vnoremap [ <esc>`>a]<esc>`<i[<esc>
+
 " Automatically deletes all trailing whitespace and newlines at end of file on save.
 function! <SID>StripTrailingWhitespaces()
     let l = line(".")
@@ -106,12 +115,6 @@ function! <SID>StripTrailingWhitespaces()
 endfun
 
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-
-"autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
-"autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
-"autocmd FileType go setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
-
-set tabstop=4 softtabstop=0 expandtab shiftwidth=2 smarttab
 
 nnoremap <leader>html :-1read $HOME/.config/nvim/.skeleton.html<CR>:set filetype=html<CR>3jf>a
 
