@@ -118,11 +118,17 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 nnoremap <leader>html :-1read $HOME/.config/nvim/.skeleton.html<CR>:set filetype=html<CR>3jf>a
 
-let g:vimwiki_ext2syntax    = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-let wiki_personal           = {}
-let wiki_personal.path 		= system('printf "%s" "$ONEDRIVE" "/Projects/notes"')
-let wiki_personal.path_html	= system('printf "%s" "$ONEDRIVE" "/Projects/notes/html"')
-let g:vimwiki_list 		    = [wiki_personal]
+let g:vimwiki_ext2syntax     = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+let wiki_personal            = {}
+let wiki_personal.path       = system('printf "%s" "$ONEDRIVE" "/Projects/notes"')
+let wiki_personal.path_html  = system('printf "%s" "$ONEDRIVE" "/Projects/notes/html"')
+let wiki_oneliners           = {}
+let wiki_oneliners.path      = system('printf "%s" "$ONEDRIVE" "/Projects/oneliners.txt"')
+let wiki_oneliners.path_html = system('printf "%s" "$ONEDRIVE" "/Projects/oneliners.txt/html"')
+let wiki_oneliners.index     = 'oneliners'
+let wiki_oneliners.ext       = 'txt'
+
+let g:vimwiki_list           = [wiki_personal, wiki_oneliners]
 
 let g:slime_no_mappings = 1
 autocmd FileType python xmap <Space> <Plug>SlimeRegionSend
