@@ -14,35 +14,35 @@ endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 Plug 'tpope/vim-surround'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'rafi/awesome-vim-colorschemes'
+Plug 'hzchirs/vim-material'
 Plug 'vimwiki/vimwiki'
-Plug 'jalvesaq/Nvim-R' " a plugin for R
-Plug 'ap/vim-css-color' "previews colors for convenience
+Plug 'jalvesaq/Nvim-R'
+Plug 'ap/vim-css-color'
 Plug 'jpalardy/vim-slime'
+Plug 'mhinz/vim-startify'
+Plug 'airblade/vim-rooter'
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
-"                           _   _       _
-"   ___  ___ ___  ___ _ __ | |_(_) __ _| |___
-"  / _ \/ __/ __|/ _ \ '_ \| __| |/ _` | / __|
-" |  __/\__ \__ \  __/ | | | |_| | (_| | \__ \
-"  \___||___/___/\___|_| |_|\__|_|\__,_|_|___/
-"
-
+syntax on
 filetype plugin indent on
+
 let mapleader=","
 let maplocalleader=';'
-syntax on
-colorscheme PaperColor " gruvbox is good, too
-set clipboard+=unnamedplus " system clipboard
+
+set termguicolors
+let g:material_style = 'oceanic'
+colorscheme vim-material
+
+set title
+set clipboard+=unnamedplus
 set spelllang=en_ca
-set ruler
+"set ruler
 set nowrap
 set nonumber
 set scrolloff=9
 set showmode
-set nohlsearch
+"set nohlsearch
 set history=50
 set incsearch
 set autochdir
@@ -51,41 +51,115 @@ set hidden
 set splitbelow splitright
 
 set statusline=
-set statusline+=\ %M 	"modified?
-set statusline+=\ %F 	"full path
-"set statusline+=%=
-set statusline+=\ ----
-set statusline+=\ %l/%L "line/out of
-set statusline+=\ [%n] 	"buffer #
+set statusline +=%5*\ %n\ %*            "buffer number
+set statusline +=%1*%{&ff}%*            "file format
+set statusline +=%2*%y%*                "file type
+set statusline +=%1*\ %<%F%*            "full path
+set statusline +=%1*\ %*%5*%m%*                "modified flag
+" set statusline +=%2*\ \[%{v:register}]
+set statusline +=%1*%=%5l%*             "current line
+set statusline +=%2*/%L%*               "total lines
+set statusline +=%1*%4v\ %*             "virtual column number
+set statusline +=%2*0x%04B\ %*          "character under cursor
+
+hi User1 guifg=#eea040 guibg=#442244
+hi User2 guifg=#ff3366 guibg=#442244
+hi User3 guifg=#ff66ff guibg=#442244
+hi User4 guifg=#a0ee40 guibg=#442244
+hi User5 guifg=#eeee40 guibg=#442244
 
 "autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType go setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType c,cpp setlocal cindent expandtab shiftwidth=4 softtabstop=4 tabstop=4
+autocmd FileType javascript,html setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
 
+"" startify
+
+let g:startify_lists = [
+      \ { 'type': 'files',     'header': ['   MRU']            },
+      \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
+
+let g:startify_padding_left = 10
+let g:startify_session_persistence = 1
+let g:startify_enable_special = 0
+let g:startify_change_to_vcs_root = 1
+let g:startify_session_autoload = 1
+
+let  g:startify_bookmarks =  [
+    \ {'c': '~/.config' },
+    \ {'p': '~/Maja/Projects' },
+    \ {'m': '~/Maja/mss' }
+    \ ]
+
+let g:startify_commands = [
+    \ {'ch':  ['Health Check', ':checkhealth']},
+    \ {'ps': ['Plugins status', ':PlugStatus']},
+    \ {'pu': ['Update vim plugins',':PlugUpdate | PlugUpgrade']},
+    \ {'uc': ['Update coc Plugins', ':CocUpdate']},
+    \ {'h':  ['Help', ':help']},
+    \ ]
+
+"" FZF
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
+let g:fzf_tags_command = 'ctags -R'
+
+let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
+let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
+
+" show mapping on all modes with F1
+nmap <F1> <plug>(fzf-maps-n)
+imap <F1> <plug>(fzf-maps-i)
+vmap <F1> <plug>(fzf-maps-x)
+
+map <F2> :Startify <CR>
+
+nmap <Tab> :bnext<CR>
+nmap <S-Tab> :bprevious<CR>
 map <C-n> :vnew<CR>
-
-map <F11> :bn<CR>
-map <F10> :bp<CR>
-
-" jump to the beginning and end of a line
 nnoremap <S-h> ^
 nnoremap <S-l> $
-
-" Simple window navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-
-" Resize quickly
 map <Up> :resize +2<CR>
 map <Down> :resize -2<CR>
 map <Left> :vertical resize -2<CR>
 map <Right> :vertical resize +2<CR>
-
-" quick terminal escape
 tnoremap <Esc><Esc> <C-\><C-n>
+
+nnoremap <silent> <leader>f :Files<CR>
+nmap <leader>b :Buffers<CR>
+nmap <leader>c :Commands<CR>
+nmap <leader>t :BTags<CR>
+nmap <leader>/ :Rg<CR>
+nmap <leader>gc :Commits<CR>
+nmap <leader>gs :GFiles?<CR>
+nmap <leader>sh :History/<CR>
+
+" show mapping on all modes with F1
+nmap <F1> <plug>(fzf-maps-n)
+imap <F1> <plug>(fzf-maps-i)
+vmap <F1> <plug>(fzf-maps-x)
+
+" Yank-Append to register A
+nnoremap <leader>Y "Ayy
+" Delete-Append to register A
+nnoremap <leader>D "Add
+" Put from register A
+nnoremap <leader>P "Ap
+" Clear register A
+nnoremap <leader>C :call setreg("a", [])<CR>
 
 " In insert mode, F12 to insert date and <S-F12> for a datetime
 inoremap <F12> <C-r>=system("date +'\%F' \| tr '\n' ' '")<CR>
@@ -105,6 +179,7 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 vnoremap ( <esc>`>a)<esc>`<i(<esc>
 vnoremap [ <esc>`>a]<esc>`<i[<esc>
+vnoremap { <esc>`>a}<esc>`<i{<esc>
 
 " Automatically deletes all trailing whitespace and newlines at end of file on save.
 function! <SID>StripTrailingWhitespaces()
@@ -116,8 +191,11 @@ endfun
 
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
+nnoremap <leader>ttoc :-1read $HOME/.config/nvim/.skeleton.ttoc<CR>:set filetype=asciidoc<CR>3jf>a
 nnoremap <leader>html :-1read $HOME/.config/nvim/.skeleton.html<CR>:set filetype=html<CR>3jf>a
+nnoremap <leader>ccp  :-1read $HOME/.config/nvim/.skeleton.cpp<CR>:set filetype=cpp<CR>3jf>a
 
+let g:vimwiki_global_ext = 0  " don't vimwiki every goddamn md file, please
 let g:vimwiki_ext2syntax     = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 let wiki_personal            = {}
 let wiki_personal.path       = system('printf "%s" "$ONEDRIVE" "/Projects/notes"')
@@ -148,34 +226,17 @@ let rout_follow_colorscheme = 1 "ORIGINAL
 let r_syntax_folding = 1
 set nofoldenable
 
-"Goyo
+"let g:limelight_conceal_ctermfg = 'gray'
+"let g:limelight_conceal_ctermfg = 240
 
-function! s:goyo_enter()
-  if executable('tmux') && strlen($TMUX)
-    silent !tmux set status off
-    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  endif
-  set noshowmode
-  set noshowcmd
-  set scrolloff=999
-  Limelight
-  " ...
-endfunction
+" startify if no passed argument or all buffers are closed
+augroup noargs
+    " startify when there is no open buffer left
+    autocmd BufDelete * if empty(filter(tabpagebuflist(), '!buflisted(v:val)')) | Startify | endif
 
-function! s:goyo_leave()
-  if executable('tmux') && strlen($TMUX)
-    silent !tmux set status on
-    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  endif
-  set showmode
-  set showcmd
-  set scrolloff=5
-  Limelight!
-  " ...
-endfunction
+    " open startify on start if no argument was passed
+    autocmd VimEnter * if argc() == 0 | Startify | endif
+augroup END
 
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
+let g:rooter_change_directory_for_non_project_files = 'current'
 
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_ctermfg = 240
