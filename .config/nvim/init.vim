@@ -20,8 +20,8 @@ Plug 'jalvesaq/Nvim-R'
 Plug 'ap/vim-css-color'
 Plug 'jpalardy/vim-slime'
 Plug 'mhinz/vim-startify'
-Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf.vim'
+Plug 'preservim/nerdtree'
 call plug#end()
 
 syntax on
@@ -68,6 +68,10 @@ hi User3 guifg=#ff66ff guibg=#442244
 hi User4 guifg=#a0ee40 guibg=#442244
 hi User5 guifg=#eeee40 guibg=#442244
 
+hi ActiveWindow guibg=#17152c
+hi InactiveWindow guibg=#0C0B22
+set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
+
 "autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType go setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
@@ -76,12 +80,21 @@ autocmd FileType javascript,html setlocal expandtab shiftwidth=2 softtabstop=2 t
 
 "" startify
 
+" list most recent directories visited
+" https://github.com/mhinz/vim-startify/issues/429
+function! s:mru_dirs()
+  " get 5 most recently used working directories
+  let dirs = uniq(map(copy(v:oldfiles), 'fnamemodify(v:val, ":h")'))[:4]
+  return map(dirs, '{"line": fnamemodify(v:val, ":."), "path": v:val}')
+endfunction
+
 let g:startify_lists = [
-      \ { 'type': 'files',     'header': ['   MRU']            },
-      \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-      \ { 'type': 'sessions',  'header': ['   Sessions']       },
-      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-      \ { 'type': 'commands',  'header': ['   Commands']       },
+	\ { 'type': function('s:mru_dirs'),'header': ['   MRU dirs']       },
+	\ { 'type': 'files',               'header': ['   MRU']            },
+	\ { 'type': 'dir',                 'header': ['   MRU '. getcwd()] },
+	\ { 'type': 'sessions',            'header': ['   Sessions']       },
+	\ { 'type': 'bookmarks',           'header': ['   Bookmarks']      },
+	\ { 'type': 'commands',            'header': ['   Commands']       },
       \ ]
 
 let g:startify_padding_left = 10
@@ -93,7 +106,7 @@ let g:startify_session_autoload = 1
 let  g:startify_bookmarks =  [
     \ {'c': '~/.config' },
     \ {'p': '~/Maja/Projects' },
-    \ {'m': '~/Maja/mss' }
+    \ {'': '~/Maja/mss' }
     \ ]
 
 let g:startify_commands = [
@@ -121,8 +134,10 @@ nmap <F1> <plug>(fzf-maps-n)
 imap <F1> <plug>(fzf-maps-i)
 vmap <F1> <plug>(fzf-maps-x)
 
+map <F3> :NERDTreeToggle <CR>
 map <F2> :Startify <CR>
 
+" Tab, Windows, and Buffers
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
 map <C-n> :vnew<CR>
@@ -138,9 +153,9 @@ map <Left> :vertical resize -2<CR>
 map <Right> :vertical resize +2<CR>
 tnoremap <Esc><Esc> <C-\><C-n>
 
+" FZF
 nnoremap <silent> <leader>f :Files<CR>
 nmap <leader>b :Buffers<CR>
-nmap <leader>c :Commands<CR>
 nmap <leader>t :BTags<CR>
 nmap <leader>/ :Rg<CR>
 nmap <leader>gc :Commits<CR>
@@ -152,14 +167,27 @@ nmap <F1> <plug>(fzf-maps-n)
 imap <F1> <plug>(fzf-maps-i)
 vmap <F1> <plug>(fzf-maps-x)
 
-" Yank-Append to register A
-nnoremap <leader>Y "Ayy
-" Delete-Append to register A
-nnoremap <leader>D "Add
+" plus is add (teehee)
+nnoremap <leader>d "Add
+vnoremap <leader>d "Add<ESC>
 " Put from register A
-nnoremap <leader>P "Ap
+nnoremap <leader>p "Ap
+vnoremap <leader>p "Ap
 " Clear register A
-nnoremap <leader>C :call setreg("a", [])<CR>
+vnoremap <leader>d "Add<ESC>
+nnoremap <leader>c :call setreg("a", [])<CR>
+
+" stop highlighting search results with ESC
+nnoremap <silent> <ESC> :noh<CR>
+
+" make line joins and jumps more natural
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" move lines in visual mode
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 " In insert mode, F12 to insert date and <S-F12> for a datetime
 inoremap <F12> <C-r>=system("date +'\%F' \| tr '\n' ' '")<CR>
