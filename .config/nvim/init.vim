@@ -257,14 +257,5 @@ set nofoldenable
 "let g:limelight_conceal_ctermfg = 'gray'
 "let g:limelight_conceal_ctermfg = 240
 
-" startify if no passed argument or all buffers are closed
-augroup noargs
-    " startify when there is no open buffer left
-    autocmd BufDelete * if empty(filter(tabpagebuflist(), '!buflisted(v:val)')) | Startify | endif
-
-    " open startify on start if no argument was passed
-    autocmd VimEnter * if argc() == 0 | Startify | endif
-augroup END
-
 let g:rooter_change_directory_for_non_project_files = 'current'
 

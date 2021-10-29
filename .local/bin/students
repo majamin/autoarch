@@ -10,7 +10,7 @@ MAINSEL=$(echo -e "Care Package\\nStudent\\nTeacher\\nClass" | dmenu -i -l 20)
 
 case $MAINSEL in
 	'Care Package')
-		CPCHOICE=$(find ${HOME}/Maja/_data/ed/myed/staff/2021/minar_marian -name "*html" | dmenu -i -l 20)
+		CPCHOICE=$(find ${HOME}/Maja/_data/ed/myed/staff/2021 -name "*html" | dmenu -i -l 20)
 		brave "$CPCHOICE" ;;
 	Student) STUDENT=$(selcol 1 "student")
 	         cat "$FILE" | grep "$STUDENT" | sort -t";" -k4 ;;

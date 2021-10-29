@@ -1,3 +1,7 @@
+/*
+ * This is a cpp skeleton file - it shows the basics
+ */
+
 #include <iostream>
 #include <cmath>
 using namespace std;
