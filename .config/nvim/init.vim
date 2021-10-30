@@ -110,7 +110,7 @@ map <F2> :Startify <CR>
 
 " Use FZF (and rg) to find files from the project root (identified by git root)
 function! s:find_git_root()
-  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+  return system('git rev-parse --path-format=relative --show-toplevel 2> /dev/null')[:-2]
 endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 
