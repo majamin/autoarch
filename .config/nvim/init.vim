@@ -127,13 +127,13 @@ endfunction
 command! -nargs=* -bang GrepProjectFiles call RipgrepFzf(<q-args>, <bang>0)
 
 "nnoremap <silent> <leader>f :Files<CR>
-nnoremap <silent> <leader>F :ProjectFiles<CR>
-nnoremap <silent> <leader>G :GrepProjectFiles<CR>
+nnoremap <silent> <leader>f :ProjectFiles<CR>
+nnoremap <silent> <leader>g :GrepProjectFiles<CR>
 nmap <leader>b :Buffers<CR>
 nmap <leader>t :BTags<CR>
 nmap <leader>/ :RG<CR>
-nmap <leader>gc :Commits<CR>
-nmap <leader>gf :GFiles?<CR>
+nmap <leader>c :Commits<CR>
+nmap <leader>F :GFiles?<CR>
 nmap <leader>h :History/<CR>
 
 " show mapping on all modes with F1
