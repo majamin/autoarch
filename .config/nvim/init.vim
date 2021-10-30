@@ -45,6 +45,7 @@ set showmode
 "set nohlsearch
 set history=50
 set incsearch
+set nowrapscan
 set autochdir
 set noswapfile
 set hidden
@@ -189,6 +190,9 @@ endfun
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 "------------------------------------------------------------------------------
+let g:startify_custom_header =
+    \ startify#pad(split(system('cat ~/.local/share/jokes.txt | shuf -n1 | fold -s -w30'), '\n'))
+
 " list most recent directories visited
 " https://github.com/mhinz/vim-startify/issues/429
 function! s:mru_dirs()
