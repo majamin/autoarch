@@ -78,8 +78,117 @@ set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
 autocmd FileType c,cpp setlocal cindent expandtab shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType javascript,html setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
 
-"" startify
+"------------------------------------------------------------------------------
 
+nmap <Tab> :bnext<CR>
+nmap <S-Tab> :bprevious<CR>
+map <C-n> :vnew<CR>
+nnoremap <S-h> ^
+nnoremap <S-l> $
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <Up> :resize +2<CR>
+map <Down> :resize -2<CR>
+map <Left> :vertical resize -2<CR>
+map <Right> :vertical resize +2<CR>
+tnoremap <Esc><Esc> <C-\><C-n>
+
+" Save file as sudo on files that require root permission
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" make line joins and jumps more natural
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" quit highlighting search results with ESC
+nnoremap <silent> <ESC> :noh<CR>
+
+map <F2> :Startify <CR>
+
+" Use FZF (and rg) to find files from the project root (identified by git root)
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+command! ProjectFiles execute 'Files' s:find_git_root()
+
+" Grep inside project files (
+function! RipgrepFzf(query, fullscreen)
+let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s %s || true'
+"let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+let initial_command = printf(command_fmt, shellescape(a:query), s:find_git_root())
+let reload_command = printf(command_fmt, '{q}', s:find_git_root())
+let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang GrepProjectFiles call RipgrepFzf(<q-args>, <bang>0)
+
+"nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>F :ProjectFiles<CR>
+nnoremap <silent> <leader>G :GrepProjectFiles<CR>
+nmap <leader>b :Buffers<CR>
+nmap <leader>t :BTags<CR>
+nmap <leader>/ :RG<CR>
+nmap <leader>gc :Commits<CR>
+nmap <leader>gf :GFiles?<CR>
+nmap <leader>h :History/<CR>
+
+" show mapping on all modes with F1
+nmap <F1> <plug>(fzf-maps-n)
+imap <F1> <plug>(fzf-maps-i)
+vmap <F1> <plug>(fzf-maps-x)
+
+" Add to buffer
+nnoremap <leader>d "Add
+vnoremap <leader>d "Add<ESC>
+" Put from buffer
+nnoremap <leader>p "Ap
+vnoremap <leader>p "Ap
+" Clear buffer
+vnoremap <leader>d "Add<ESC>
+nnoremap <leader>c :call setreg("a", [])<CR>
+
+" move lines in visual mode
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" In insert mode, F12 to insert date and <S-F12> for a datetime
+inoremap <F12> <C-r>=system("date +'\%F' \| tr '\n' ' '")<CR>
+inoremap <F24> <C-r>=system("date +'\%F \%T \%Z' \| tr '\n' ' '")<CR>
+
+" look for visual selection
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+let g:surround_{char2nr('-')} = "\1start: \1\r\2end: \2"
+
+" paste image paths found in working directory and up to sub-sub directories
+" DEPS: sxiv, xclip
+map <leader>i :r !find . -maxdepth 3 -print \| file -if - \| grep "image/" \| awk -F: '{print $1}' \| xargs sxiv -qto 2> /dev/null <CR><CR>
+
+" Surround a visual selection
+vnoremap ( <esc>`>a)<esc>`<i(<esc>
+vnoremap [ <esc>`>a]<esc>`<i[<esc>
+vnoremap { <esc>`>a}<esc>`<i{<esc>
+
+" Skeleton files
+nnoremap <leader>ttoc :-1read $HOME/.config/nvim/.skeleton.ttoc<CR>:set filetype=asciidoc<CR>3jf>a
+nnoremap <leader>html :-1read $HOME/.config/nvim/.skeleton.html<CR>:set filetype=html<CR>3jf>a
+nnoremap <leader>cpp  :-1read $HOME/.config/nvim/.skeleton.cpp<CR>:set filetype=cpp<CR>3jf>a
+
+" Automatically deletes all trailing whitespace and newlines at end of file on save.
+function! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+"------------------------------------------------------------------------------
 " list most recent directories visited
 " https://github.com/mhinz/vim-startify/issues/429
 function! s:mru_dirs()
@@ -117,7 +226,7 @@ let g:startify_commands = [
     \ {'h':  ['Help', ':help']},
     \ ]
 
-"" FZF
+"------------------------------------------------------------------------------
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
@@ -129,100 +238,8 @@ let g:fzf_tags_command = 'ctags -R'
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
 
-" show mapping on all modes with F1
-nmap <F1> <plug>(fzf-maps-n)
-imap <F1> <plug>(fzf-maps-i)
-vmap <F1> <plug>(fzf-maps-x)
 
-map <F3> :NERDTreeToggle <CR>
-map <F2> :Startify <CR>
-
-" Tab, Windows, and Buffers
-nmap <Tab> :bnext<CR>
-nmap <S-Tab> :bprevious<CR>
-map <C-n> :vnew<CR>
-nnoremap <S-h> ^
-nnoremap <S-l> $
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-map <Up> :resize +2<CR>
-map <Down> :resize -2<CR>
-map <Left> :vertical resize -2<CR>
-map <Right> :vertical resize +2<CR>
-tnoremap <Esc><Esc> <C-\><C-n>
-
-" FZF
-nnoremap <silent> <leader>f :Files<CR>
-nmap <leader>b :Buffers<CR>
-nmap <leader>t :BTags<CR>
-nmap <leader>/ :Rg<CR>
-nmap <leader>gc :Commits<CR>
-nmap <leader>gs :GFiles?<CR>
-nmap <leader>sh :History/<CR>
-
-" show mapping on all modes with F1
-nmap <F1> <plug>(fzf-maps-n)
-imap <F1> <plug>(fzf-maps-i)
-vmap <F1> <plug>(fzf-maps-x)
-
-" plus is add (teehee)
-nnoremap <leader>d "Add
-vnoremap <leader>d "Add<ESC>
-" Put from register A
-nnoremap <leader>p "Ap
-vnoremap <leader>p "Ap
-" Clear register A
-vnoremap <leader>d "Add<ESC>
-nnoremap <leader>c :call setreg("a", [])<CR>
-
-" stop highlighting search results with ESC
-nnoremap <silent> <ESC> :noh<CR>
-
-" make line joins and jumps more natural
-nnoremap n nzzzv
-nnoremap N Nzzzv
-nnoremap J mzJ`z
-
-" move lines in visual mode
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
-" In insert mode, F12 to insert date and <S-F12> for a datetime
-inoremap <F12> <C-r>=system("date +'\%F' \| tr '\n' ' '")<CR>
-inoremap <F24> <C-r>=system("date +'\%F \%T \%Z' \| tr '\n' ' '")<CR>
-
-" look for visual selection
-vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-
-let g:surround_{char2nr('-')} = "\1start: \1\r\2end: \2"
-
-" paste image paths found in working directory and up to sub-sub directories
-" DEPS: sxiv, xclip
-map <leader>i :r !find . -maxdepth 3 -print \| file -if - \| grep "image/" \| awk -F: '{print $1}' \| xargs sxiv -qto 2> /dev/null <CR><CR>
-
-" Save file as sudo on files that require root permission
-cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-
-vnoremap ( <esc>`>a)<esc>`<i(<esc>
-vnoremap [ <esc>`>a]<esc>`<i[<esc>
-vnoremap { <esc>`>a}<esc>`<i{<esc>
-
-" Automatically deletes all trailing whitespace and newlines at end of file on save.
-function! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
-endfun
-
-autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-
-nnoremap <leader>ttoc :-1read $HOME/.config/nvim/.skeleton.ttoc<CR>:set filetype=asciidoc<CR>3jf>a
-nnoremap <leader>html :-1read $HOME/.config/nvim/.skeleton.html<CR>:set filetype=html<CR>3jf>a
-nnoremap <leader>ccp  :-1read $HOME/.config/nvim/.skeleton.cpp<CR>:set filetype=cpp<CR>3jf>a
-
+"------------------------------------------------------------------------------
 let g:vimwiki_global_ext = 0  " don't vimwiki every goddamn md file, please
 let g:vimwiki_ext2syntax     = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 let wiki_personal            = {}
@@ -236,11 +253,13 @@ let wiki_oneliners.ext       = 'txt'
 
 let g:vimwiki_list           = [wiki_personal, wiki_oneliners]
 
+"------------------------------------------------------------------------------
 let g:slime_no_mappings = 1
 autocmd FileType python xmap <Space> <Plug>SlimeRegionSend
 autocmd FileType python nmap <Space> <Plug>SlimeParagraphSend
 nmap <C-c>v <Plug>SlimeConfig
 
+"------------------------------------------------------------------------------
 let R_assign = 0
 let r_indent_align_args = 0
 autocmd FileType r setlocal ts=2
@@ -253,9 +272,4 @@ nmap <Space> <Plug>RDSendLine
 let rout_follow_colorscheme = 1 "ORIGINAL
 let r_syntax_folding = 1
 set nofoldenable
-
-"let g:limelight_conceal_ctermfg = 'gray'
-"let g:limelight_conceal_ctermfg = 240
-
-let g:rooter_change_directory_for_non_project_files = 'current'
 
