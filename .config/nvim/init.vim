@@ -124,12 +124,10 @@ call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
 command! -nargs=* -bang GrepProjectFiles call RipgrepFzf(<q-args>, <bang>0, s:find_git_root())
-command! -nargs=* -bang GrepPythonHelpFiles call RipgrepFzf(<q-args>, <bang>0, "$HOME/Maja/Projects/python-examples-geekcomputers/")
 
 "nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>f :ProjectFiles<CR>
 nnoremap <silent> <leader>g :GrepProjectFiles<CR>
-nnoremap <silent> <leader>hp :GrepPythonHelpFiles<CR>
 
 nmap <leader>b :Buffers<CR>
 nmap <leader>t :BTags<CR>
@@ -240,7 +238,7 @@ let g:fzf_action = {
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 let g:fzf_tags_command = 'ctags -R'
 
-let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
+let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --delimiter "Maja" --with-nth 1'
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
 
 
