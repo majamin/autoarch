@@ -116,7 +116,7 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 
 " Grep inside project files (
 function! RipgrepFzf(query, fullscreen, reladir)
-let command_fmt = 'rg --hidden --column --line-number --no-heading --color=always --smart-case -- %s %s'
+let command_fmt = "rg --hidden --glob '!{.git,node_modules,build,.idea}' --column --line-number --no-heading --color=always --smart-case -- %s %s"
 let initial_command = printf(command_fmt, shellescape(a:query), a:reladir)
 let reload_command = printf(command_fmt, '{q}', a:reladir)
 let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
@@ -125,7 +125,6 @@ endfunction
 
 command! -nargs=* -bang GrepProjectFiles call RipgrepFzf(<q-args>, <bang>0, s:find_git_root())
 
-"nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>f :ProjectFiles<CR>
 nnoremap <silent> <leader>g :GrepProjectFiles<CR>
 
@@ -238,8 +237,8 @@ let g:fzf_action = {
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 let g:fzf_tags_command = 'ctags -R'
 
-let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info --delimiter "Maja" --with-nth 1'
-let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
+let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
+let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git' --glob '!build' --glob '!.dart_tool' --glob '!.idea' --glob '!node_modules'"
 
 
 "------------------------------------------------------------------------------
