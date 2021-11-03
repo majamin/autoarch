@@ -38,6 +38,7 @@ PS1="${STY}%F{150}%n@%m%F{141} (%1d)%F{reset} -> "
 setopt globdots
 bindkey '^e' edit-command-line
 bindkey '^ ' forward-char
+bindkey -s '^o' 'oneliner\n'
 
 export KEYTIMEOUT=1
 
@@ -68,3 +69,24 @@ alias oneliner='print -z $(grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.
 . "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 . "/usr/share/LS_COLORS/dircolors.sh"
 . "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# change directory to chosen file
+cdf () {
+	thefile=$(rg -j0 --hidden --no-messages --smart-case --files -g '!{.git,node_modules,build,.idea,.npm,.cache,.bundle,cache}' . | fzf)
+	printf '%s\n\e[1;34m%-6s\e[m\n' "You are now in the same directory as" "$thefile"
+	cd $(dirname $thefile)
+}
+
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
+}
