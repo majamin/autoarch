@@ -73,6 +73,7 @@ alias oneliner='print -z $(grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.
 # change directory to chosen file
 cdf () {
 	thefile=$(rg -j0 --hidden --no-messages --smart-case --files -g '!{.git,node_modules,build,.idea,.npm,.cache,.bundle,cache}' . | fzf)
+	[[ -z $thefile ]] && return 1
 	printf '%s\n\e[1;34m%-6s\e[m\n' "You are now in the same directory as" "$thefile"
 	cd $(dirname $thefile)
 }
