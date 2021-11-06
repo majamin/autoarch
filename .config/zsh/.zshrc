@@ -33,6 +33,7 @@ autoload -U colors && colors
 
 PS1="${STY}%F{150}%n@%m%F{141} (%1d)%F{reset} -> "
 
+unsetopt BEEP
 setopt globdots
 bindkey '^e' edit-command-line
 bindkey '^ ' forward-char
