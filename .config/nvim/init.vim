@@ -30,7 +30,7 @@ let mapleader=","
 let maplocalleader=';'
 
 set termguicolors
-let g:material_style = 'oceanic'
+let g:material_style = 'palenight'
 colorscheme vim-material
 
 set title
@@ -67,10 +67,6 @@ hi User2 guifg=#ff3366 guibg=#442244
 hi User3 guifg=#ff66ff guibg=#442244
 hi User4 guifg=#a0ee40 guibg=#442244
 hi User5 guifg=#eeee40 guibg=#442244
-
-hi ActiveWindow guibg=#17152c
-hi InactiveWindow guibg=#0C0B22
-set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
 
 "autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab

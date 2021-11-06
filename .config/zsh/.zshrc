@@ -25,14 +25,10 @@ zstyle ':completion:*' substitute 1
 zstyle ':completion:*' use-cache on
 zstyle :compinstall filename '~/.config/zsh/.zshrc'
 
-autoload -Uz compinit
+autoload -Uz compinit && compinit
 autoload edit-command-line; zle -N edit-command-line
 autoload -U colors && colors
 
-compinit
-
-#PROMPT="${STY} %~ -> "
-#PS1="${STY}%{$fg[red]%}%n%{$reset_color%}@%{$fg[blue]%}%m %{$fg[yellow]%}%(5~|%-1~/.../%3~|%4~) %{$reset_color%}%-> "
 PS1="${STY}%F{150}%n@%m%F{141} (%1d)%F{reset} -> "
 
 setopt globdots
@@ -69,6 +65,16 @@ alias oneliner='print -z $(grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.
 . "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 . "/usr/share/LS_COLORS/dircolors.sh"
 . "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+#RG_PREFIX="rg --file --hidden --smart-case --glob '!{.git,node_modules,build,.idea}'"
+FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-messages"
+FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+FZF_DEFAULT_OPTS='
+--ansi
+--height 50%
+--color fg:15,fg+:15,bg+:239,hl+:108
+--color info:2,prompt:109,spinner:2,pointer:168,marker:168
+'
 
 # change directory to chosen file
 cdf () {
