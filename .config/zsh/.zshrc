@@ -23,7 +23,9 @@ zstyle ':completion:*' prompt '%e'
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' substitute 1
 zstyle ':completion:*' use-cache on
+zstyle ':completion:*:*:git:*' script ~/.config/zsh/git-completion.bash
 zstyle :compinstall filename '~/.config/zsh/.zshrc'
+fpath=(~/.config/zsh $fpath)
 
 autoload -Uz compinit && compinit
 autoload edit-command-line; zle -N edit-command-line
