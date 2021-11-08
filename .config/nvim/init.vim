@@ -13,6 +13,7 @@ if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autolo
 endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
+Plug 'neovim/nvim-lspconfig'
 Plug 'tpope/vim-surround'
 Plug 'hzchirs/vim-material'
 Plug 'vimwiki/vimwiki'
@@ -22,6 +23,10 @@ Plug 'jpalardy/vim-slime'
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf.vim'
 call plug#end()
+
+lua << EOF
+require'lspconfig'.pyright.setup{}
+EOF
 
 syntax on
 filetype plugin indent on
@@ -72,7 +77,7 @@ hi User5 guifg=#eeee40 guibg=#442244
 "autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType go setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType c,cpp setlocal cindent expandtab shiftwidth=4 softtabstop=4 tabstop=4
-autocmd FileType javascript,html setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
+autocmd FileType r,javascript,html setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
 
 "------------------------------------------------------------------------------
 
@@ -211,9 +216,8 @@ let g:startify_change_to_vcs_root = 1
 let g:startify_session_autoload = 1
 
 let  g:startify_bookmarks =  [
-    \ {'c': '~/.config' },
-    \ {'p': '~/Maja/Projects/python-examples-geekcomputers/' },
-    \ {'': '~/Maja/mss' }
+    \ {'p': '~/Maja/Projects' },
+    \ {'n': '~/Maja/Projects/newed/myed.R' },
     \ ]
 
 let g:startify_commands = [
@@ -260,8 +264,6 @@ nmap <C-c>v <Plug>SlimeConfig
 "------------------------------------------------------------------------------
 let R_assign = 0
 let r_indent_align_args = 0
-autocmd FileType r setlocal ts=2
-autocmd FileType r setlocal sw=2
 
 " Press the space bar to send lines and selection to R:
 vmap <Space> <Plug>RDSendSelection
