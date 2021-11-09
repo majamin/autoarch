@@ -31,6 +31,12 @@ autoload -Uz compinit && compinit
 autoload edit-command-line; zle -N edit-command-line
 autoload -U colors && colors
 
+if [ -f $HOME/.cache/wal/sequences ]; then
+	(cat ~/.cache/wal/sequences &)
+else
+	wal --theme sexy-kasugano &
+fi
+
 PS1="${STY}%F{150}%n@%m%F{141} (%1d)%F{reset} -> "
 
 unsetopt BEEP
