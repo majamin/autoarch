@@ -37,7 +37,7 @@ autoload -U colors && colors
 #	wal --theme sexy-kasugano &
 #fi
 
-PS1="${STY}%F{88}%n@%m%F{blue} (%1d)%F{reset} -> "
+PS1="${STY}%F{210}%n@%m%F{190} (%1d)%F{reset} -> "
 
 unsetopt BEEP
 setopt globdots
@@ -72,18 +72,17 @@ alias oneliner='print -z $(grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.
 . "/usr/share/fzf/completion.zsh"
 . "/usr/share/fzf/key-bindings.zsh"
 . "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-#. "/usr/share/LS_COLORS/dircolors.sh"
+. "/usr/share/LS_COLORS/dircolors.sh"
 . "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-#RG_PREFIX="rg --file --hidden --smart-case --glob '!{.git,node_modules,build,.idea}'"
-FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-messages"
+FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-messages --smart-case --glob '!{.git,node_modules,build,.idea}'"
 FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-#FZF_DEFAULT_OPTS='
-#--ansi
-#--height 50%
-#--color fg:15,fg+:15,bg+:239,hl+:108
-#--color info:2,prompt:109,spinner:2,pointer:168,marker:168
-#'
+FZF_DEFAULT_OPTS='
+--ansi
+--height 50%
+--color fg:15,fg+:15,bg+:239,hl+:108
+--color info:2,prompt:109,spinner:2,pointer:168,marker:168
+'
 
 # change directory to chosen file
 cdf () {
@@ -106,11 +105,3 @@ lfcd () {
         fi
     fi
 }
-
-[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/config/nvm"
-source /usr/share/nvm/nvm.sh
-source /usr/share/nvm/bash_completion
-
-NPM_PACKAGES="${HOME}/.local/share/.npm-packages"
-export PATH="$PATH:$NPM_PACKAGES/bin"
-export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
