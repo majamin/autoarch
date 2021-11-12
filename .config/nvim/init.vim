@@ -252,9 +252,11 @@ let g:vimwiki_list           = [wiki_personal, wiki_oneliners]
 
 "------------------------------------------------------------------------------
 let g:slime_no_mappings = 1
+let g:slime_python_ipython = 1
 autocmd FileType python xmap <Space> <Plug>SlimeRegionSend
 autocmd FileType python nmap <Space> <Plug>SlimeParagraphSend
 nmap <C-c>v <Plug>SlimeConfig
+let g:slime_target = "tmux"
 
 "------------------------------------------------------------------------------
 let R_assign = 0

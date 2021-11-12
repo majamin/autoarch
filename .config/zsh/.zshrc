@@ -73,7 +73,7 @@ alias oneliner='print -z $(grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.
 . "/usr/share/fzf/key-bindings.zsh"
 . "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 . "/usr/share/LS_COLORS/dircolors.sh"
-. "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+#. "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-messages --smart-case --glob '!{.git,node_modules,build,.idea}'"
 FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
