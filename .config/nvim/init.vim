@@ -15,13 +15,15 @@ endif
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
 Plug 'neovim/nvim-lspconfig'
 Plug 'tpope/vim-surround'
-Plug 'hzchirs/vim-material'
+Plug 'junegunn/fzf.vim'
 Plug 'vimwiki/vimwiki'
+Plug 'mhinz/vim-startify'
 Plug 'jalvesaq/Nvim-R'
 Plug 'ap/vim-css-color'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'chiendo97/intellij.vim'
 Plug 'jpalardy/vim-slime'
-Plug 'mhinz/vim-startify'
-Plug 'junegunn/fzf.vim'
 call plug#end()
 
 lua << EOF
@@ -35,9 +37,14 @@ let mapleader=","
 let maplocalleader=';'
 
 set termguicolors
-let g:material_style = 'palenight'
-colorscheme vim-material
+colorscheme intellij
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175
+hi CursorLine ctermbg=255 guibg=#F0E5AF
+autocmd BufEnter * set cursorline
+autocmd BufLeave * set nocursorline
 
+set cursorline
+set relativenumber
 set title
 set clipboard+=unnamedplus
 set spelllang=en_ca
@@ -55,29 +62,17 @@ set noswapfile
 set hidden
 set splitbelow splitright
 
-set statusline=
-set statusline +=%5*\ %n\ %*            "buffer number
-set statusline +=%1*%{&ff}%*            "file format
-set statusline +=%2*%y%*                "file type
-set statusline +=%1*\ %<%F%*            "full path
-set statusline +=%1*\ %*%5*%m%*                "modified flag
-" set statusline +=%2*\ \[%{v:register}]
-set statusline +=%1*%=%5l%*             "current line
-set statusline +=%2*/%L%*               "total lines
-set statusline +=%1*%4v\ %*             "virtual column number
-set statusline +=%2*0x%04B\ %*          "character under cursor
-
-hi User1 guifg=#eea040 guibg=#442244
-hi User2 guifg=#ff3366 guibg=#442244
-hi User3 guifg=#ff66ff guibg=#442244
-hi User4 guifg=#a0ee40 guibg=#442244
-hi User5 guifg=#eeee40 guibg=#442244
-
 "autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType go setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType c,cpp setlocal cindent expandtab shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType r,javascript,html setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
+
+
+"------------------------------------------------------------------------------
+
+let g:airline_theme='light'
+let g:airline#extensions#tabline#enabled = 1
 
 "------------------------------------------------------------------------------
 
@@ -111,17 +106,17 @@ map <F2> :Startify <CR>
 
 " Use FZF (and rg) to find files from the project root (identified by git root)
 function! s:find_git_root()
-  return system('git rev-parse --path-format=relative --show-toplevel 2> /dev/null')[:-2]
+	return system('git rev-parse --path-format=relative --show-toplevel 2> /dev/null')[:-2]
 endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 
 " Grep inside project files (
 function! RipgrepFzf(query, fullscreen, reladir)
-let command_fmt = "rg --hidden --glob '!{.git,node_modules,build,.idea}' --column --line-number --no-heading --color=always --smart-case -- %s %s"
-let initial_command = printf(command_fmt, shellescape(a:query), a:reladir)
-let reload_command = printf(command_fmt, '{q}', a:reladir)
-let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+	let command_fmt = "rg --hidden --glob '!{.git,node_modules,build,.idea}' --column --line-number --no-heading --color=always --smart-case -- %s %s"
+	let initial_command = printf(command_fmt, shellescape(a:query), a:reladir)
+	let reload_command = printf(command_fmt, '{q}', a:reladir)
+	let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+	call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
 command! -nargs=* -bang GrepProjectFiles call RipgrepFzf(<q-args>, <bang>0, s:find_git_root())
@@ -180,34 +175,34 @@ nnoremap <leader>cpp  :-1read $HOME/.config/nvim/.skeleton.cpp<CR>:set filetype=
 
 " Automatically deletes all trailing whitespace and newlines at end of file on save.
 function! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
+	let l = line(".")
+	let c = col(".")
+	%s/\s\+$//e
+	call cursor(l, c)
 endfun
 
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 "------------------------------------------------------------------------------
 let g:startify_custom_header =
-    \ startify#pad(split(system('cat ~/.local/share/jokes.txt | shuf -n1 | fold -s -w30'), '\n'))
+			\ startify#pad(split(system('cat ~/.local/share/jokes.txt | shuf -n1 | fold -s -w30'), '\n'))
 
 " list most recent directories visited
 " https://github.com/mhinz/vim-startify/issues/429
 function! s:mru_dirs()
-  " get 5 most recently used working directories
-  let dirs = uniq(map(copy(v:oldfiles), 'fnamemodify(v:val, ":h")'))[:4]
-  return map(dirs, '{"line": fnamemodify(v:val, ":."), "path": v:val}')
+	" get 5 most recently used working directories
+	let dirs = uniq(map(copy(v:oldfiles), 'fnamemodify(v:val, ":h")'))[:4]
+	return map(dirs, '{"line": fnamemodify(v:val, ":."), "path": v:val}')
 endfunction
 
 let g:startify_lists = [
-	\ { 'type': 'bookmarks',           'header': ['   Bookmarks']      },
-	\ { 'type': 'files',               'header': ['   Recent Files']   },
-	\ { 'type': 'dir',                 'header': ['   Current Dir']    },
-	\ { 'type': function('s:mru_dirs'),'header': ['   Directories']    },
-	\ { 'type': 'sessions',            'header': ['   Sessions']       },
-	\ { 'type': 'commands',            'header': ['   Commands']       },
-      \ ]
+			\ { 'type': 'bookmarks',           'header': ['   Bookmarks']      },
+			\ { 'type': 'files',               'header': ['   Recent Files']   },
+			\ { 'type': 'dir',                 'header': ['   Current Dir']    },
+			\ { 'type': function('s:mru_dirs'),'header': ['   Directories']    },
+			\ { 'type': 'sessions',            'header': ['   Sessions']       },
+			\ { 'type': 'commands',            'header': ['   Commands']       },
+			\ ]
 
 let g:startify_padding_left = 10
 let g:startify_session_persistence = 1
@@ -216,23 +211,23 @@ let g:startify_change_to_vcs_root = 1
 let g:startify_session_autoload = 1
 
 let  g:startify_bookmarks =  [
-    \ {'p': '~/Maja/Projects' },
-    \ {'n': '~/Maja/Projects/newed/myed.R' },
-    \ ]
+			\ {'p': '~/Maja/Projects' },
+			\ {'n': '~/Maja/Projects/newed/myed.R' },
+			\ ]
 
 let g:startify_commands = [
-    \ {'ch':  ['Health Check', ':checkhealth']},
-    \ {'ps': ['Plugins status', ':PlugStatus']},
-    \ {'pu': ['Update vim plugins',':PlugUpdate | PlugUpgrade']},
-    \ {'uc': ['Update coc Plugins', ':CocUpdate']},
-    \ {'h':  ['Help', ':help']},
-    \ ]
+			\ {'ch':  ['Health Check', ':checkhealth']},
+			\ {'ps': ['Plugins status', ':PlugStatus']},
+			\ {'pu': ['Update vim plugins',':PlugUpdate | PlugUpgrade']},
+			\ {'uc': ['Update coc Plugins', ':CocUpdate']},
+			\ {'h':  ['Help', ':help']},
+			\ ]
 
 "------------------------------------------------------------------------------
 let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
+			\ 'ctrl-t': 'tab split',
+			\ 'ctrl-x': 'split',
+			\ 'ctrl-v': 'vsplit' }
 
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' } }
 let g:fzf_tags_command = 'ctags -R'
