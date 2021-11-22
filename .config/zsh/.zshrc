@@ -49,15 +49,15 @@ export KEYTIMEOUT=1
 
 # Change cursor shape for different vi modes.
 function zle-keymap-select () {
-    case $KEYMAP in
-        vicmd) echo -ne '\e[1 q';;      # block
-        viins|main) echo -ne '\e[5 q';; # beam
-    esac
+case $KEYMAP in
+	vicmd) echo -ne '\e[1 q';;      # block
+	viins|main) echo -ne '\e[5 q';; # beam
+esac
 }
 zle -N zle-keymap-select
 zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-    echo -ne "\e[5 q"
+zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+echo -ne "\e[5 q"
 }
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
@@ -67,7 +67,7 @@ alias pacman="sudo pacman"
 alias ls="ls -hN --color=auto --group-directories-first"
 alias yt="youtube-dl --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/video.config\""
 alias yta="youtube-dl --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/audio.config\""
-alias oneliner='print -z $(grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.txt | fzf -e | grep -oP "(?<=: \`).*(?=\`$)")'
+alias oneliner='print -z -R -e $(grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.txt | fzf -e | grep -oP "(?<=: \`).*(?=\`$)")'
 
 . "/usr/share/fzf/completion.zsh"
 . "/usr/share/fzf/key-bindings.zsh"
@@ -75,14 +75,31 @@ alias oneliner='print -z $(grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.
 . "/usr/share/LS_COLORS/dircolors.sh"
 #. "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
-FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-messages --smart-case --glob '!{.git,node_modules,build,.idea}'"
-FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+#FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-messages --smart-case --glob '!{.git,node_modules,build,.idea}'"
+#FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 FZF_DEFAULT_OPTS='
 --ansi
+--border
+--layout=reverse
 --height 50%
 --color fg:15,fg+:15,bg+:239,hl+:108
 --color info:2,prompt:109,spinner:2,pointer:168,marker:168
 '
+
+# To use custom commands instead of find, override _fzf_compgen_{path,dir}
+_fzf_compgen_path() {
+	rg -j0 --files --hidden --glob '!{.git,node_modules,build,.idea}' --column --line-number --no-heading --smart-case
+	}
+
+_fzf_compgen_dir() {
+	rg -j0 --sort accessed --files --hidden --glob '!{.git,node_modules,build,.idea}' --column --line-number --no-heading --smart-case --null | xargs -0 dirname
+	}
+
+# requires fd
+f() {
+    sels=( "${(@f)$(fd -H -d1 "${@:2}"| fzf -m)}" )
+    test -n "$sels" && print -z -- "$1 ${sels[@]:q:q}"
+}
 
 # change directory to chosen file
 cdf () {
@@ -93,15 +110,15 @@ cdf () {
 }
 
 lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        if [ -d "$dir" ]; then
-            if [ "$dir" != "$(pwd)" ]; then
-                cd "$dir"
-            fi
-        fi
-    fi
+	tmp="$(mktemp)"
+	lf -last-dir-path="$tmp" "$@"
+	if [ -f "$tmp" ]; then
+		dir="$(cat "$tmp")"
+		rm -f "$tmp"
+		if [ -d "$dir" ]; then
+			if [ "$dir" != "$(pwd)" ]; then
+				cd "$dir"
+			fi
+		fi
+	fi
 }
