@@ -43,19 +43,26 @@ let maplocalleader=';'
 
 colorscheme intellij
 "set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175
-hi CursorLine ctermbg=255 guibg=#CEF781
+hi CursorLine ctermbg=255 guibg=#EDEBC9
 hi Search gui=bold,italic,undercurl guibg=NONE guifg=#FF1168
+hi HopNextKey   guifg=#FF073B
+hi HopNextKey2  guifg=#26C2FC
+hi HopNextKey1  guifg=#0D84B0
+hi HopUnmatched guifg=#CFD5E1
 autocmd BufEnter * set cursorline
 autocmd BufLeave * set nocursorline
 set completeopt=menu,menuone,noselect
-set termguicolors cursorline relativenumber title clipboard+=unnamedplus spelllang=en_ca nowrap nonumber scrolloff=9 noshowmode history=50 incsearch nowrapscan autochdir noswapfile hidden splitbelow splitright
+set termguicolors cursorline relativenumber title clipboard+=unnamedplus
+set spelllang=en_ca nowrap noshowmode history=50 incsearch
+set nowrapscan autochdir noswapfile hidden splitbelow splitright
 let g:airline_theme='light'
+let g:airline#extensions#tabline#enabled = 1
 
 "autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType go setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType c,cpp setlocal cindent expandtab shiftwidth=4 softtabstop=4 tabstop=4
-autocmd FileType r,javascript,html setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
+autocmd FileType r,javascript,html,css,scss setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
 
 lua <<EOF
   -- totally optional to use setup
@@ -91,10 +98,10 @@ map <Right> :vertical resize +2<CR>
 tnoremap <Esc><Esc> <C-\><C-n>
 
 " Using Lua functions
-nnoremap <leader>fr <cmd>lua require('telescope.builtin').oldfiles({hidden=true})<cr>
+nnoremap <leader>fr <cmd>lua require('telescope.builtin').oldfiles({hidden=false})<cr>
 nnoremap <leader>fw <cmd>lua require('telescope.builtin').file_browser({hidden=true})<cr>
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden=true})<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep({hidden=true})<cr>
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden=false})<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep({hidden=false})<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
@@ -117,6 +124,9 @@ vnoremap K :m '<-2<CR>gv=gv
 inoremap <F12> <C-r>=system("date +'\%F' \| tr '\n' ' '")<CR>
 inoremap <F24> <C-r>=system("date +'\%F \%T \%Z' \| tr '\n' ' '")<CR>
 
+" nnoremap g= :execute '!git commit -m "'.input('Enter message: ').'"'<CR>
+nnoremap g= :execute 'r !echo "'.input('Enter math expression: ').'" \| bc -l'<CR>
+
 " look for visual selection
 "vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
@@ -138,6 +148,8 @@ function! <SID>StripTrailingWhitespaces()
 endfun
 
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+nmap <F2> :wa<Bar>exe "mksession! " . v:this_session<CR>:so ~/sessions/
 
 "------------------------------------------------------------------------------
 let g:vimwiki_global_ext = 0  " don't vimwiki every goddamn md file, please
