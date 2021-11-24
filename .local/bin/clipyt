@@ -16,18 +16,7 @@ play_toggle(){
 }
 
 play(){
-	mpv \
-	--title="mpv-clipyt" \
-	--ytdl-raw-options="yes-playlist=" \
-	--cache=yes \
-	--cache-secs=20 \
-	--no-osc \
-	--ontop \
-	--geometry=35%--0--0 \
-	--volume=60 \
-	--no-terminal \
-	--input-ipc-server="$SOC" \
-	"$1" &>/dev/null
+	mpv --profile=clipyt "$1" &>/dev/null
 }
 
 show_help(){
