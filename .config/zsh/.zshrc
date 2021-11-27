@@ -30,95 +30,38 @@ fpath=(~/.config/zsh $fpath)
 autoload -Uz compinit && compinit
 autoload edit-command-line; zle -N edit-command-line
 autoload -U colors && colors
-
-#if [ -f $HOME/.cache/wal/sequences ]; then
-#	(cat ~/.cache/wal/sequences &)
-#else
-#	wal --theme sexy-kasugano &
-#fi
-
-PS1="${STY}%F{210}%n@%m%F{190} (%1d)%F{reset} -> "
+PS1="${STY}%F{#CB4F57}%n@%m%F{#EB9961} (%1d)%F{#EDE7D5} -> "
+#ZSH_HIGHLIGHT_STYLES[unknown-token]=fg="#EDE7D5"
+#ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg="#00DFFC",underline
+#ZSH_HIGHLIGHT_STYLES[precommand]=fg="#00DFFC",underline
+#ZSH_HIGHLIGHT_STYLES[arg0]=fg="#00DFFC"
 
 unsetopt BEEP
 setopt globdots
-bindkey '^e' edit-command-line
+bindkey '^e' edit-command-line # help: CTRL-E ..... edits the command line in vim
 bindkey '^ ' forward-char
-bindkey -s '^o' 'oneliner\n'
-
-export KEYTIMEOUT=1
-
-# Change cursor shape for different vi modes.
-function zle-keymap-select () {
-case $KEYMAP in
-	vicmd) echo -ne '\e[1 q';;      # block
-	viins|main) echo -ne '\e[5 q';; # beam
-esac
-}
-zle -N zle-keymap-select
-zle-line-init() {
-zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-echo -ne "\e[5 q"
-}
-zle -N zle-line-init
-echo -ne '\e[5 q' # Use beam shape cursor on startup.
-preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+bindkey -s '^o' 'oneliner\n' # help: CTRL-O ..... opens oneliners
+bindkey -s '^a' 'fglsa\n'
+bindkey -s '^f' 'fglsm\n'
 
 alias pacman="sudo pacman"
-alias ls="ls -hN --color=auto --group-directories-first"
-alias yt="youtube-dl --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/video.config\""
-alias yta="youtube-dl --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/audio.config\""
-alias oneliner='print -z -R -e $(grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.txt | fzf -e | grep -oP "(?<=: \`).*(?=\`$)")'
+alias sdn='sudo shutdown -h now' # help: sdn - executes shutdown -h now
+alias ls="ls -hN --color=auto --group-directories-first" # help: ls - ls has color and groups directories first
+alias yt="yt-dlp --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/video.config\"" # help: yt - downloads videos using yt-dlp using config found in ~/.config/youtube-dl
+alias yta="yt-dlp --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/audio.config\"" # help: yta - downloads audio only of videos using yt-dlp using config found in ~/.config/youtube-dl
+alias oneliner='grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.txt | fzf -e | grep -oP "(?<=: \`).*(?=\`$)"' # oneliner (alias) - greps oneliners.txt and selects a command
 
+. "$ZDOTDIR/vimin.zsh" # vim movements and cursor ~/.config/zsh/vimin.zsh
 . "/usr/share/fzf/completion.zsh"
 . "/usr/share/fzf/key-bindings.zsh"
+  # help: CTRL-T ..... Paste the selected file path(s) into the command line
+  # help: CTRL-R ..... Search command history
+  # help: ALT-C  ..... Change to the selected directory, default command is `fd`
 . "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 . "/usr/share/LS_COLORS/dircolors.sh"
-#. "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+. "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+. "$ZDOTDIR/myextensions.zsh" # fzf and more ~/.config/zsh/myextensions.zsh
+#. "$ZDOTDIR/colors.zsh" # colors  ~/.config/zsh/colors.zsh
 
-#FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-messages --smart-case --glob '!{.git,node_modules,build,.idea}'"
-#FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-FZF_DEFAULT_OPTS='
---ansi
---border
---layout=reverse
---height 50%
---color fg:15,fg+:15,bg+:239,hl+:108
---color info:2,prompt:109,spinner:2,pointer:168,marker:168
-'
+#eval `dircolors $ZDOTDIR/mydircolors`
 
-# To use custom commands instead of find, override _fzf_compgen_{path,dir}
-_fzf_compgen_path() {
-	rg -j0 --files --hidden --glob '!{.git,node_modules,build,.idea}' --column --line-number --no-heading --smart-case
-	}
-
-_fzf_compgen_dir() {
-	rg -j0 --sort accessed --files --hidden --glob '!{.git,node_modules,build,.idea}' --column --line-number --no-heading --smart-case --null | xargs -0 dirname
-	}
-
-# requires fd
-f() {
-    sels=( "${(@f)$(fd -H -d1 "${@:2}"| fzf -m)}" )
-    test -n "$sels" && print -z -- "$1 ${sels[@]:q:q}"
-}
-
-# change directory to chosen file
-cdf () {
-	thefile=$(rg -j0 --hidden --no-messages --smart-case --files -g '!{.git,node_modules,build,.idea,.npm,.cache,.bundle,cache}' . | fzf)
-	[[ -z $thefile ]] && return 1
-	printf '%s\n\e[1;34m%-6s\e[m\n' "You are now in the same directory as" "$thefile"
-	cd $(dirname $thefile)
-}
-
-lfcd () {
-	tmp="$(mktemp)"
-	lf -last-dir-path="$tmp" "$@"
-	if [ -f "$tmp" ]; then
-		dir="$(cat "$tmp")"
-		rm -f "$tmp"
-		if [ -d "$dir" ]; then
-			if [ "$dir" != "$(pwd)" ]; then
-				cd "$dir"
-			fi
-		fi
-	fi
-}
