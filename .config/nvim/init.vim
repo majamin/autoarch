@@ -21,6 +21,7 @@ Plug 'ap/vim-css-color'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'vimwiki/vimwiki'
+Plug 'airblade/vim-rooter'
 " Moving around
 Plug 'tpope/vim-surround'
 Plug 'phaazon/hop.nvim'
@@ -30,7 +31,6 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 " REPL
 Plug 'jpalardy/vim-slime'
 Plug 'jalvesaq/Nvim-R'
-Plug 'phaazon/hop.nvim'
 " LSP, Completion
 Plug 'MordechaiHadad/nvim-lspmanager' | Plug 'neovim/nvim-lspconfig'
 call plug#end()
@@ -57,6 +57,7 @@ set spelllang=en_ca nowrap noshowmode history=50 incsearch
 set nowrapscan autochdir noswapfile hidden splitbelow splitright
 let g:airline_theme='light'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t' " show filenames only
 
 "autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
@@ -77,11 +78,6 @@ EOF
 
 "------------------------------------------------------------------------------
 
-"let g:airline_theme='light'
-"let g:airline#extensions#tabline#enabled = 1
-
-"------------------------------------------------------------------------------
-
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
 map <C-n> :vnew<CR>
@@ -98,6 +94,8 @@ map <Right> :vertical resize +2<CR>
 tnoremap <Esc><Esc> <C-\><C-n>
 
 " Using Lua functions
+nnoremap <leader><space> :Telescope<CR>
+nnoremap <leader>fc <cmd>lua require('telescope.builtin').git_bcommits({hidden=false})<cr>
 nnoremap <leader>fr <cmd>lua require('telescope.builtin').oldfiles({hidden=false})<cr>
 nnoremap <leader>fw <cmd>lua require('telescope.builtin').file_browser({hidden=true})<cr>
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden=false})<cr>
