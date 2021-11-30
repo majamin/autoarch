@@ -121,6 +121,9 @@ nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep({hidden=fals
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
+" compiler
+map <leader>c :w! \| !compiler "<c-r>%"<CR>
+
 " Save file as sudo on files that require root permission
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
