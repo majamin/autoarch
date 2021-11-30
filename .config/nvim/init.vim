@@ -32,7 +32,8 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'jpalardy/vim-slime'
 Plug 'jalvesaq/Nvim-R'
 " LSP, Completion
-Plug 'MordechaiHadad/nvim-lspmanager' | Plug 'neovim/nvim-lspconfig'
+" https://github.com/williamboman/nvim-lsp-installer
+Plug 'williamboman/nvim-lsp-installer' | Plug 'neovim/nvim-lspconfig'
 call plug#end()
 
 syntax on
@@ -58,6 +59,7 @@ set nowrapscan autochdir noswapfile hidden splitbelow splitright
 let g:airline_theme='light'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t' " show filenames only
+let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json', '>Projects']
 
 "autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
@@ -66,14 +68,30 @@ autocmd FileType c,cpp setlocal cindent expandtab shiftwidth=4 softtabstop=4 tab
 autocmd FileType r,javascript,html,css,scss setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
 
 lua <<EOF
-  -- totally optional to use setup
-  require'telescope'.setup {
-     defaults = {
-          path_display = { "truncate" }
-      }
-  }
-  require'hop'.setup { keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5 }
-  require'lspmanager'.setup()
+-- totally optional to use setup
+require'telescope'.setup {
+	defaults = {
+		path_display = { "truncate" }
+		}
+	}
+require'hop'.setup { keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5 }
+
+local lsp_installer = require("nvim-lsp-installer")
+
+-- Register a handler that will be called for all installed servers.
+-- Alternatively, you may also register handlers on specific server instances instead (see example below).
+lsp_installer.on_server_ready(function(server)
+local opts = {}
+
+-- (optional) Customize the options passed to the server
+-- if server.name == "tsserver" then
+--     opts.root_dir = function() ... end
+-- end
+
+-- This setup() function is exactly the same as lspconfig's setup function.
+-- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+server:setup(opts)
+end)
 EOF
 
 "------------------------------------------------------------------------------
