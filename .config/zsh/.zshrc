@@ -44,6 +44,7 @@ bindkey -s '^o' 'oneliner\n' # help: CTRL-O ..... opens oneliners
 bindkey -s '^a' 'fglsa\n'
 bindkey -s '^f' 'fglsm\n'
 
+alias help='find $ZDOTDIR -maxdepth 1 -type f -not -name "*hist*" | xargs grep -Porh "(?<=# help: ).+"'
 alias pacman="sudo pacman"
 alias sdn='sudo shutdown -h now' # help: sdn - executes shutdown -h now
 alias ls="ls -hN --color=auto --group-directories-first" # help: ls - ls has color and groups directories first
