@@ -51,7 +51,22 @@ alias ls="ls -hN --color=auto --group-directories-first" # help: ls - ls has col
 alias yt="yt-dlp --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/video.config\"" # help: yt - downloads videos using yt-dlp using config found in ~/.config/youtube-dl
 alias yta="yt-dlp --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/audio.config\"" # help: yta - downloads audio only of videos using yt-dlp using config found in ~/.config/youtube-dl
 alias oneliner='grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.txt | fzf -e | grep -oP "(?<=: \`).*(?=\`$)"' # oneliner (alias) - greps oneliners.txt and selects a command
-alias proj='PROJDIR=$(find ~/Maja/Projects -maxdepth 2 -type d | fzf) && cd "$PROJDIR" && PROJFILES=$(find "$PROJDIR" -maxdepth 2 -type f -printf "%T@ %p\n" | sort -n | cut -f2- -d" " | xargs file | grep "text" | cut -f1 -d":" | tail -n5) && [[ -n "$PROJFILES" ]] && (echo "$PROJFILES" | xargs vim) || printf "Directory is now %s, but no text files here.\n" "$PROJDIR" && ls'
+#alias proj='PROJDIR=$(find ~/Maja/Projects -maxdepth 2 -type d | fzf) && cd "$PROJDIR" && PROJFILES=$(find "$PROJDIR" -maxdepth 2 -type f -printf "%T@ %p\n" | sort -n | cut -f2- -d" " | xargs file | grep "text" | cut -f1 -d":" | tail -n5) && [[ -n "$PROJFILES" ]] && (echo "$PROJFILES" | xargs vim) || printf "Directory is now %s, but no text files here.\n" "$PROJDIR" && ls'
+
+proj() {
+	PROJDIR=$(find ~/Maja/Projects -maxdepth 2 -type d | fzf)
+	cd "$PROJDIR"
+	PROJFILES=$(find "$PROJDIR" -maxdepth 2 -type f -printf "%T@ %p\n" | sort -n | cut -f2- -d" " | xargs file | grep "text" | cut -f1 -d":" | tail -n5)
+	if [[ -n "$PROJFILES" ]]; then
+		if [[ -e "$PROJDIR/Session.vim" ]]; then
+			vim -S "$PROJDIR/Session.vim"
+		#else
+		#	echo "$PROJFILES" | xargs vim
+		fi
+	else
+		printf "Directory is now %s, but no text files here.\n" "$PROJDIR" && ls
+	fi
+}
 
 . "$ZDOTDIR/vimin.zsh" # vim movements and cursor ~/.config/zsh/vimin.zsh
 . "/usr/share/fzf/completion.zsh"
