@@ -60,8 +60,8 @@ proj() {
 	if [[ -n "$PROJFILES" ]]; then
 		if [[ -e "$PROJDIR/Session.vim" ]]; then
 			vim -S "$PROJDIR/Session.vim"
-		#else
-		#	echo "$PROJFILES" | xargs vim
+		else
+			echo "$PROJFILES" | xargs vim
 		fi
 	else
 		printf "Directory is now %s, but no text files here.\n" "$PROJDIR" && ls
