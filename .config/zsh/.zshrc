@@ -56,7 +56,7 @@ alias oneliner='grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.txt | fzf -
 proj() {
 	PROJDIR=$(find ~/Maja/Projects -maxdepth 2 -type d | fzf)
 	cd "$PROJDIR"
-	PROJFILES=$(find "$PROJDIR" -maxdepth 2 -type f -printf "%T@ %p\n" | sort -n | cut -f2- -d" " | xargs file | grep "text" | cut -f1 -d":" | tail -n5)
+	PROJFILES=$(find "$PROJDIR" -maxdepth 2 -type f -printf "%T@ %p\n" | sort -n | cut -f2- -d" " | xargs file 2>/dev/null | grep "text" | cut -f1 -d":" | tail -n5)
 	if [[ -n "$PROJFILES" ]]; then
 		if [[ -e "$PROJDIR/Session.vim" ]]; then
 			vim -S "$PROJDIR/Session.vim"
