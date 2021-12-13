@@ -1,9 +1,0 @@
-# modified simple newsbeuter color scheme.
-
-color listnormal        color8 black
-color listnormal_unread white black
-color listfocus         yellow red bold
-color listfocus_unread  yellow red bold
-color info              color3 black underline
-color background        white black
-color article           white black
