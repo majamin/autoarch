@@ -12,7 +12,7 @@ external-url-viewer "urlscan -dc -r 'linkhandler {}'"
 # -- display -------------------------------------------------------------------
 
 show-read-feeds yes
-include simple2
+include simple-white
 text-width 80
 
 
