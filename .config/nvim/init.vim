@@ -34,6 +34,9 @@ Plug 'jalvesaq/Nvim-R'
 " LSP, Completion
 " https://github.com/williamboman/nvim-lsp-installer
 Plug 'williamboman/nvim-lsp-installer' | Plug 'neovim/nvim-lspconfig'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'folke/trouble.nvim'
+Plug 'folke/lsp-colors.nvim'
 call plug#end()
 
 syntax on
@@ -68,33 +71,40 @@ autocmd FileType c,cpp setlocal cindent expandtab shiftwidth=4 softtabstop=4 tab
 autocmd FileType r,javascript,html,css,scss setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
 
 lua <<EOF
--- totally optional to use setup
+
+-- telescope
 require'telescope'.setup {
 	defaults = {
 		path_display = { "truncate" }
 		}
 	}
+
+-- hop
 require'hop'.setup { keys = 'etovxqpdygfblzhckisuran', term_seq_bias = 0.5 }
 
+-- lsp installer
 local lsp_installer = require("nvim-lsp-installer")
-
--- Register a handler that will be called for all installed servers.
--- Alternatively, you may also register handlers on specific server instances instead (see example below).
 lsp_installer.on_server_ready(function(server)
-local opts = {}
-
--- (optional) Customize the options passed to the server
--- if server.name == "tsserver" then
---     opts.root_dir = function() ... end
--- end
-
--- This setup() function is exactly the same as lspconfig's setup function.
--- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-server:setup(opts)
+  local opts = {}
+  server:setup(opts)
 end)
+
+-- trouble plugin
+require("trouble").setup {}
+
+-- LSP colors
+require("lsp-colors").setup({
+  Error = "#db4b4b",
+  Warning = "#e0af68",
+  Information = "#0db9d7",
+  Hint = "#10B981"
+})
+
 EOF
 
 "------------------------------------------------------------------------------
+
+autocmd User DiagnosticsChanged lua vim.diagnostic.setqflist({open = false })
 
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
@@ -110,9 +120,10 @@ map <Down> :resize -2<CR>
 map <Left> :vertical resize -2<CR>
 map <Right> :vertical resize +2<CR>
 tnoremap <Esc><Esc> <C-\><C-n>
+nnoremap <C-b> :bp\|bd #<CR>
 
 " Using Lua functions
-nnoremap <leader><space> :Telescope<CR>
+nnoremap <space><space> :Telescope<CR>
 nnoremap <leader>fc <cmd>lua require('telescope.builtin').git_bcommits({hidden=false})<cr>
 nnoremap <leader>fr <cmd>lua require('telescope.builtin').oldfiles({hidden=false})<cr>
 nnoremap <leader>fw <cmd>lua require('telescope.builtin').file_browser({hidden=true})<cr>
@@ -183,6 +194,10 @@ let wiki_oneliners.index     = 'oneliners'
 let wiki_oneliners.ext       = 'txt'
 
 let g:vimwiki_list           = [wiki_personal, wiki_oneliners]
+" send VimwikiNextLink into a black hole
+" vimwiki defaults this command to TAB which conflicts with my mappings:
+nmap <S-F9> <Plug>VimwikiNextLink
+
 
 "------------------------------------------------------------------------------
 let g:slime_no_mappings = 1
