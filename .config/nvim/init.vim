@@ -64,6 +64,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t' " show filenames only
 let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json', '>Projects']
 
+let html_number_lines=1
+
 "autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType go setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
@@ -194,10 +196,10 @@ let wiki_oneliners.index     = 'oneliners'
 let wiki_oneliners.ext       = 'txt'
 
 let g:vimwiki_list           = [wiki_personal, wiki_oneliners]
-" send VimwikiNextLink into a black hole
+" send VimwikiNextLink and Prev into a black hole
 " vimwiki defaults this command to TAB which conflicts with my mappings:
 nmap <S-F9> <Plug>VimwikiNextLink
-
+nmap <S-F8> <Plug>VimwikiPrevLink
 
 "------------------------------------------------------------------------------
 let g:slime_no_mappings = 1
