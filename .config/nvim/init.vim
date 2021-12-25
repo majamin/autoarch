@@ -46,9 +46,11 @@ let mapleader=","
 let maplocalleader=';'
 
 colorscheme intellij
-"set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175
 hi CursorLine ctermbg=255 guibg=#EDEBC9
-hi Search gui=bold,italic,undercurl guibg=NONE guifg=#FF1168
+hi Cursor guibg=NONE guifg=NONE
+
+hi Search gui=undercurl guibg=NONE guifg=NONE
 hi HopNextKey   guifg=#FF073B
 hi HopNextKey2  guifg=#26C2FC
 hi HopNextKey1  guifg=#0D84B0

@@ -75,6 +75,7 @@ SOURCES+=(
 "http://audio-ogg.ibiblio.org:8000/wcpe.ogg"
 "https://ycradio.stream.publicradio.org/ycradio.aac"
 "https://holiday.stream.publicradio.org/holiday_yc.aac"
+"https://stream.wqxr.org/qxr-special-web?nyprBrowserId=73ef765c453ff400"
 "https://hygge.stream.publicradio.org/hygge.aac"
 "https://peacefulpiano.stream.publicradio.org/peacefulpiano.aac"
 "https://classicalkids.stream.publicradio.org/classicalkids.aac"
