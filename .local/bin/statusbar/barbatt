@@ -9,12 +9,12 @@ do
 	[ "$capacity" -le 75 ] && baticon="$(echo -e "")"
 	[ "$capacity" -le 50 ] && baticon="$(echo -e "")"
 	[ "$capacity" -le 25 ] && baticon="$(echo -e "")"
-	[ "$capacity" -le 10 ] && baticon="$(echo -e "\x09\x01")"
+	[ "$capacity" -le 10 ] && baticon="$(echo -e "")"
 
 	status=$(cat "$battery"/status) || break
 
-	[ "$status" = "Discharging" ] && icon="" && printf " %s%s  \\n" "$icon" "$baticon"
-	[ "$status" != "Discharging" ] && icon="" && printf " %s%s  \\n" "$icon" "$baticon"
+	[ "$status" = "Discharging" ] && icon="" && printf "%s%s  \\n" "$icon" "$baticon"
+	[ "$status" != "Discharging" ] && icon="" && printf "%s%s  \\n" "$icon" "$baticon"
 
 	unset warn
 done | sed s/\ $/\\n/

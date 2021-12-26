@@ -31,6 +31,6 @@ for DIR in $DIRS; do
 	fi
 done
 
-[[ $GITFLAG == true ]] && FLAGS+=("  ")
+[[ $GITFLAG == true ]] && FLAGS+=(" ")
 
-echo -e "   \x05${FLAGS[@]}\x01"
+echo -e "   ${FLAGS[@]}"
