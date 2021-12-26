@@ -1,0 +1,13 @@
+dwm.normbgcolor:     #000000
+dwm.normbordercolor: #444444
+dwm.normfgcolor:     #dddddd
+dwm.selfgcolor:      #ffffff
+dwm.selbordercolor:  #1377b7
+dwm.selbgcolor:      #1377b7
+dwm.borderpx:         4
+dwm.snap:             32
+dwm.showbar:          1
+dwm.topbar:           0
+dwm.nmaster:          1
+dwm.resizehints:      0
+dwm.mfact:            0.5
