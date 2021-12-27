@@ -25,4 +25,4 @@ s=$(echo "($TIMEREM/1)%60" | bc)
 
 [[ $PAUSE == "true" ]] && ICON="" || ICON=""
 
-printf "%s %02d:%02d:%02d \x08%s\x01" "$ICON" "$H" "$m" "$s" "$TITLE"
+printf "%s %02d:%02d:%02d %s" "$ICON" "$H" "$m" "$s" "$TITLE"
