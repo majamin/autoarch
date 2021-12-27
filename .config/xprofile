@@ -2,6 +2,7 @@
 dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY
 
 remaps &			# switch caps/esc etc.
+xrdb ~/.Xresources &		# load Xresources
 picom --no-vsync --no-use-damage & # composite manager
 dwmblocks &			# dwmstatus statusbar
 dunst &				# dunst for notifications
