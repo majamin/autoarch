@@ -2,7 +2,7 @@ dwm.normbgcolor:     #000000
 dwm.normbordercolor: #444444
 dwm.normfgcolor:     #dddddd
 dwm.selfgcolor:      #ffffff
-dwm.selbordercolor:  #1377b7
+dwm.selbordercolor:  #f8b343
 dwm.selbgcolor:      #1377b7
 dwm.borderpx:         4
 dwm.snap:             32
@@ -11,3 +11,8 @@ dwm.topbar:           0
 dwm.nmaster:          1
 dwm.resizehints:      0
 dwm.mfact:            0.5
+
+dmenu.background:    #1377b7
+dmenu.foreground:    #dddddd
+dmenu.selbackground: #5eb9ee
+dmenu.selforeground: #000000
