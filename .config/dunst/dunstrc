@@ -1,7 +1,16 @@
 [global]
     monitor = 0
     follow = keyboard
-    geometry = "350x5-0+50"
+
+    # geometry
+    width = 300
+    height = 300
+    origin = top-right
+    offset = 10x50
+
+    # Scale factor. It is auto-detected if value is 0.
+    scale = 0
+
     indicate_hidden = yes
     shrink = yes
     transparency = 20
@@ -24,7 +33,7 @@
     sort = yes
 
     idle_threshold = 120
-    font = Monospace 12
+    font = Monospace 14
     line_height = 0
     markup = full
 
@@ -73,23 +82,20 @@
     context = ctrl+shift+period
 
 [urgency_low]
-    # IMPORTANT: colors have to be defined in quotation marks.
-    # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#8be9fd"
-    foreground = "#000000"
-    timeout = 5
-    # Icon for notifications with low urgency, uncomment to enable
+    background = "#cad9f3"
+    foreground = "#444444"
+    timeout = 10
     #icon = /path/to/icon
 
 [urgency_normal]
-    background = "#444444"
-    foreground = "#ffffff"
-    timeout = 5
+    background = "#cad9f3"
+    foreground = "#444444"
+    timeout = 120
+    #icon = /path/to/icon
 
 [urgency_critical]
     background = "#cc2421"
-    foreground = "#ebdbb2"
-    frame_color = "#fabd2f"
+    foreground = "#eeeeee"
     timeout = 0
 
 # Every section that isn't one of the above is interpreted as a rules to
