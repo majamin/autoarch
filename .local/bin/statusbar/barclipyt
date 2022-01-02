@@ -7,16 +7,12 @@
 # capture a certain portion of a string:
 #echo "$TITLE" | sed 's/.\{100\}\(.\{25\}\).*/\1/g'
 
-
-
 # Displays information about the currently playing clipyt (mpv) file
 
 TITLE=$(echo '{ "command": ["get_property", "media-title"] }' | socat - /tmp/mpv-clipyt | grep -Po '(?<="data":").*(?=","request)')
 [[ $? == 1 ]] && exit
 
 TITLE=$(echo $TITLE | sed 's/\\//g;s/"//g') # clean-up (no '"' or '\')
-TITLELEN=${#TITLE}
-DISPLEN=$(( TITLELEN < 30 ? TITLELEN : 30))
 PAUSE=$(echo '{ "command": ["get_property", "pause"] }' | socat - /tmp/mpv-clipyt| grep -Po '(?<=data":)[a-z]*')
 
 TIMEREM=$(echo '{ "command": ["get_property", "time-remaining"] }' | socat - /tmp/mpv-clipyt| grep -Po '(?<=data":)[^"]*(?=,")')
@@ -28,7 +24,10 @@ s=$(echo "($TIMEREM/1)%60" | bc)
 TSTAMP=$(date +%ms)
 
 [[ $PAUSE == "true" ]] && ICON="" || ICON=""
-A=$(((60-s) % (TITLELEN - DISPLEN)))
-B=$(((60-s) % (TITLELEN - DISPLEN) + DISPLEN))
+
+TITLELEN=${#TITLE}
+DISPLEN=$(( TITLELEN < 30 ? TITLELEN : 30))
+A=$(( TITLELEN - DISPLEN <= 0 ? 0 : (60-s) % (TITLELEN - DISPLEN)))
+B=$((A + DISPLEN))
 
 printf "%s %02d:%02d:%02d %s" "$ICON" "$H" "$m" "$s" "${TITLE:$A:$DISPLEN}"
