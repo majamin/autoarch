@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # NOTES #
 #FILENAME=$(echo '{ "command": ["get_property", "filename/no-ext"] }' | socat - /tmp/mpv-clipyt)
@@ -15,6 +15,8 @@ TITLE=$(echo '{ "command": ["get_property", "media-title"] }' | socat - /tmp/mpv
 [[ $? == 1 ]] && exit
 
 TITLE=$(echo $TITLE | sed 's/\\//g;s/"//g') # clean-up (no '"' or '\')
+TITLELEN=${#TITLE}
+DISPLEN=$(( TITLELEN < 30 ? TITLELEN : 30))
 PAUSE=$(echo '{ "command": ["get_property", "pause"] }' | socat - /tmp/mpv-clipyt| grep -Po '(?<=data":)[a-z]*')
 
 TIMEREM=$(echo '{ "command": ["get_property", "time-remaining"] }' | socat - /tmp/mpv-clipyt| grep -Po '(?<=data":)[^"]*(?=,")')
@@ -23,6 +25,10 @@ H=$(echo "$TIMEREM/3600" | bc)
 m=$(echo "($TIMEREM/60)%60" | bc)
 s=$(echo "($TIMEREM/1)%60" | bc)
 
-[[ $PAUSE == "true" ]] && ICON="" || ICON=""
+TSTAMP=$(date +%ms)
 
-printf "%s %02d:%02d:%02d %s" "$ICON" "$H" "$m" "$s" "$TITLE"
+[[ $PAUSE == "true" ]] && ICON="" || ICON=""
+A=$(((60-s) % (TITLELEN - DISPLEN)))
+B=$(((60-s) % (TITLELEN - DISPLEN) + DISPLEN))
+
+printf "%s %02d:%02d:%02d %s" "$ICON" "$H" "$m" "$s" "${TITLE:$A:$DISPLEN}"

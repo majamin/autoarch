@@ -16,7 +16,7 @@ x-scheme-handler/mailto=brave-browser.desktop
 x-scheme-handler/webcal=brave-browser.desktop
 
 [Added Associations]
-image/png=brave-browser.desktop;gimp.desktop;sxiv.desktop;
+image/png=gimp.desktop;brave-browser.desktop;sxiv.desktop;
 text/html=brave-browser.desktop;firefox.desktop;
 image/jpeg=org.inkscape.Inkscape.desktop;gimp.desktop;
 image/svg+xml=org.inkscape.Inkscape.desktop;

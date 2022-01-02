@@ -31,10 +31,6 @@ autoload -Uz compinit && compinit
 autoload edit-command-line; zle -N edit-command-line
 autoload -U colors && colors
 PS1="${STY}%F{#459ED6}%n@%m%F{#F8BB46} (%1d)%F{#EDE7D5} -> "
-#ZSH_HIGHLIGHT_STYLES[unknown-token]=fg="#EDE7D5"
-#ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg="#00DFFC",underline
-#ZSH_HIGHLIGHT_STYLES[precommand]=fg="#00DFFC",underline
-#ZSH_HIGHLIGHT_STYLES[arg0]=fg="#00DFFC"
 
 unsetopt BEEP
 setopt globdots
@@ -79,5 +75,5 @@ proj() {
 . "$ZDOTDIR/myextensions.zsh" # fzf and more ~/.config/zsh/myextensions.zsh
 . "$ZDOTDIR/colors.zsh" # colors  ~/.config/zsh/colors.zsh
 
-#eval `dircolors $ZDOTDIR/mydircolors`
+eval `dircolors $ZDOTDIR/mydircolors`
 

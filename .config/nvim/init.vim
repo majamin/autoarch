@@ -68,9 +68,9 @@ let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'p
 
 let html_number_lines=1
 
-"autocmd FileType markdown setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
 "autocmd FileType go setlocal noexpandtab shiftwidth=4 softtabstop=4 tabstop=4
+autocmd FileType markdown,vimwiki setlocal shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType c,cpp setlocal cindent expandtab shiftwidth=4 softtabstop=4 tabstop=4
 autocmd FileType r,javascript,html,css,scss setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
 
@@ -125,6 +125,8 @@ map <Left> :vertical resize -2<CR>
 map <Right> :vertical resize +2<CR>
 tnoremap <Esc><Esc> <C-\><C-n>
 nnoremap <C-b> :bp\|bd #<CR>
+map <F3> :setlocal spell! spelllang=en_ca<CR>
+map <F4> :setlocal spell! spelllang=en-basic<CR>
 
 " Using Lua functions
 nnoremap <space><space> :Telescope<CR>
