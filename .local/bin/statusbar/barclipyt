@@ -21,13 +21,13 @@ H=$(echo "$TIMEREM/3600" | bc)
 m=$(echo "($TIMEREM/60)%60" | bc)
 s=$(echo "($TIMEREM/1)%60" | bc)
 
-TSTAMP=$(date +%ms)
+TSTAMP=$(date +%s)
 
 [[ $PAUSE == "true" ]] && ICON="" || ICON=""
 
 TITLELEN=${#TITLE}
 DISPLEN=$(( TITLELEN < 30 ? TITLELEN : 30))
-A=$(( TITLELEN - DISPLEN <= 0 ? 0 : (60-s) % (TITLELEN - DISPLEN)))
+A=$(( TITLELEN - DISPLEN <= 0 ? 0 : TSTAMP % (TITLELEN - DISPLEN)))
 B=$((A + DISPLEN))
 
 printf "%s %02d:%02d:%02d %s" "$ICON" "$H" "$m" "$s" "${TITLE:$A:$DISPLEN}"
