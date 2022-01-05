@@ -1,6 +1,6 @@
 # modified simple newsbeuter color scheme.
 
-color listnormal        color8 white
+color listnormal        color244 white
 color listnormal_unread black white
 color listfocus         white red bold
 color listfocus_unread  white red bold
