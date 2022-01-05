@@ -172,7 +172,7 @@ map <leader>i :r !find . -maxdepth 3 -print \| file -if - \| grep "image/" \| aw
 
 " Skeleton files
 nnoremap <leader>ttoc :-1read $HOME/.config/nvim/.skeleton.ttoc<CR>:set filetype=asciidoc<CR>3jf>a
-nnoremap <leader>html :-1read $HOME/.config/nvim/.skeleton.html<CR>:set filetype=html<CR>3jf>a
+nnoremap <leader>html :-1read $HOME/.config/nvim/.skeleton.html<CR>:set filetype=html<CR>5jf>a
 nnoremap <leader>cpp  :-1read $HOME/.config/nvim/.skeleton.cpp<CR>:set filetype=cpp<CR>3jf>a
 
 " Automatically deletes all trailing whitespace and newlines at end of file on save.
