@@ -205,6 +205,8 @@ let g:vimwiki_list           = [wiki_personal, wiki_oneliners]
 nmap <S-F9> <Plug>VimwikiNextLink
 nmap <S-F8> <Plug>VimwikiPrevLink
 
+let g:vimwiki_url_maxsave = 0
+
 "------------------------------------------------------------------------------
 let g:slime_no_mappings = 1
 let g:slime_python_ipython = 1
