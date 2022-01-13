@@ -64,7 +64,7 @@ set nowrapscan autochdir noswapfile hidden splitbelow splitright
 let g:airline_theme='light'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t' " show filenames only
-let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json', '>Projects']
+let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json', '>Projects', 'README*']
 
 let html_number_lines=1
 
@@ -171,6 +171,7 @@ nnoremap g= :execute 'r !echo "'.input('Enter math expression: ').'" \| bc -l'<C
 map <leader>i :r !find . -maxdepth 3 -print \| file -if - \| grep "image/" \| awk -F: '{print $1}' \| xargs sxiv -qto 2> /dev/null <CR><CR>
 
 " Skeleton files
+nnoremap <leader>adoc :-1read $HOME/.config/nvim/.skeleton.adoc<CR>:set filetype=asciidoc<CR>
 nnoremap <leader>ttoc :-1read $HOME/.config/nvim/.skeleton.ttoc<CR>:set filetype=asciidoc<CR>3jf>a
 nnoremap <leader>html :-1read $HOME/.config/nvim/.skeleton.html<CR>:set filetype=html<CR>5jf>a
 nnoremap <leader>cpp  :-1read $HOME/.config/nvim/.skeleton.cpp<CR>:set filetype=cpp<CR>3jf>a
