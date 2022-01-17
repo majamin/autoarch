@@ -28,6 +28,7 @@ Plug 'phaazon/hop.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 " REPL
 Plug 'jpalardy/vim-slime'
 Plug 'jalvesaq/Nvim-R'
@@ -104,6 +105,8 @@ require("lsp-colors").setup({
   Hint = "#10B981"
 })
 
+require("telescope").load_extension "file_browser"
+
 EOF
 
 "------------------------------------------------------------------------------
@@ -132,7 +135,7 @@ map <F4> :setlocal spell! spelllang=en-basic<CR>
 nnoremap <space><space> :Telescope<CR>
 nnoremap <leader>fc <cmd>lua require('telescope.builtin').git_bcommits({hidden=false})<cr>
 nnoremap <leader>fr <cmd>lua require('telescope.builtin').oldfiles({hidden=false})<cr>
-nnoremap <leader>fw <cmd>lua require('telescope.builtin').file_browser({hidden=true})<cr>
+nnoremap <leader>fw <cmd>lua require('telescope').extensions.file_browser.file_browser({hidden=true})<cr>
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden=false})<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep({hidden=false})<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
