@@ -3,7 +3,7 @@
 " | '_ \ / _ \/ _ \ \ / / | '_ ` _ \
 " | | | |  __/ (_) \ V /| | | | | | |
 " |_| |_|\___|\___/ \_/ |_|_| |_| |_|
-" 				VIMRC
+"   Marian <majamin at gmail dot com>
 
 if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
@@ -19,7 +19,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ap/vim-css-color'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'vimwiki/vimwiki'
 Plug 'airblade/vim-rooter'
 " Moving around
@@ -43,7 +43,7 @@ call plug#end()
 syntax on
 filetype plugin indent on
 
-let mapleader=","
+let mapleader=" "
 let maplocalleader=';'
 
 colorscheme intellij
@@ -62,11 +62,6 @@ set completeopt=menu,menuone,noselect
 set termguicolors cursorline relativenumber title clipboard+=unnamedplus
 set spelllang=en_ca nowrap noshowmode history=50 incsearch
 set nowrapscan autochdir noswapfile hidden splitbelow splitright
-let g:airline_theme='light'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t' " show filenames only
-let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json', '>Projects', 'README*']
-
 let html_number_lines=1
 
 "autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
@@ -113,11 +108,10 @@ EOF
 
 autocmd User DiagnosticsChanged lua vim.diagnostic.setqflist({open = false })
 
+noremap <silent> <ESC> :noh<CR>
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
-map <C-n> :vnew<CR>
-nnoremap <S-h> :HopWordBC<CR>
-nnoremap <S-l> :HopWordAC<CR>
+map <C-n> :enew<CR>
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
@@ -131,55 +125,7 @@ nnoremap <C-b> :bp\|bd #<CR>
 map <F3> :setlocal spell! spelllang=en_ca<CR>
 map <F4> :setlocal spell! spelllang=en-basic<CR>
 
-" Using Lua functions
-nnoremap <space><space> :Telescope<CR>
-nnoremap <leader>fc <cmd>lua require('telescope.builtin').git_bcommits({hidden=false})<cr>
-nnoremap <leader>fr <cmd>lua require('telescope.builtin').oldfiles({hidden=false})<cr>
-nnoremap <leader>fw <cmd>lua require('telescope').extensions.file_browser.file_browser({hidden=true})<cr>
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden=false})<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep({hidden=false})<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
-" compiler
-map <leader>c :w! \| !compiler "<c-r>%"<CR>
-
-" Save file as sudo on files that require root permission
-cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-
-" make line joins and jumps more natural
-nnoremap n nzzzv
-nnoremap N Nzzzv
-nnoremap J mzJ`z
-
-" quit highlighting search results with ESC
-noremap <silent> <ESC> :noh<CR>
-
-" move lines in visual mode
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
-" In insert mode, F12 to insert date and <S-F12> for a datetime
-inoremap <F12> <C-r>=system("date +'\%F' \| tr '\n' ' '")<CR>
-inoremap <F24> <C-r>=system("date +'\%F \%T \%Z' \| tr '\n' ' '")<CR>
-
-" nnoremap g= :execute '!git commit -m "'.input('Enter message: ').'"'<CR>
-nnoremap g= :execute 'r !echo "'.input('Enter math expression: ').'" \| bc -l'<CR>
-
-" look for visual selection
-"vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-
-" paste image paths found in working directory and up to sub-sub directories
-" DEPS: sxiv, xclip
-map <leader>i :r !find . -maxdepth 3 -print \| file -if - \| grep "image/" \| awk -F: '{print $1}' \| xargs sxiv -qto 2> /dev/null <CR><CR>
-
-" Skeleton files
-nnoremap <leader>adoc :-1read $HOME/.config/nvim/.skeleton.adoc<CR>:set filetype=asciidoc<CR>
-nnoremap <leader>ttoc :-1read $HOME/.config/nvim/.skeleton.ttoc<CR>:set filetype=asciidoc<CR>3jf>a
-nnoremap <leader>html :-1read $HOME/.config/nvim/.skeleton.html<CR>:set filetype=html<CR>5jf>a
-nnoremap <leader>cpp  :-1read $HOME/.config/nvim/.skeleton.cpp<CR>:set filetype=cpp<CR>3jf>a
-
-" Automatically deletes all trailing whitespace and newlines at end of file on save.
+" Delete trailing white space
 function! <SID>StripTrailingWhitespaces()
 	let l = line(".")
 	let c = col(".")
@@ -187,9 +133,64 @@ function! <SID>StripTrailingWhitespaces()
 	call cursor(l, c)
 endfun
 
+" Call before and after buffer open and save
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
-nmap <F2> :wa<Bar>exe "mksession! " . v:this_session<CR>:so ~/sessions/
+" Make line joins and jumps more natural
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" Compile various filetypes with ~/.local/bin/compiler
+map <leader>c :w! \| !compiler "<c-r>%"<CR>
+
+nnoremap <leader>adoc :-1read $HOME/.config/nvim/.skeleton.adoc<CR>:set filetype=asciidoc<CR>
+nnoremap <leader>ttoc :-1read $HOME/.config/nvim/.skeleton.ttoc<CR>:set filetype=asciidoc<CR>3jf>a
+nnoremap <leader>html :-1read $HOME/.config/nvim/.skeleton.html<CR>:set filetype=html<CR>5jf>a
+nnoremap <leader>cpp  :-1read $HOME/.config/nvim/.skeleton.cpp<CR>:set filetype=cpp<CR>3jf>a
+
+" Save file as sudo on files that require root permission
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" In insert mode, F12 to insert date and <S-F12> for a datetime
+inoremap <F12> <C-r>=system("date +'\%F' \| tr '\n' ' '")<CR>
+inoremap <F24> <C-r>=system("date +'\%F \%T \%Z' \| tr '\n' ' '")<CR>
+
+" Find images, pipe through sxiv and paste selected paths
+map <leader>i :r !find . -maxdepth 3 -print \| file -if - \| grep "image/" \| awk -F: '{print $1}' \| xargs sxiv -qto 2> /dev/null <CR><CR>
+
+"------------------------------------------------------------------------------
+"nmap <F2> :wa<Bar>exe "mksession! " . v:this_session<CR>:so ~/sessions/
+
+" Send math expression to bc
+"nnoremap g= :execute 'r !echo "'.input('Enter math expression: ').'" \| bc -l'<CR>
+
+" look for visual selection
+"vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+" move lines in visual mode
+"vnoremap J :m '>+1<CR>gv=gv
+"vnoremap K :m '<-2<CR>gv=gv
+
+"------------------------------------------------------------------------------
+let g:airline_theme='light'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t' " show filenames only
+let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json', '>Projects', 'README*']
+
+"------------------------------------------------------------------------------
+nnoremap <S-h> :HopWordBC<CR>
+nnoremap <S-l> :HopWordAC<CR>
+
+"------------------------------------------------------------------------------
+nnoremap <leader><leader> :Telescope<CR>
+nnoremap <leader>fw :Telescope file_browser<CR>
+nnoremap <leader>fr :Telescope oldfiles<CR>
+nnoremap <leader>ff :Telescope find_files<CR>
+nnoremap <leader>fg :Telescope live_grep<CR>
+nnoremap <leader>fb :Telescope buffers<CR>
+nnoremap <leader>fc :Telescope git_bcommits<CR>
+nnoremap <leader>fh :Telescope help_tags<CR>
 
 "------------------------------------------------------------------------------
 let g:vimwiki_global_ext = 0  " don't vimwiki every goddamn md file, please
@@ -197,18 +198,13 @@ let g:vimwiki_ext2syntax     = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'm
 let wiki_personal            = {}
 let wiki_personal.path       = system('printf "%s" "$ONEDRIVE" "/Projects/notes"')
 let wiki_personal.path_html  = system('printf "%s" "$ONEDRIVE" "/Projects/notes/html"')
-let wiki_oneliners           = {}
-let wiki_oneliners.path      = system('printf "%s" "$ONEDRIVE" "/Projects/oneliners.txt"')
-let wiki_oneliners.path_html = system('printf "%s" "$ONEDRIVE" "/Projects/oneliners.txt/html"')
-let wiki_oneliners.index     = 'oneliners'
-let wiki_oneliners.ext       = 'txt'
+let g:vimwiki_list           = [wiki_personal]
 
-let g:vimwiki_list           = [wiki_personal, wiki_oneliners]
-" send VimwikiNextLink and Prev into a black hole
-" vimwiki defaults this command to TAB which conflicts with my mappings:
+" Vimwiki maps <tab> to these, which is a conflict - bury them.
 nmap <S-F9> <Plug>VimwikiNextLink
 nmap <S-F8> <Plug>VimwikiPrevLink
 
+" Expose the entire URL so you can plumb from terminal emulators
 let g:vimwiki_url_maxsave = 0
 
 "------------------------------------------------------------------------------
