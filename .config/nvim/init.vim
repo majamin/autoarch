@@ -184,7 +184,7 @@ nnoremap <S-l> :HopWordAC<CR>
 
 "------------------------------------------------------------------------------
 nnoremap <leader><leader> :Telescope<CR>
-nnoremap <leader>fw :Telescope file_browser<CR>
+nnoremap <leader>fw :Telescope file_browser hidden=true<CR>
 nnoremap <leader>fr :Telescope oldfiles<CR>
 nnoremap <leader>ff :Telescope find_files<CR>
 nnoremap <leader>fg :Telescope live_grep<CR>
