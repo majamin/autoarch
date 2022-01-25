@@ -29,6 +29,8 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope-file-browser.nvim'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 " REPL
 Plug 'jpalardy/vim-slime'
 Plug 'jalvesaq/Nvim-R'
@@ -163,10 +165,10 @@ map <leader>i :r !find . -maxdepth 3 -print \| file -if - \| grep "image/" \| aw
 "nmap <F2> :wa<Bar>exe "mksession! " . v:this_session<CR>:so ~/sessions/
 
 " Send math expression to bc
-"nnoremap g= :execute 'r !echo "'.input('Enter math expression: ').'" \| bc -l'<CR>
+nnoremap g= :execute 'r !echo "'.input('Enter math expression: ').'" \| bc -l'<CR>
 
 " look for visual selection
-"vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " move lines in visual mode
 "vnoremap J :m '>+1<CR>gv=gv
@@ -177,6 +179,7 @@ let g:airline_theme='light'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t' " show filenames only
 let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json', '>Projects', 'README*']
+let g:rooter_silent_chdir = 1
 
 "------------------------------------------------------------------------------
 nnoremap <S-h> :HopWordBC<CR>
@@ -206,6 +209,10 @@ nmap <S-F8> <Plug>VimwikiPrevLink
 
 " Expose the entire URL so you can plumb from terminal emulators
 let g:vimwiki_url_maxsave = 0
+
+
+"------------------------------------------------------------------------------
+autocmd FileType asciidoc setlocal commentstring=//\ %s
 
 "------------------------------------------------------------------------------
 let g:slime_no_mappings = 1
