@@ -70,10 +70,13 @@ proj() {
   # help: CTRL-R ..... Search command history
   # help: ALT-C  ..... Change to the selected directory, default command is `fd`
 . "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
-. "/usr/share/LS_COLORS/dircolors.sh"
+#. "/usr/share/LS_COLORS/dircolors.sh"
 . "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 . "$ZDOTDIR/myextensions.zsh" # fzf and more ~/.config/zsh/myextensions.zsh
 . "$ZDOTDIR/colors.zsh" # colors  ~/.config/zsh/colors.zsh
 
-eval `dircolors $ZDOTDIR/mydircolors`
+#eval `dircolors $ZDOTDIR/mydircolors`
 
+ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=blue,underline
+ZSH_HIGHLIGHT_STYLES[precommand]=fg=blue,underline
+ZSH_HIGHLIGHT_STYLES[arg0]=fg=blue
