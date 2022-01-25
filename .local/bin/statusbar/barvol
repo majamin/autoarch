@@ -12,4 +12,4 @@ case $BUTTON in
 esac
 
 # both options
-printf "%s %s \\n" "" "$(pamixer --get-volume-human)"
+printf "%s %s%%\n" "" "$(pamixer --get-volume)"

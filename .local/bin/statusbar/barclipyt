@@ -30,4 +30,4 @@ DISPLEN=$(( TITLELEN < 30 ? TITLELEN : 30))
 A=$(( TITLELEN - DISPLEN <= 0 ? 0 : TSTAMP % (TITLELEN - DISPLEN)))
 B=$((A + DISPLEN))
 
-printf "%s %02d:%02d:%02d %s" "$ICON" "$H" "$m" "$s" "${TITLE:$A:$DISPLEN}"
+printf "%s %02d:%02d:%02d %s\n" "$ICON" "$H" "$m" "$s" "${TITLE:$A:$DISPLEN}"
