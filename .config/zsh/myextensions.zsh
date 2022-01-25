@@ -38,13 +38,18 @@ fbr() {
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
-# change directory to chosen file
-# help: fcd() - fzf change to the directory of the select file
+# Change directory to file.
+# help: cdf() - change directory to file, run fzf if no file argument provided
 cdf () {
-	thefile=$(rg -j0 --hidden --no-messages --smart-case --files -g '!{.git,node_modules,build,.idea,.npm,.cache,.bundle,cache}' . | fzf)
-	[[ -z $thefile ]] && return 1
-	printf '%s\n\e[1;34m%-6s\e[m\n' "You are now in the same directory as" "$thefile"
-	cd $(dirname $thefile)
+	if [[ -e "$1" ]]
+	then
+		cd $(dirname "$1")
+	else
+		thefile=$(rg -j0 --hidden --no-messages --smart-case --files -g '!{.git,node_modules,build,.idea,.npm,.cache,.bundle,cache}' . | fzf)
+		[[ -z $thefile ]] && return 1
+		printf '%s\n\e[1;34m%-6s\e[m\n' "You are now in the same directory as" "$thefile"
+		cd $(dirname $thefile)
+	fi
 }
 
 # cd to directory that you were in when you closed lf
