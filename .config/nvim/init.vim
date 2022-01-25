@@ -17,7 +17,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
 Plug 'chiendo97/intellij.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ap/vim-css-color'
+Plug 'chrisbra/Colorizer'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'vimwiki/vimwiki'
@@ -180,6 +180,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t' " show filenames only
 let g:rooter_patterns = ['.git', '_darcs', '.hg', '.bzr', '.svn', 'Makefile', 'package.json', '>Projects', 'README*']
 let g:rooter_silent_chdir = 1
+
+"------------------------------------------------------------------------------
+let g:colorizer_auto_filetype='html,css,json,R,cpp'
 
 "------------------------------------------------------------------------------
 nnoremap <S-h> :HopWordBC<CR>
