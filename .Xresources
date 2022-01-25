@@ -18,7 +18,12 @@ dwm.nmaster:         1
 dwm.resizehints:     0
 dwm.mfact:           0.5
 
-dmenu.background:    #1377b7
-dmenu.foreground:    #dddddd
-dmenu.selbackground: #5eb9ee
-dmenu.selforeground: #000000
+dmenu.topbar:        1
+dmenu.dmx:           20
+dmenu.dmy:           20
+dmenu.wgap:          20
+dmenu.font:          JetBrainsMono-Regular:size=14
+dmenu.normfgcolor:   #444444
+dmenu.normbgcolor:   #ffffff
+dmenu.selfgcolor:    #000000
+dmenu.selbgcolor:    #f8b343
