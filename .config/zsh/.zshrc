@@ -49,7 +49,13 @@ alias yta="yt-dlp --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-
 alias oneliner='grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.txt | fzf -e | grep -oP "(?<=: \`).*(?=\`$)"' # oneliner (alias) - greps oneliners.txt and selects a command
 
 proj() {
-	PROJDIR=$(find ~/Maja/Projects -maxdepth 2 -type d | fzf)
+	PROJDIR=$(\
+		fd . "$HOME/Maja/Projects" --max-depth=2 --type=d --changed-within=3months --print0 | \
+		xargs -0 stat --format '%Y,%n' | \
+		sort -nr | \
+		cut -d, -f2 | \
+		fzf
+	)
 	cd "$PROJDIR"
 	PROJFILES=$(find "$PROJDIR" -maxdepth 2 -type f -type f \! \( -path '*/\.git/*' \) -printf "%T@ %p\n" | sort -n | cut -f2- -d" " | xargs file 2>/dev/null | grep "text" | cut -f1 -d":" | tail -n5 | tac)
 	if [[ -n "$PROJFILES" ]]; then
