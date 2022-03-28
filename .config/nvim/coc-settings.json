@@ -1,0 +1,21 @@
+{
+  "coc.preferences.useQuickfixForLocations": true,
+  "coc.preferences.extensionUpdateCheck": "never",
+  "suggest.autoTrigger": "none",
+  "suggest.snippetIndicator": "",
+  "diagnostic.virtualText": true,
+  "languageserver": {
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": [
+        "*.cabal",
+        "stack.yaml",
+        "cabal.project",
+        "package.yaml",
+        "hie.yaml"
+      ],
+      "filetypes": ["hs", "lhs", "haskell", "lhaskell"]
+    }
+  }
+}
