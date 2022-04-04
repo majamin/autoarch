@@ -47,6 +47,7 @@ alias ls="ls -hN --color=auto --group-directories-first" # help: ls - ls has col
 alias yt="yt-dlp --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/video.config\"" # help: yt - downloads videos using yt-dlp using config found in ~/.config/youtube-dl
 alias yta="yt-dlp --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/audio.config\"" # help: yta - downloads audio only of videos using yt-dlp using config found in ~/.config/youtube-dl
 alias oneliner='grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.txt | fzf -e | grep -oP "(?<=: \`).*(?=\`$)"' # oneliner (alias) - greps oneliners.txt and selects a command
+alias ll="ls -SsaA1"
 
 proj() {
 	PROJDIR=$(\
