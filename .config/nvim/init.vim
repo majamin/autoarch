@@ -25,11 +25,14 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'sheerun/vim-polyglot'
 Plug 'vimwiki/vimwiki'
+Plug 'jpalardy/vim-slime'
+Plug 'jalvesaq/Nvim-R'
 call plug#end()
 
 let mapleader=" "
 colorscheme github-light
 
+filetype plugin on
 set nospell
 set nowrap
 set nowrapscan
@@ -104,6 +107,8 @@ inoremap <F24> <C-r>=system("date +'\%F \%T \%Z' \| tr '\n' ' '")<CR>
 
 " https://raw.githubusercontent.com/LukeSmithxyz/voidrice/master/.local/bin/compiler
 map <leader>c :w! \| !compiler "<c-r>%"<CR>
+
+autocmd BufNewFile,BufRead *.html,*htm :set filetype=html
 
 "====FILETYPE===================================================================
 " NOTE: Tab stops and expansions is not required if using vim-polyglot
@@ -264,4 +269,24 @@ let g:vimwiki_list           = [wiki_personal]
 nmap <S-F9> <Plug>VimwikiNextLink
 nmap <S-F8> <Plug>VimwikiPrevLink
 
+"------------------------------------------------------------------------------
+let g:slime_no_mappings = 1
+let g:slime_python_ipython = 1
+autocmd FileType python xmap <Space> <Plug>SlimeRegionSend
+autocmd FileType python nmap <Space> <Plug>SlimeParagraphSend
+nmap <C-c>v <Plug>SlimeConfig
+let g:slime_target = "tmux"
+
+"------------------------------------------------------------------------------
+let maplocalleader = ';'
+let R_assign = 0
+let r_indent_align_args = 0
+
+" Press the space bar to send lines and selection to R:
+vmap <Space> <Plug>RDSendSelection
+nmap <Space> <Plug>RDSendLine
+
+let rout_follow_colorscheme = 1 "ORIGINAL
+let r_syntax_folding = 1
+set nofoldenable
 
