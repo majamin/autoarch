@@ -19,8 +19,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'romgrk/github-light.vim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-file-browser.nvim'
+" Plug 'nvim-telescope/telescope.nvim'
+" Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'sheerun/vim-polyglot'
@@ -69,6 +69,11 @@ map <Down> :resize -2<CR>
 map <Left> :vertical resize -2<CR>
 map <Right> :vertical resize +2<CR>
 tnoremap <Esc><Esc> <C-\><C-n>
+
+"====COLORS AND SUCH============================================================
+
+hi clear SpellBad
+hi SpellBad cterm=underline ctermfg=0 ctermbg=226 guifg=0 guibg=226
 
 "====HELPERS AND SHELL==========================================================
 
