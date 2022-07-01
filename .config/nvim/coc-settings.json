@@ -4,6 +4,7 @@
   "suggest.autoTrigger": "none",
   "suggest.snippetIndicator": "",
   "diagnostic.virtualText": true,
+  "coc.preferences.formatOnSaveFiletypes": ["html", "css", "markdown", "javascript", "typescript", "vue", "python"],
   "languageserver": {
     "haskell": {
       "command": "haskell-language-server-wrapper",
