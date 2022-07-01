@@ -19,8 +19,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'romgrk/github-light.vim'
 Plug 'nvim-lua/plenary.nvim'
-" Plug 'nvim-telescope/telescope.nvim'
-" Plug 'nvim-telescope/telescope-file-browser.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
 Plug 'sheerun/vim-polyglot'
@@ -255,6 +255,7 @@ endfunction
 nnoremap <silent><nowait> fw        <cmd>exec ToggleNetrw()<cr>
 
 "====TELESCOPE==================================================================
+nnoremap <silent><nowait> ff        <cmd>Telescope find_files<cr>
 nnoremap <silent><nowait> fr        <cmd>Telescope oldfiles<cr>
 nnoremap <silent><nowait> fg        <cmd>Telescope live_grep<cr>
 nnoremap <silent><nowait> <leader>h <cmd>Telescope help_tags<cr>
