@@ -37,7 +37,10 @@ local lspkind = require'lspkind'
     }),
     formatting = {
       format = lspkind.cmp_format({with_text = false, maxwidth = 50})
-    }
+    },
+    experimental = {
+      ghost_text = true
+    },
   })
 
   -- Set configuration for specific filetype.
