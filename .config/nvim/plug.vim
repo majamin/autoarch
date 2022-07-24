@@ -31,7 +31,8 @@ if has("nvim")
   Plug 'nvim-telescope/telescope-file-browser.nvim'
   Plug 'windwp/nvim-autopairs'
   Plug 'windwp/nvim-ts-autotag'
-  Plug 'sonph/onehalf', { 'rtp': 'vim' }
+  "Plug 'sonph/onehalf', { 'rtp': 'vim' }
+  Plug 'Th3Whit3Wolf/one-nvim'
   Plug 'vimwiki/vimwiki'
 endif
 

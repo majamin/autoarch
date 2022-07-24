@@ -150,7 +150,7 @@ if exists("&termguicolors") && exists("&winblend")
   set wildoptions=pum
   set pumblend=5
   set background=light
-  colorscheme onehalflight
+  colorscheme one-nvim
 endif
 
 "}}}
