@@ -11,12 +11,20 @@ saga.init_lsp_saga {
   border_style = "round",
   code_action_prompt = {
     enable = false
+    },
+  finder_action_keys = {
+    open = "o",
+    vsplit = "s",
+    split = "i",
+    tabe = "t",
+    quit = "q",
+    scroll_down = "<C-f>",
+    scroll_up = "<C-b>", -- quit can be a table
+    },
   }
-}
-
 EOF
 
-nnoremap <silent> <C-j> <Cmd>Lspsaga diagnostic_jump_next<CR>
+nnoremap <silent> <C-e> <Cmd>Lspsaga diagnostic_jump_next<CR>
 nnoremap <silent>K <Cmd>Lspsaga hover_doc<CR>
 "nnoremap <silent> K <Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
 inoremap <silent> <C-k> <Cmd>Lspsaga signature_help<CR>
