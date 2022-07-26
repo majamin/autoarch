@@ -21,11 +21,11 @@ let mapleader=" "
 set nocompatible
 set number
 syntax enable
-set fileencodings=utf-8,sjis,euc-jp,latin
+set spelllang=en_ca
+set fileencodings=utf-8,latin
 set encoding=utf-8
 set title
 set autoindent
-"set background=dark
 set nobackup
 set hlsearch
 set showcmd
@@ -61,6 +61,7 @@ set tabstop=2
 set ai "Auto indent
 set si "Smart indent
 set nowrap "No Wrap lines
+set nowrapscan "Don't wrap around file on search
 set backspace=start,eol,indent
 " Finding files - Search down into subfolders
 set path+=**
@@ -77,12 +78,15 @@ set formatoptions+=r
 " Highlights "{{{
 " ---------------------------------------------------------------------
 set cursorline
-"set cursorcolumn
 
-" Set cursor line color on visual mode
-highlight Visual cterm=NONE ctermbg=236 ctermfg=NONE guibg=Grey40
+hi Visual cterm=NONE ctermfg=NONE ctermbg=236 guibg=Grey40
 
-highlight LineNr cterm=none ctermfg=240 guifg=#2b506e guibg=#000000
+hi LineNr cterm=NONE ctermfg=240 guifg=#2b506e guibg=#000000
+
+hi Search guibg=LightBlue
+
+hi clear SpellBad
+hi SpellBad cterm=underline ctermfg=196 ctermbg=226 guifg=red guibg=226
 
 augroup BgHighlight
   autocmd!
@@ -94,9 +98,6 @@ if &term =~ "screen"
   autocmd BufEnter * if bufname("") !~ "^?[A-Za-z0-9?]*://" | silent! exe '!echo -n "\ek[`hostname`:`basename $PWD`/`basename %`]\e\\"' | endif
   autocmd VimLeave * silent!  exe '!echo -n "\ek[`hostname`:`basename $PWD`]\e\\"'
 endif
-
-hi clear SpellBad
-hi SpellBad cterm=underline ctermfg=0 ctermbg=226 guifg=0 guibg=226
 
 "}}}
 
@@ -119,8 +120,6 @@ set suffixesadd=.js,.es,.jsx,.json,.css,.less,.sass,.styl,.php,.py,.md
 autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
 autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
-
-autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js,*.vue EslintFixAll
 
 "}}}
 
@@ -169,6 +168,18 @@ function! <SID>StripTrailingWhitespaces()
 endfun
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
+let g:vimwiki_global_ext     = 0  " Don't vimwiki every goddamn md file, please
+let g:vimwiki_url_maxsave    = 0  " Don't shorten URL so you can plumb links
+"let g:vimwiki_ext2syntax     = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+let wiki_personal            = {}
+let wiki_personal.path       = system('printf "%s" "$ONEDRIVE" "/Projects/notes"')
+let wiki_personal.path_html  = system('printf "%s" "$ONEDRIVE" "/Projects/notes/html"')
+let g:vimwiki_list           = [wiki_personal]
+
+" I'm already using TAB to switch buffers
+" (Vimwiki is rude and maps TAB automatically)
+nmap <S-F9> <Plug>VimwikiNextLink
+nmap <S-F8> <Plug>VimwikiPrevLink
 "}}}
 
 " vim: set foldmethod=marker foldlevel=0:

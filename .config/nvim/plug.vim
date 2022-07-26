@@ -25,7 +25,6 @@ if has("nvim")
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'hrsh7th/nvim-cmp'
 
-  " For vsnip users.
   Plug 'hrsh7th/cmp-vsnip'
   Plug 'hrsh7th/vim-vsnip'
 
@@ -38,8 +37,8 @@ if has("nvim")
   Plug 'nvim-telescope/telescope-file-browser.nvim'
   Plug 'windwp/nvim-autopairs'
   Plug 'windwp/nvim-ts-autotag'
-  "Plug 'sonph/onehalf', { 'rtp': 'vim' }
-  Plug 'Th3Whit3Wolf/one-nvim'
+  Plug 'norcalli/nvim-colorizer.lua' "Colors hex values
+  Plug 'Th3Whit3Wolf/one-nvim' "The colorscheme
   Plug 'vimwiki/vimwiki'
 endif
 

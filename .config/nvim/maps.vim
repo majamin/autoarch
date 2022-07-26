@@ -36,8 +36,9 @@ nnoremap <ESC> :noh<CR>
 map <F3> :setlocal spell! spelllang=en_ca<CR>
 map <F4> :setlocal spell! spelllang=en-basic<CR>
 
-" close a buffer
-nnoremap <C-q> :bp\|bd #<CR>
+" close buffer or window
+nnoremap <C-b> :bp\|bd #<CR>
+nnoremap <C-q> <C-w>q
 
 " navigate buffers
 nmap <Tab> :bnext<CR>
@@ -63,3 +64,8 @@ map <Right> :vertical resize +2<CR>
 "------------------------------
 " Terminal
 tnoremap <Esc><Esc> <C-\><C-n>
+
+"------------------------------
+" Git (via fugitive)
+" Select and open current file as it appear in git history
+nmap gh :0Gclog<CR>

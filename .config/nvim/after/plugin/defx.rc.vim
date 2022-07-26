@@ -1,5 +1,41 @@
 if !exists('g:loaded_defx') | finish | endif
 
+"--------------------------------------------------------------
+" https://github.com/Shougo/defx.nvim/issues/175#issuecomment-554599774
+" Open defx on directories
+
+function! s:defx_my_settings() abort
+  " ... configure defx as per :help defx-examples ...
+endfunction
+
+function! s:open_defx_if_directory()
+  " This throws an error if the buffer name contains unusual characters like
+  " [[buffergator]]. Desired behavior in those scenarios is to consider the
+  " buffer not to be a directory.
+  try
+    let l:full_path = expand(expand('%:p'))
+  catch
+    return
+  endtry
+
+  " If the path is a directory, delete the (useless) buffer and open defx for
+  " that directory instead.
+  if isdirectory(l:full_path)
+    execute "Defx `expand('%:p')` | bd " . expand('%:r')
+  endif
+endfunction
+
+augroup defx_config
+  autocmd!
+  autocmd FileType defx call s:defx_my_settings()
+
+  " It seems like BufReadPost should work for this, but for some reason, I can't
+  " get it to fire. BufEnter seems to be more reliable.
+  autocmd BufEnter * call s:open_defx_if_directory()
+augroup END
+
+"--------------------------------------------------------------
+
 " Define mappings
 "cnoreabbrev sf Defx -listed -new
 "      \ -columns=indent:mark:icon:icons:filename:git:size
