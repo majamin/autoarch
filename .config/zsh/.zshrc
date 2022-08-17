@@ -30,7 +30,7 @@ fpath=(~/.config/zsh $fpath)
 autoload -Uz compinit && compinit
 autoload edit-command-line; zle -N edit-command-line
 autoload -U colors && colors
-PS1="${STY}%F{#459ED6}%n@%m%F{#F8BB46} (%1d)%F{#EDE7D5} -> "
+PS1="${STY}%F{#459ED6}%n@%m%F{#F8BB46} (%1d)%F{#616161} [%j]%F{#EDE7D5} -> "
 
 unsetopt BEEP
 setopt globdots
