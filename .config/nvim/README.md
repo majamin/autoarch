@@ -1,45 +1,28 @@
-# README
+### Introduction
 
-Hi! This is a helpful guide on how to use this config setup for Neovim.
+A starting point for neovim that is:
 
-I primarily use this setup for web development, so many plugins reflect that.
+* Small (~325 lines)
+* Single-file
+* Documented
+* Modular
 
-It is completely extensible to any other type of development, but you're on your own for that.
+Kickstart targets *only* the latest stable neovim release (0.7) and the nightly.
 
-This Neovim config was inspired by [[https://github.com/craftzdog/dotfiles-public/tree/master/.config/nvim]]
+This repo is meant to be used as a starting point for a user's own configuration; remove the things you don't use and add what you miss. This configuration serves as the reference configuration for the [lspconfig wiki](https://github.com/neovim/nvim-lspconfig/wiki).
 
-The majority of the functionality is helped by Telescope and Neovim LSP.
-Defx is used for file browsing,
+### Installation
+* Backup your previous configuration
+* Copy and paste the kickstart.nvim `init.lua` into `$HOME/.config/nvim/init.lua`
+* start neovim (`nvim`) and run `:PackerInstall`, ignore any error message about missing plugins, `:PackerInstall` will fix that shortly.
+* restart neovim
 
-## How to use
+### Contribution
 
-Easiest way is to grab my entire dotfile repo (`git clone "https://github.com/majamin/autoarch"`) and copy the corresponding folder where it needs to go.
+Pull-requests are welcome. The goal of this repo is not to create a neovim configuration framework, but to offer a starting template that shows, by example, available features in neovim. Some things that will not be included:
 
-*On Linux*: Run `echo $XDG_CONFIG_HOME`.
-Copy the entire nvim directory to that folder (be mindful of any existing `nvim` folder and make backups)
+* Custom language server configuration (null-ls templates)
+* Theming beyond a default colorscheme necessary for LSP highlight groups
+* Lazy-loading. Kickstart.nvim should start within 40 ms on modern hardware. Please profile and contribute to upstream plugins to optimize startup time instead.
 
-*On Windows* and *Mac*: these configs are untested. Sorry!
-
-## First run
-
-Run `nvim` then `:PlugInstall` to install the plugins.
-
-I like light themes. If you want to go dark, simply change `background=light` to `background=dark` in `init.vim` (the colorscheme adjusts everything to suit).
-
-Run `:checkhealth` to understand what Neovim is missing (normal for first-time Neovim use).
-The majority of the fixes here include installing certain dependencies (read the messages there carefully).
-
-## Tips
-
-Jumping into someone else's configs can be a nightmare. For my configs, some tips:
-
-  - `F3` and `F4` are spell toggle for standard and basic English (change `spelllang` in `init.vim`)
-  - `Tab` and `Shift-Tab` cycles through buffers
-  - `<C-q>` closes windows, `<C-b>` closes buffers
-  - `Ctrl-h`, `-j`, `-k`, and `-l` moves between windows
-  - Run `fk` to get a keybindings menu
-  - Run `fh` to get a fuzzy help menu (or `:Telescope help_tags`)
-  - Run `ff` to search and open files
-  - Run `fw` to browse files (`hjkl` moves around, `q` quits, `Enter` opens)
-
-
+Each PR, especially those which increase the line count, should have a description as to why the PR is necessary.
