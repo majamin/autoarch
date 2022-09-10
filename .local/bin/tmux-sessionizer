@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/Maja/Projects ~ -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(find ~/.config ~/Maja/Projects ~/Maja/Project/mss ~ -mindepth 1 -maxdepth 1 -type d | fzf)
 fi
 
 if [[ -z $selected ]]; then
