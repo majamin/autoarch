@@ -24,7 +24,6 @@ export TEXMFHOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export PATH="$PATH:${XDG_DATA_HOME:-$HOME/.local/share}/gem/ruby/3.0.0/bin"
 export NPM_PACKAGES="${XDG_DATA_HOME:-$HOME/.local/share}/npm_packages"
 export PATH="$PATH:$NPM_PACKAGES/bin"
-npm config set prefix "$NPM_PACKAGES"
 
 export LESS=-R
 export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"

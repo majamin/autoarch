@@ -82,6 +82,9 @@ proj() {
 . "$ZDOTDIR/myextensions.zsh" # fzf and more ~/.config/zsh/myextensions.zsh
 . "$ZDOTDIR/colors.zsh" # colors  ~/.config/zsh/colors.zsh
 
+. "/usr/share/nvm/init-nvm.sh"
+[[ -e "npm" ]] && npm config set prefix "$NPM_PACKAGES"
+
 #eval `dircolors $ZDOTDIR/mydircolors`
 
 ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=blue,underline
