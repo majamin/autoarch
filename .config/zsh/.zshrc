@@ -37,17 +37,21 @@ setopt globdots
 bindkey '^e' edit-command-line # help: CTRL-E ..... edits the command line in vim
 bindkey '^ ' forward-char
 bindkey -s '^o' 'oneliner\n' # help: CTRL-O ..... opens oneliners
-bindkey -s '^a' 'fglsa\n'
-bindkey -s '^f' 'fglsm\n'
+bindkey -s '^a' 'tmux attach-session || tmux\n' # help: CTRL-A ..... attaches to any available open tmux session
+bindkey -s '^p' 'tmux-sessionizer\n' # help: CTRL-P ..... opens a project in tmux-sessionizer
 
 alias help='find $ZDOTDIR -maxdepth 1 -type f -not -name "*hist*" | xargs grep -Porh "(?<=# help: ).+"'
 alias pacman="sudo pacman"
 alias sdn='sudo shutdown -h now' # help: sdn - executes shutdown -h now
-alias ls="ls -hN --color=auto --group-directories-first" # help: ls - ls has color and groups directories first
+alias reboot='sudo reboot' # help: reboot
 alias yt="yt-dlp --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/video.config\"" # help: yt - downloads videos using yt-dlp using config found in ~/.config/youtube-dl
 alias yta="yt-dlp --config-location \"${XDG_CONFIG_HOME:-$HOME/.config}/youtube-dl/audio.config\"" # help: yta - downloads audio only of videos using yt-dlp using config found in ~/.config/youtube-dl
 alias oneliner='grep "^(\*)" ~/Maja/Projects/oneliners.txt/oneliners.txt | fzf -e | grep -oP "(?<=: \`).*(?=\`$)"' # oneliner (alias) - greps oneliners.txt and selects a command
-alias ll="ls -SsaA1"
+alias ls="ls -hN --color=auto --group-directories-first" # help: ls - ls has color and groups directories first
+alias l="ls" # help: l - just ls
+alias ll="ls -SlA1" # help: ll - ls -SlA1
+alias la="ls -SlaA1" # help: l - ls -SlaA1
+alias gsu="git status -uno" # help: git status -uno (don't show untracked)
 
 proj() {
 	PROJDIR=$(\
