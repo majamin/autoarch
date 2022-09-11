@@ -3,3 +3,21 @@
   # Print a welcome message
   message("Welcome back ", Sys.getenv("USER"),"!\n","working directory is:", getwd())
 }
+
+# Package names
+packages <- c("tidyverse")
+
+# Install packages not yet installed
+installed_packages <- packages %in% rownames(utils::installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages])
+}
+
+# Packages loading
+invisible(lapply(packages, library, character.only = TRUE, quiet = TRUE))
+
+if("devtools" %in% rownames(utils::installed.packages())) {
+    devtools::install_github("jalvesaq/colorout", quiet=TRUE)
+  }
+
+library(colorout, quietly=TRUE)
