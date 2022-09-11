@@ -37,8 +37,8 @@ setopt globdots
 bindkey '^e' edit-command-line # help: CTRL-E ..... edits the command line in vim
 bindkey '^ ' forward-char
 bindkey -s '^o' 'oneliner\n' # help: CTRL-O ..... opens oneliners
-bindkey -s '^a' 'tmux attach-session || tmux\n' # help: CTRL-A ..... attaches to any available open tmux session
-bindkey -s '^p' 'tmux-sessionizer\n' # help: CTRL-P ..... opens a project in tmux-sessionizer
+# bindkey -s '^a' 'tmux attach-session || tmux\n' # help: CTRL-A ..... attaches to any available open tmux session
+bindkey -s '^f' 'tmux-sessionizer\n' # help: CTRL-P ..... opens a project in tmux-sessionizer
 
 alias help='find $ZDOTDIR -maxdepth 1 -type f -not -name "*hist*" | xargs grep -Porh "(?<=# help: ).+"'
 alias pacman="sudo pacman"
