@@ -1,5 +1,3 @@
-if [ -f $HOME/.cache/wal/sequences ]; then
-	(cat ~/.cache/wal/sequences &)
-else
-	wal --theme sexy-material &
+if [[ -e "wal" ]]; then
+	setsid wal -r
 fi
