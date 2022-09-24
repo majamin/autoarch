@@ -38,7 +38,6 @@ attach() {
 # $1: window name
 switch() {
   if ! has_session; then
-    echo "no session $selected_name found - creating it"
     tmux new-session -d -s "$selected_name" -c "$selected"
   fi
   tmux switch-client -t "$selected_name"
