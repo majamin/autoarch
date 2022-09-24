@@ -31,7 +31,7 @@ setopt globdots
 autoload -Uz compinit && compinit
 autoload edit-command-line; zle -N edit-command-line
 autoload -U colors && colors
-PS1="%{$fg[blue]%}%n%{$reset_color%}@%{$fg[yellow]%}%m %F{#616161}%~ {%j} %{$reset_color%}%% "
+PS1="%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[yellow]%}%m %F{#616161}%~ {%j} %{$reset_color%}%% "
 
 bindkey '^e' edit-command-line # help: CTRL-E ..... edits the command line in vim
 bindkey '^l' forward-char
