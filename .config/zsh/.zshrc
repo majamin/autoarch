@@ -30,7 +30,10 @@ setopt globdots
 autoload -Uz compinit && compinit
 autoload edit-command-line; zle -N edit-command-line
 autoload -U colors && colors
-print -P "Hi \e[0;33m%n\e[0m. This is \e[0;33m%1~\e[0m on \e[0;33m%m\e[0m. (Type "help" for some useful commands.)\n"
+DATE=$(date +"%b %d, %Y - %H:%M:%S")
+print -P "Hi \e[0;33m%n\e[0m. $DATE"
+print -P "This is the \e[0;33mzsh\e[0m shell on \e[0;33m%m\e[0m."
+print -P "Type \"help\" for some useful commands.\n"
 PS1="%F{#616161}%~ {%j} %{$reset_color%}% $ "
 
 # ------------ KEYBINDINGS AND MODES -----------------------------------------
