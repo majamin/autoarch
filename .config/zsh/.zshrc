@@ -26,6 +26,7 @@ fpath=(~/.config/zsh $fpath)
 
 unsetopt BEEP
 setopt globdots
+export COLORTERM=truecolor
 
 autoload -Uz compinit && compinit
 autoload edit-command-line; zle -N edit-command-line
@@ -58,6 +59,7 @@ alias l="ls" # help: `l` - alias for `ls`
 alias ll="ls -SlA1" # help: `ll` is an alias for `ls -SlA1`
 alias la="ls -SlaA1" # help: `l` is an alias for `ls -SlaA1`
 alias gsu="git status -uno" # help: `gsu` is an alias for `git status -uno`
+mkcd() { mkdir -p $1 && cd $1 }
 
 # ------------ BEHAVIOUR -----------------------------------------------------
 source "/usr/share/fzf/completion.zsh"
