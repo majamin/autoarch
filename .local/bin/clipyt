@@ -2,7 +2,7 @@
 
 # check for basic dependencies
 [[ ! -x $(which mpv) ]] && notify-send "mpv could not be found - please make sure it is installed or in your \$PATH" && exit 1
-[[ ! -x $(which youtube-dl) ]] && notify-send "youtube-dl could not be found - please make sure it is installed or in your \$PATH" && exit 1
+[[ ! -x $(which yt-dlp) ]] && notify-send "yt-dlp could not be found - please make sure it is installed or in your \$PATH" && exit 1
 [[ ! -x $(which socat) ]] && notify-send "socat could not be found - please make sure it is installed or in your \$PATH" && exit 1
 [[ ! -x $(which dmenu) ]] && notify-send "dmenu could not be found - please make sure it is installed or in your \$PATH" && exit 1
 
