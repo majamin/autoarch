@@ -1,29 +1,9 @@
-dwm.normbgcolor:     #ffffff
-dwm.normbordercolor: #444444
-dwm.normfgcolor:     #000000
-dwm.selfgcolor:      #231893
-dwm.selbordercolor:  #f8b343
-dwm.selbgcolor:      #ffffff
-dwm.borderpx:        3
-dwm.gappx:           20
-dwm.snap:            32
-dwm.showbar:         1
-dwm.topbar:          1
-dwm.vertpad:         20
-dwm.sidepad:         20
-dwm.horizpadbar:     20
-dwm.vertpadbar:      20
-dwm.focusonwheel:    0
-dwm.nmaster:         1
-dwm.resizehints:     0
-dwm.mfact:           0.5
-
 dmenu.topbar:        1
-dmenu.dmx:           20
-dmenu.dmy:           20
-dmenu.wgap:          20
-dmenu.font:          JetBrainsMono-Regular:size=14
-dmenu.normfgcolor:   #444444
-dmenu.normbgcolor:   #ffffff
+dmenu.dmx:           5
+dmenu.dmy:           5
+dmenu.wgap:          5
+dmenu.font:          Iosevka Nerd Font:size=14
+dmenu.normfgcolor:   #ffffff
+dmenu.normbgcolor:   #24283b
 dmenu.selfgcolor:    #000000
-dmenu.selbgcolor:    #f8b343
+dmenu.selbgcolor:    #2ac3de
