@@ -46,8 +46,8 @@ gitwatch() {
 }
 
 pkg_updates() {
-  updates=$(checkupdates | wc -l)   # arch
-  if [ ! -z "$updates" ]; then
+  updates=$(checkupdates | wc -l) # requires `pacman-contrib`
+  if [ -z "$updates" ]; then
     printf "  ^c$green^    $updates"" updates"
   fi
 }
@@ -98,8 +98,11 @@ clock() {
 
 while true; do
 
-  [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates)
+  [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && \
+    updates=$(pkg_updates) && \
+    gits=$(gitwatch)
+
   interval=$((interval + 1))
 
-  sleep 1 && xsetroot -name "$updates $(gitwatch) $(battery) $(sys) $(net) $(clock)"
+  sleep 1 && xsetroot -name "$updates $gits $(battery) $(sys) $(net) $(clock)"
 done
