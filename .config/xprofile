@@ -3,7 +3,6 @@ dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XA
 
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 remaps &
-~/.local/bin/statusbar/bar.sh &
 dunst &
 xset r rate 300 50 &
 unclutter &

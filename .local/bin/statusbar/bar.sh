@@ -11,24 +11,43 @@ green=#7eca9c
 white=#abb2bf
 grey=#282c34
 blue=#7aa2f7
+orange=#ff9e64
 red=#d47d85
 darkblue=#668ee3
 
-cpu() {
-  cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
+gitwatch() {
+  LOG="$HOME/git_report.log"
+  rm -f $LOG 2>/dev/null
+  FLAGS=()
 
-  printf "^c$black^ ^b$green^ CPU"
-  printf "^c$white^ ^b$grey^ $cpu_val"
+  git_ls_files(){
+    printf "%s" "$(git -C "$1" ls-files --modified | sed '/^ *$/d')"
+  }
+
+  # TODO: add $HOME repo
+  DIRS="$HOME $(find "$HOME/.local/src" -maxdepth 1 -type d)"
+
+  # check src repos
+  for DIR in $DIRS; do
+    FILES="$(git_ls_files ${DIR})"
+    if [[ -z "$FILES" ]]; then
+      continue
+    else
+      GITFLAG=true
+      for FILE in $FILES; do
+        echo -e "$DIR/$FILE" >> "$LOG"
+      done
+    fi
+  done
+
+  [[ $GITFLAG == true ]] && \
+    printf "^c$black^ ^b$orange^ GIT" && \
+    printf "^c$white^ ^b$grey^ $(cat $LOG | wc -l)"
 }
 
 pkg_updates() {
-  # updates=$(doas xbps-install -un | wc -l) # void
   updates=$(checkupdates | wc -l)   # arch
-  # updates=$(aptitude search '~U' | wc -l)  # apt (ubuntu,debian etc)
-
-  if [ -z "$updates" ]; then
-    printf "  ^c$green^    Fully Updated"
-  else
+  if [ ! -z "$updates" ]; then
     printf "  ^c$green^    $updates"" updates"
   fi
 }
@@ -52,9 +71,16 @@ battery() {
   printf "^c$blue^ $icon $capacity"
 }
 
-mem() {
-  printf "^c$blue^^b$black^  "
-  printf "^c$blue^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
+sys() {
+  printf "^c$black^ ^b$green^ SYS"
+
+  CPU=$(grep -o "^[^ ]*" /proc/loadavg)
+  printf "^c$green^ ^b$grey^ CPU"
+  printf "^c$white^ ^b$grey^$CPU"
+
+  MEM=$(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)
+  printf "^c$green^ ^b$grey^ MEM"
+  printf "^c$white^ ^b$grey^$MEM"
 }
 
 net() {
@@ -67,7 +93,7 @@ net() {
 
 clock() {
 	# printf "^c$black^ ^b$darkblue^ 󱑆 "
-	printf "^c$black^^b$blue^ $(date '+%H:%M')  "
+	printf "^c$black^^b$blue^ $(date '+%d %b %H:%M')  "
 }
 
 while true; do
@@ -75,5 +101,5 @@ while true; do
   [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates)
   interval=$((interval + 1))
 
-  sleep 1 && xsetroot -name "$updates $(battery) $(cpu) $(mem) $(net) $(clock)"
+  sleep 1 && xsetroot -name "$updates $(gitwatch) $(battery) $(sys) $(net) $(clock)"
 done
