@@ -9,7 +9,7 @@ xset r rate 300 50 &
 unclutter &
 mpd-module-update &
 xinput disable 'SynPS/2 Synaptics TouchPad' & # use mouse or trackpoint only
-picom --no-vsync --no-use-damage & # composite manager
+picom & # composite manager
 [[ -x VBoxClient-all ]] && VBoxClient-all 2> ~/vbox.log &
 [[ -x ~/.screenlayout/default.sh ]] && ~/.screenlayout/default.sh &
 [[ -x $(command setbg) ]] && setbg &
