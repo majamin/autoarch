@@ -343,7 +343,7 @@ schemes:
   ### Monokai ###
   MonokaiPro: &MonokaiPro # Default colors
     primary:
-      background: "#2D2A2E"
+      background: "#1F2335"
       foreground: "#FCFCFA"
 
     # Normal colors
