@@ -31,6 +31,9 @@ export GOPATH="${XDG_DATA_HOME:-$HOME/.local/share}/go"
 # R
 export R_ENVIRON_USER="${XDG_CONFIG_HOME:-$HOME/.config}/R/Renviron"
 
+# Rust
+export PATH="$PATH:$HOME/.cargo/bin"
+
 # LaTeX
 export TEXMFHOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 
