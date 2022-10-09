@@ -47,7 +47,7 @@ gitwatch() {
 
 pkg_updates() {
   updates=$(checkupdates | wc -l) # requires `pacman-contrib`
-  if [ -z "$updates" ]; then
+  if [ -n "$updates" ]; then
     printf "  ^c$green^    $updates"" updates"
   fi
 }
