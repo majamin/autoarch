@@ -13,11 +13,12 @@ INCLUDE="\
 EXCLUDE="\
   --exclude .cache \
   --exclude .git \
+  --exclude node_modules \
   --exclude microsoft-edge \
   "
 
 # check for dependencies
-for cmd in tmux fd notify-send basename; do
+for cmd in tmux fd xargs notify-send basename; do
   command -v "${cmd}" >/dev/null 2>&1 || cmd_failures="${cmd_failures},${cmd}"
 done
 if (( "${#cmd_failures}" > 0 )); then
