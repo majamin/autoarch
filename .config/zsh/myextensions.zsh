@@ -22,14 +22,13 @@ _fzf_compgen_dir() {
 	}
 
 # pass arguments on to command line
-# help: f() - fzf pass selected files as arguments to command (e.g. f mv)
+# help: f() .......... fzf pass selected files as arguments to command (e.g. f mv)
 f() {
     sels=( "${(@f)$(fd -H -d1 "${@:2}"| fzf -m)}" )
     test -n "$sels" && print -z -- "$1 ${sels[@]:q:q}"
 }
 
-# Git
-# help: fbr() - fzf select local and remote branches
+# help: fgb() ........ fzf select local and remote git branches
 fbr() {
   local branches branch
   branches=$(git branch --all | grep -v HEAD) &&
@@ -38,8 +37,7 @@ fbr() {
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
-# Change directory to file.
-# help: cdf() - change directory to file, run fzf if no file argument provided
+# help: fcd() ........ change directory to file, run fzf if no file argument provided
 cdf () {
 	if [[ -e "$1" ]]
 	then
@@ -52,8 +50,7 @@ cdf () {
 	fi
 }
 
-# cd to directory that you were in when you closed lf
-# help: lfcd() - cd to the directory that you were in when you closed lf
+# help: lfcd() ....... open lf, but also cd to the directory that was open when lf closes
 lfcd () {
 	tmp="$(mktemp)"
 	lf -last-dir-path="$tmp" "$@"
@@ -65,27 +62,5 @@ lfcd () {
 				cd "$dir"
 			fi
 		fi
-	fi
-}
-
-# open projects with fzf
-proj() {
-	PROJDIR=$(\
-		fd . "$HOME/Maja/Projects" --max-depth=2 --type=d --changed-within=3months --print0 | \
-		xargs -0 stat --format '%Y,%n' | \
-		sort -nr | \
-		cut -d, -f2 | \
-		fzf
-	)
-	cd "$PROJDIR"
-	PROJFILES=$(find "$PROJDIR" -maxdepth 2 -type f -type f \! \( -path '*/\.git/*' \) -printf "%T@ %p\n" | sort -n | cut -f2- -d" " | xargs file 2>/dev/null | grep "text" | cut -f1 -d":" | tail -n5 | tac)
-	if [[ -n "$PROJFILES" ]]; then
-		if [[ -e "$PROJDIR/Session.vim" ]]; then
-			vim -S "$PROJDIR/Session.vim"
-		else
-			echo "$PROJFILES" | xargs vim
-		fi
-	else
-		printf "Directory is now %s, but no text files here.\n" "$PROJDIR" && ls
 	fi
 }
