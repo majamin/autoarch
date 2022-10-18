@@ -50,11 +50,11 @@ shift $((OPTIND-1))
 SOURCES=("$@")
 
 # if a mpv-clipyt process if already running, kill it and exit
-MPVPID=$(xprop -name mpv-clipyt 2>/dev/null | grep -Po "(?<=_NET_WM_PID\(CARDINAL\) = ).+")
-if [[ -n $MPVPID ]]; then
-	notify-send -u low "clipyt already running - closing current session!"
-	kill -HUP $MPVPID && exit 0
-fi
+# MPVPID=$(xprop -name mpv-clipyt 2>/dev/null | grep -Po "(?<=_NET_WM_PID\(CARDINAL\) = ).+")
+# if [[ -n $MPVPID ]]; then
+# 	notify-send -u low "clipyt already running - closing current session!"
+# 	kill -HUP $MPVPID && exit 0
+# fi
 
 # if ran interactively with an argument just play it
 [[ -n "$@" ]] && play "$@" && exit 0
