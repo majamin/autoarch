@@ -65,6 +65,8 @@ alias l="ls"                                    # help: l ............ alias for
 alias ll="ls -SlA1"                             # help: ll ........... is an alias for `ls -SlA1`
 alias la="ls -SlaA1"                            # help: l ............ is an alias for `ls -SlaA1`
 alias gsu="git status -uno"                     # help: gsu .......... is an alias for `git status -uno`
+alias th='tmux new -s $(basename $(pwd))'       # help: th ........... create a new tmux session in current directory
+alias ta='tmux attach -t "$(tmux ls -F #S | fzf)"' # help: ta ........... attach an existing tmux session
 mkcd() { mkdir -p $1 && cd $1 }                 # help: mkcd ......... make a directory and cd into it
 
 # ------------ BEHAVIOUR -----------------------------------------------------
