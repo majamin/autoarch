@@ -35,7 +35,8 @@ DATE=$(date +"%b %d, %Y - %H:%M:%S")
 print -P "Hi \e[0;33m%n\e[0m. $DATE"
 print -P "This is the \e[0;33mzsh\e[0m shell on \e[0;33m%m\e[0m."
 print -P "Type \"help\" for some useful commands.\n"
-PROMPT='%B%F{008}%~%b %F{011}$%f '
+NEWL=$'\n'
+PROMPT="%B%F{008}%~%b${NEWL}%F{011}$%f "
 
 # ------------ KEYBINDINGS AND MODES -----------------------------------------
 bindkey '^e' edit-command-line                  # help: CTRL-E ....... while in insert mode, edits the command line in vim
