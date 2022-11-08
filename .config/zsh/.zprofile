@@ -7,7 +7,7 @@ export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$
 export TERMINAL="st"
 export EDITOR="nvim"
 export READER="zathura"
-export BROWSER="microsoft-edge-stable"
+export BROWSER="firefox"
 
 # XDG
 export XDG_CONFIG_HOME="$HOME/.config"
