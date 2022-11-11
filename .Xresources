@@ -1,9 +1,0 @@
-dmenu.topbar:        1
-dmenu.dmx:           5
-dmenu.dmy:           5
-dmenu.wgap:          5
-dmenu.font:          Iosevka Nerd Font:size=14
-dmenu.normfgcolor:   #ffffff
-dmenu.normbgcolor:   #24283b
-dmenu.selfgcolor:    #000000
-dmenu.selbgcolor:    #2ac3de

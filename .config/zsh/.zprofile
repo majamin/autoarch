@@ -63,8 +63,7 @@ export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
 export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
 
-# Start X if not already running
-[[ -z $(echo ${SSH_CLIENT}) && -n "$(tty)" && -z "$(pgrep -u $USER '\bXorg$')" ]] && exec startx
-
-# Switch escape and caps if tty and no passwd required:
-sudo -n loadkeys ${XDG_DATA_HOME:-$HOME/.local/share}/ttymaps.kmap 2>/dev/null
+# Start sway
+if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
+  ~/start.sh || sway
+fi
