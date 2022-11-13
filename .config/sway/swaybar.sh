@@ -18,6 +18,24 @@ net() {
   printf "$ICON %s" "$SSID"
 }
 
+sound() {
+
+  local vol="$(pamixer --get-volume)"
+  local muted="$(pamixer --get-mute)"
+
+  # If muted, print 🔇 and exit.
+  [ "$muted" = "true" ] && echo 🔇 && exit
+
+  case 1 in
+    $((vol >= 70)) ) icon="🔊" ;;
+    $((vol >= 30)) ) icon="🔉" ;;
+    $((vol >= 1)) ) icon="🔈" ;;
+    * ) echo 🔇 && exit ;;
+  esac
+
+  printf "%s" "$icon $vol%"
+}
+
 # 💎 💻 💡 🔌 ⚡ 📁 ↑ 🔋\|
-printf "%s" "🐧$linux_version   $(net)   $date_formatted"
+printf "%s" "🐧$linux_version   $(sound)  $date_formatted"
 
