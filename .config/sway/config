@@ -69,6 +69,8 @@ floating_modifier $mod normal
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+q exec swaynag -t warning -m 'Exit sway?' -B 'Yes' 'swaymsg exit'
 
+bindsym Print exec maimpick
+
 # Move your focus around
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
