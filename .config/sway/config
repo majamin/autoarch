@@ -20,7 +20,7 @@ set $up k
 set $right l
 
 set $white #ffffff
-set $light_sea_green #1abc9c
+set $cyan_cobalt_blue #28589c
 set $inactive_grey #bdbdbd
 set $midnight_express #24283b
 
@@ -220,33 +220,24 @@ bindsym $mod+r mode "resize"
 #│placeholder       │ #000000 │ #0c0c0c    │ #ffffff │ #000000   │ #0c0c0c      │
 #└──────────────────┴─────────┴────────────┴─────────┴───────────┴──────────────┘
 
-# class                 border            background        text    indicator   child_border
-client.focused          $light_sea_green  $light_sea_green  #000000 #2e9ef4     $light_sea_green
+# class                 border            background        text    indicator         child_border
+client.focused          $cyan_cobalt_blue $cyan_cobalt_blue $white  $cyan_cobalt_blue $cyan_cobalt_blue
 client.focused_inactive $midnight_express $midnight_express $white
-client.unfocused        $inactive_grey    $inactive_grey    #000000
+client.unfocused        $midnight_express $midnight_express $white
 client.urgent           $midnight_express #ff007c           $white
+
+#▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+# GAPS
+
+gaps inner 16
+smart_gaps off
 
 #▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # STATUS BAR
 # Read `man 5 sway-bar` for more information about this section.
 
 bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while ~/.config/sway/swaybar.sh; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background $midnight_express
-        focused_workspace #ff9e64 #ff9e64 #000000
-        inactive_workspace $midnight_express $midnight_express #ffffff
-
-    }
-
-    # Pango:
-    font pango:Source Code Pro Semibold 12
+    swaybar_command waybar
 }
 
 include /etc/sway/config.d/*
