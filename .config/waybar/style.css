@@ -77,8 +77,8 @@ button:hover {
 
 window#waybar > box {
   background-color: #b4c7df;
-  border-radius: 3px;
-  margin: 16px 16px 4px 16px;
+  border-radius: 0px 4px;
+  margin: 0px 0px 4px 0px;
   padding: 5px;
   box-shadow: 1px 1px 3px 1px #222;
 }
