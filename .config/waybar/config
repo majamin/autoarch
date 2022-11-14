@@ -3,7 +3,7 @@
   "position": "top",
   "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
   "modules-center": ["clock"],
-  "modules-right": ["custom/recorder","sway/language", "tray", "idle_inhibitor", "pulseaudio", "temperature", "custom/cpu_speed", "battery", "custom/powermenu"],
+  "modules-right": ["custom/recorder","custom/colorpicker","sway/language", "tray", "idle_inhibitor", "pulseaudio", "temperature", "custom/cpu_speed", "battery", "custom/powermenu"],
   "sway/mode": {
     "format": " {}"
   },
@@ -52,6 +52,14 @@
     "interval": 4,
     "exec": "echo '{\"class\": \"recording\"}'",
     "exec-if": "pgrep wf-recorder"
+  },
+  "custom/colorpicker": {
+    "format": "<span font='Font Awesome 6 Free 9'>{icon}</span>  {}",
+    "format-icons": [""],
+    "return-type": "json",
+    "interval": 3600,
+    "exec": "echo '{\"class\": \"colorpicker\"}'",
+    "on-click": ""
   },
   "battery": {
     "format": "<span font='Font Awesome 6 Free 11'>{icon}</span>  {capacity}% - {time}",
