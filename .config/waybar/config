@@ -59,7 +59,7 @@
     "return-type": "json",
     "interval": 3600,
     "exec": "echo '{\"class\": \"colorpicker\"}'",
-    "on-click": ""
+    "on-click": "~/.local/bin/colorpicker"
   },
   "battery": {
     "format": "<span font='Font Awesome 6 Free 11'>{icon}</span>  {capacity}% - {time}",
