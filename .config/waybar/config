@@ -3,7 +3,7 @@
   "position": "top",
   "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
   "modules-center": ["clock"],
-  "modules-right": ["custom/recorder","custom/colorpicker","sway/language", "tray", "idle_inhibitor", "pulseaudio", "temperature", "custom/cpu_speed", "battery", "custom/powermenu"],
+  "modules-right": ["custom/recorder","sway/language", "custom/colorpicker","tray", "idle_inhibitor", "pulseaudio", "temperature", "custom/cpu_speed", "battery", "custom/powermenu"],
   "sway/mode": {
     "format": " {}"
   },
@@ -19,28 +19,24 @@
     "format": "{:%a %d %b - %H:%M}",
     "on-click": "gnome-calendar"
   },
-  "hyprland/window": {
-    "format": "👉 {}",
-    "separate-outputs": true
+  "sway/language": {
+    "format": "{}",
+    "tooltip-format": "{long}",
+    "on-click": "swaymsg input 'type:keyboard' xkb_switch_layout next"
   },
   "custom/cpu_speed": {
     "interval": 10,
     "return-type": "json",
     "exec": "~/.config/waybar/modules/cpu_speed.sh",
-    "format": "<span font='Font Awesome 6 Free 11'>{icon}</span>  {}",
+    "format": "<span font='Font Awesome 6 Free 11'>{icon}</span>{}",
     "format-icons": [""],
     "escape": true,
     "on-click": "kitty top"
   },
-  "sway/language": {
-    "format": "<span font='Font Awesome 6 Free 9'>🏳️</span> {}",
-    "tooltip-format": "{long}",
-    "on-click": "swaymsg input 'type:keyboard' xkb_switch_layout next"
-  },
   "custom/powermenu": {
     "return-type": "json",
     "exec": "~/.config/waybar/modules/powermenu.sh",
-    "format": "<span font='Font Awesome 6 Free 9'>{icon}</span>  {}",
+    "format": "<span font='Font Awesome 6 Free 9'>{icon}</span>{}",
     "format-icons": [""],
     "interval": 3600,
     "escape": true,
@@ -54,7 +50,7 @@
     "exec-if": "pgrep wf-recorder"
   },
   "custom/colorpicker": {
-    "format": "<span font='Font Awesome 6 Free 9'>{icon}</span>  {}",
+    "format": "<span font='Font Awesome 6 Free 9'>{icon}</span>{}",
     "format-icons": [""],
     "return-type": "json",
     "interval": 3600,
@@ -62,11 +58,11 @@
     "on-click": "~/.local/bin/colorpicker"
   },
   "battery": {
-    "format": "<span font='Font Awesome 6 Free 11'>{icon}</span>  {capacity}% - {time}",
+    "format": "<span font='Font Awesome 6 Free 11'>{icon}</span>{capacity}% - {time}",
     "format-icons": ["", "", "", "", ""],
     "format-time": "{H}h{M}m",
-    "format-charging": "<span font='Font Awesome 6 Free'></span>  <span font='Font Awesome 6 Free 11'>{icon}</span>  {capacity}% - {time}",
-    "format-full": "<span font='Font Awesome 6 Free'></span>  <span font='Font Awesome 6 Free 11'>{icon}</span>  Charged",
+    "format-charging": "<span font='Font Awesome 6 Free'></span><span font='Font Awesome 6 Free 11'>{icon}</span>{capacity}% - {time}",
+    "format-full": "<span font='Font Awesome 6 Free'></span><span font='Font Awesome 6 Free 11'>{icon}</span>Charged",
     "interval": 30,
     "states": {
       "warning": 25,
@@ -79,16 +75,15 @@
     "format": "{icon}",
     "format-alt": "{ipaddr}/{cidr} {icon}",
     "format-alt-click": "click-right",
-    "format-wifi": "<span font='Font Awesome 6 Free 10'></span>  {essid} ({signalStrength}%)",
+    "format-wifi": "<span font='Font Awesome 6 Free 10'></span>{essid} ({signalStrength}%)",
     "format-ethernet": " {ifname}",
     "format-disconnected": "⚠ Disconnected",
     "on-click": "kitty ~/.config/sway/scripts/network-manager",
-    // "on-click": "gnome-control-center wifi",
     "tooltip": false
   },
   "pulseaudio": {
     "format": "<span font='Font Awesome 6 Free 11'>{icon:2}</span> {volume:4}% ",
-    "format-bluetooth": "<span font='Font Awesome 6 Free 11'> {icon:2}</span> {volume:4}% - {desc}",
+    "format-bluetooth": "<span font='Font Awesome 6 Free 11'>{icon:2}</span>{volume:4}% - {desc}",
     "format-alt": "<span font='Font Awesome 6 Free 11'>{icon:2}</span> {volume:4}%",
     "format-alt-click": "click-right",
     "format-muted": "<span font='Font Awesome 6 Free 11'></span>",
