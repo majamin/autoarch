@@ -12,11 +12,12 @@
     "sway/language",
     "custom/colorpicker",
     "tray",
-    "idle_inhibitor",
     "pulseaudio",
     "temperature",
     "custom/cpu_speed",
     "battery",
+    "idle_inhibitor",
+    "network",
     "custom/powermenu",
   ],
   "sway/mode": {
@@ -91,7 +92,7 @@
     "format-alt": "{ipaddr}/{cidr} {icon}",
     "format-alt-click": "click-right",
     "format-wifi": "<span font='Font Awesome 6 Free 10'></span>{essid} ({signalStrength}%)",
-    "format-ethernet": " {ifname}",
+    "format-ethernet": "<span font='Font Awesome 6 Free 10'></span> eth",
     "format-disconnected": "⚠ Disconnected",
     "on-click": "kitty ~/.config/sway/scripts/network-manager",
     "tooltip": false
