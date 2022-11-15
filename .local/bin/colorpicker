@@ -1,22 +1,11 @@
 #!/bin/bash
 
-notify-send "Not implemented yet" "Coming soon"
+geometry=$(slurp -p)
+sleep 1 # so the user has a chance to move the mouse before it's captured
 
-# PIXEL_DATA=$(grim -g "$(slurp -p)" -t ppm - | \
-#   convert - -format '%[pixel:p{0,0}]' txt:- | \
-#   tail -n1 | cut -d: -f2)
+grim -g "$geometry" /tmp/pixel.png
+convert /tmp/pixel.png -scale 50x50 /tmp/colorpicker_icon.png
+PIXEL_DATA=$(convert /tmp/pixel.png -format '%[pixel:p{0,0}]' txt:- | tail -n1 | cut -d# -f2)
 
-# geometry=$(slurp -p)
-#
-# grim -g "$geometry" /tmp/pixel.png
-#
-# convert /tmp/pixel.png -scale 50x50 /tmp/colorpicker_icon.png
-
-# HEX=$(echo "$PIXEL_DATA" | grep -o "#\w*")
-
-# convert -size 50x50 xc:white -draw "fill $HEX rectangle 0,0 50,50" /tmp/colorpicker_icon.png
-
-# echo $PIXEL_DATA
-# wl-copy "$PIXEL_DATA" && \
-#   sleep 2 && \
-#   notify-send --icon="/tmp/colorpicker_icon.png" "Copied to clipboard" "$PIXEL_DATA"
+wl-copy "$PIXEL_DATA" && \
+  notify-send --icon="/tmp/colorpicker_icon.png" "Copied to clipboard" "$PIXEL_DATA"
