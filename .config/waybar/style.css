@@ -6,6 +6,7 @@
 /* GTK+3 definitions */
 @define-color bg-color #b4c7df;
 @define-color bg-color-darker #a3bbd9;
+@define-color fg-color #222222;
 
 /*  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
  *     GENERAL
@@ -15,6 +16,7 @@
   font-family: FontAwesome, 'Lucida Grande', Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
+  color: @fg-color;
 }
 
 #window,
@@ -23,7 +25,6 @@
 }
 
 window#waybar {
-  color: #222222;
   background-color: transparent;
   transition-duration: .5s;
 }
@@ -37,7 +38,7 @@ window#waybar > box {
   border-radius: 0px 4px;
   margin: 0px 0px 4px 0px;
   padding: 5px;
-  box-shadow: 1px 1px 3px 1px #222;
+  box-shadow: 1px 1px 3px 1px @fg-color;
 }
 
 /*
@@ -90,7 +91,7 @@ button:hover {
   box-shadow: none;
   text-shadow: none;
   border-color: transparent;
-  background: #a3bbd9;
+  background: @bg-color-darker;
 }
 
 /*  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
@@ -107,7 +108,6 @@ button:hover {
 */
 
 #battery.charging {
-  color: #222;
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -130,6 +130,4 @@ to {
   animation-direction: alternate;
 }
 
-label:focus {
-  background-color: #222;
-}
+/* label:focus {} */

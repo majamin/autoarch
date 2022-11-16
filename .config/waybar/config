@@ -92,9 +92,9 @@
     "format-alt": "{ipaddr}/{cidr} {icon}",
     "format-alt-click": "click-right",
     "format-wifi": "<span font='Font Awesome 6 Free 10'></span>{essid} ({signalStrength}%)",
-    "format-ethernet": "<span font='Font Awesome 6 Free 10'></span> eth",
+    "format-ethernet": "<span font='Font Awesome 6 Free 10'></span> {ipaddr}",
     "format-disconnected": "⚠ Disconnected",
-    "on-click": "kitty ~/.config/sway/scripts/network-manager",
+    "on-click": "kitty nmtui",
     "tooltip": false
   },
   "pulseaudio": {
