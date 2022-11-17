@@ -94,21 +94,20 @@
     "format-wifi": "<span font='Font Awesome 6 Free 10'></span>{essid} ({signalStrength}%)",
     "format-ethernet": "<span font='Font Awesome 6 Free 10'></span> {ipaddr}",
     "format-disconnected": "⚠ Disconnected",
-    "on-click": "kitty nmtui",
+    "on-click": "kitty --class kitty-nmtui nmtui",
     "tooltip": false
   },
   "pulseaudio": {
-    "format": "<span font='Font Awesome 6 Free 11'>{icon:2}</span> {volume:4}% ",
+    "format": "<span font='Font Awesome 6 Free 11'>{icon:2}</span> {volume:4}%",
     "format-bluetooth": "<span font='Font Awesome 6 Free 11'>{icon:2}</span>{volume:4}% - {desc}",
-    "format-alt": "<span font='Font Awesome 6 Free 11'>{icon:2}</span> {volume:4}%",
-    "format-alt-click": "click-right",
     "format-muted": "<span font='Font Awesome 6 Free 11'></span>",
     "format-icons": {
       "headphone": [" ", " ", " ", " "],
       "default": ["", "", "", ""]
     },
-    "scroll-step": 2,
-    "on-click": "gnome-control-center sound",
+    "scroll-step": 4,
+    "on-click": "kitty --class kitty-pulsemixer pulsemixer",
+    "on-click-right": "pactl set-sink-mute 0 toggle",
     "tooltip": false
   },
   "custom/storage": {

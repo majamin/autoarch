@@ -228,6 +228,12 @@ client.unfocused        $midnight_express $midnight_express $white
 client.urgent           $midnight_express #ff007c           $white
 
 #▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+# FLOATING RULES
+for_window [app_id="org.gnome.Calendar"] floating enable
+for_window [app_id="kitty-nmtui"] floating enable
+for_window [app_id="kitty-pulsemixer"] floating enable
+
+#▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # GAPS
 
 gaps inner 16
