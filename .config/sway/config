@@ -242,6 +242,8 @@ for_window [app_id="kitty-pulsemixer"] floating enable
 # Firefox Picture-in-Picture window
 for_window [title="Picture-in-Picture"] floating enable
 
+for_window [title="Steam"] floating enable
+
 #▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # GAPS
 

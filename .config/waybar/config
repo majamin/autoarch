@@ -59,7 +59,7 @@
     "on-click": "~/.config/sway/scripts/powermenu.sh"
   },
   "custom/recorder": {
-    "format": "",
+    "format": "🔴",
     "return-type": "json",
     "interval": 4,
     "exec": "echo '{\"class\": \"recording\"}'",
@@ -71,7 +71,8 @@
     "return-type": "json",
     "interval": 3600,
     "exec": "echo '{\"class\": \"colorpicker\"}'",
-    "on-click": "~/.local/bin/colorpicker"
+    "on-click": "~/.local/bin/colorpicker",
+    "tooltip-format": "Copy and display pixel color information. Move mouse after click!"
   },
   "battery": {
     "format": "<span font='Font Awesome 6 Free 11'>{icon}</span>{capacity}% - {time}",
@@ -87,15 +88,21 @@
     "tooltip": false,
     "on-click": "gnome-power-statistics"
   },
+  /* https://www.mankier.com/5/waybar-network */
   "network": {
     "format": "{icon}",
     "format-alt": "{ipaddr}/{cidr} {icon}",
     "format-alt-click": "click-right",
-    "format-wifi": "<span font='Font Awesome 6 Free 10'></span>{essid} ({signalStrength}%)",
-    "format-ethernet": "<span font='Font Awesome 6 Free 10'></span> {ipaddr}",
-    "format-disconnected": "⚠ Disconnected",
+    "format-wifi": "<span font='Font Awesome 6 Free 10'>{icon:2}</span> {essid} <span font='Font Awesome 6 Free 10'>    </span>{bandwidthDownBits} <span font='Font Awesome 6 Free 10'> </span>{bandwidthUpBits}",
+    "format-ethernet": "<span font='Font Awesome 6 Free 10'>{icon:1}</span> {ipaddr} <span font='Font Awesome 6 Free 10'>    </span>{bandwidthDownBits} <span font='Font Awesome 6 Free 10'> </span>{bandwidthUpBits}",
+    "format-disconnected": "{icon:3} Disconnected",
+    "format-icons": ["", "", "⚠"],
     "on-click": "kitty --class kitty-nmtui nmtui",
-    "tooltip": false
+    "tooltip-format": "Local IPv4 address",
+    "tooltip-format-ethernet": "Ethernet connection to {gwaddr}",
+    "tooltip-format-wifi": "Wireless connection to {essid}",
+    "tooltip-format-disconnected": "Network disconnected",
+    "tooltip-format-disabled": "Networking disabled",
   },
   "pulseaudio": {
     "format": "<span font='Font Awesome 6 Free 11'>{icon:2}</span> {volume:4}%",

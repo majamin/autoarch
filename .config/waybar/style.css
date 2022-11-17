@@ -94,6 +94,10 @@ button:hover {
   background: @bg-color-darker;
 }
 
+tooltip {
+  background: @bg-color;
+}
+
 /*  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
  *     MODULES
  */
