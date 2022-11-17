@@ -229,9 +229,18 @@ client.urgent           $midnight_express #ff007c           $white
 
 #▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # FLOATING RULES
+
+# waybar calendar (time)
 for_window [app_id="org.gnome.Calendar"] floating enable
+
+# waybar networking
 for_window [app_id="kitty-nmtui"] floating enable
+
+# waybar audio
 for_window [app_id="kitty-pulsemixer"] floating enable
+
+# Firefox Picture-in-Picture window
+for_window [title="Picture-in-Picture"] floating enable
 
 #▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # GAPS
