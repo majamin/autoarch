@@ -23,6 +23,7 @@ set $white #ffffff
 set $cyan_cobalt_blue #28589c
 set $inactive_grey #bdbdbd
 set $midnight_express #24283b
+set $atomic_orange #ff9966
 
 # Environment
 set $term kitty
@@ -205,6 +206,9 @@ bindsym $mod+r mode "resize"
 #▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # CLIENTS
 
+default_border none
+default_border pixel 2
+
 # DEFAULTS
 #┌──────────────────┬─────────┬────────────┬─────────┬───────────┬──────────────┐
 #│      class       │ border  │ background │ text    │ indicator │ child_border │
@@ -225,7 +229,7 @@ bindsym $mod+r mode "resize"
 #└──────────────────┴─────────┴────────────┴─────────┴───────────┴──────────────┘
 
 # class                 border            background        text    indicator         child_border
-client.focused          $cyan_cobalt_blue $cyan_cobalt_blue $white  $cyan_cobalt_blue $cyan_cobalt_blue
+client.focused          $cyan_cobalt_blue $cyan_cobalt_blue $white  $atomic_orange $atomic_orange
 client.focused_inactive $midnight_express $midnight_express $white
 client.unfocused        $midnight_express $midnight_express $white
 client.urgent           $midnight_express #ff007c           $white
