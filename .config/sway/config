@@ -1,11 +1,12 @@
 # Sway config
 # Read `man 5 sway` for a complete reference.
 
-exec autotiling-rs
-exec xrandr --output XWAYLAND0 --primary
-exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+# GTK apps hanging during init
+# See https://github.com/swaywm/sway/wiki#gtk-applications-take-20-seconds-to-start
+# See https://github.com/swaywm/sway/issues/5732
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 #▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
 # VARIABLES
@@ -76,6 +77,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+q exec swaynag -t warning -m 'Exit sway?' -B 'Yes' 'swaymsg exit'
 
 bindsym Print exec maimpick
+bindsym $mod+Shift+Backspace exec sysact
 
 # Move your focus around
 bindsym $mod+$left focus left
