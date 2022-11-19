@@ -4,9 +4,11 @@
     ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒*/
 
 /* GTK+3 definitions */
-@define-color bg-color #b4c7df;
-@define-color bg-color-darker #a3bbd9;
-@define-color fg-color #222222;
+@define-color bg-color rgba(35,33,54,0.8);
+@define-color bg-color-selected rgba(55,51,84,0.5);
+@define-color fg-color #ffffff;
+@define-color fg-color #ffffff;
+@define-color orange #c04848;
 
 /*  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
  *     GENERAL
@@ -34,11 +36,11 @@ window#waybar.hidden {
 }
 
 window#waybar > box {
-  background-color: @bg-color;
+  background: linear-gradient(45deg, @bg-color, @orange, @bg-color);
   border-radius: 0px 4px;
   margin: 0px 0px 4px 0px;
   padding: 5px;
-  box-shadow: 1px 1px 3px 1px @fg-color;
+  box-shadow: 1px 1px 3px 1px @bg-color;
 }
 
 /*
@@ -65,7 +67,7 @@ window#waybar.solo {}
 }
 
 #workspaces button.focused {
-  background: @bg-color-darker;
+  background: @orange;
 }
 
 /* #workspaces button.urgent {} */
@@ -74,7 +76,7 @@ window#waybar.solo {}
   box-shadow: none;
   text-shadow: none;
   border-color: transparent;
-  background: @bg-color-darker;
+  background: @orange;
 }
 
 /* #mode {} */
@@ -91,7 +93,7 @@ button:hover {
   box-shadow: none;
   text-shadow: none;
   border-color: transparent;
-  background: @bg-color-darker;
+  background: @orange;
 }
 
 tooltip {
@@ -101,6 +103,10 @@ tooltip {
 /*  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
  *     MODULES
  */
+
+#clock:hover {
+  background: @bg-color;
+}
 
 /*
 #clock,

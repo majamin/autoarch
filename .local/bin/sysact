@@ -3,9 +3,9 @@
 # A dmenu wrapper script for system functions.
 
 cmds="\
-lock screen	swaylock
+lock screen	 swaylock
 refresh sway	kill -HUP $(pgrep -u $USER "\bsway$")
-reboot		sudo -A reboot
+reboot	sudo -A reboot
 shutdown	sudo -A shutdown -h now"
 
 choice="$(echo "$cmds" | cut -d'	' -f 1 | dmenu)" || exit 1

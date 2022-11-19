@@ -21,10 +21,10 @@ set $up k
 set $right l
 
 set $white #ffffff
-set $cyan_cobalt_blue #28589c
-set $inactive_grey #bdbdbd
-set $midnight_express #24283b
-set $atomic_orange #ff9966
+set $blue #65b1cd
+set $grey #bdbdbd
+set $midnight_express #232136
+set $atomic_orange #c04848
 
 # Environment
 set $term kitty
@@ -45,10 +45,11 @@ bindsym $mod+Escape exec 'swaylock'
 # EXAMPLES
 
 # Basic
-# output * bg /home/marian/Images/backgrounds/catalina.jpg fill
+output * bg /home/marian/Maja/Images/backgrounds/desktop/andreas_rocha/andreas-rocha-coastalrocks01.jpg fill
+# output * bg /home/marian/Maja/Images/backgrounds/desktop/andreas_rocha/magic_hour_print.png fill
 
 # Random background:
-output * bg `find $HOME/Images/backgrounds -type f | shuf -n 1` fill
+# output * bg `find $HOME/Images/backgrounds -type f | shuf -n 1` fill
 
 # Specific monitor output:
 # output HDMI-A-1 resolution 1920x1080 position 1920,0
@@ -231,7 +232,7 @@ default_border pixel 2
 #└──────────────────┴─────────┴────────────┴─────────┴───────────┴──────────────┘
 
 # class                 border            background        text    indicator         child_border
-client.focused          $cyan_cobalt_blue $cyan_cobalt_blue $white  $atomic_orange $atomic_orange
+client.focused          $blue             $blue             $white  $atomic_orange    $atomic_orange
 client.focused_inactive $midnight_express $midnight_express $white
 client.unfocused        $midnight_express $midnight_express $white
 client.urgent           $midnight_express #ff007c           $white
