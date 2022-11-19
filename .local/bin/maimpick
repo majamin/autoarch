@@ -5,6 +5,6 @@
 # notify-send -u critical -t 1400 "Select an area of the screen to copy"
 
 grim -g "$(slurp)" - | \
-  tee "$SCREENSHOT_DIR/pic-selected-$(date '+%y%m%d-%H%M-%S').png" | \
   swappy -f - -o - | \
+  tee "$SCREENSHOT_DIR/pic-selected-$(date '+%y%m%d-%H%M-%S').png" | \
   wl-copy
