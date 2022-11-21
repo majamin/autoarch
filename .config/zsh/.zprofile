@@ -66,5 +66,5 @@ export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
 
 # Start sway
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-  sway
+  while true; do wayfire 2>~/wayfire.log; done
 fi
